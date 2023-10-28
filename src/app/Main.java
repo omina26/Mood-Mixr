@@ -37,11 +37,11 @@ public class Main {
         String state = generateRandomString(16);
         String scope = "user-read-private user-read-email";
 
-        String redirectUrl = URLEncoder.encode("response_type=code" +
+        String redirectUrl = "response_type=code" +
                 "&client_id=" + CLIENT_ID +
                 "&scope=" + scope +
                 "&redirect_uri=" + REDIRECT_URI +
-                "&state=" + state, "UTF-8");
+                "&state=" + state;
         String authURL = "https://accounts.spotify.com/authorize?" + redirectUrl;
         // Complete this URL with your app details.
         System.out.println(authURL.charAt(125));
