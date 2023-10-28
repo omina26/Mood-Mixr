@@ -3,8 +3,8 @@ package app;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
-import java.io.IOException;
-import java.io.OutputStream;
+
+import java.io.*;
 import java.net.*;
 import java.security.SecureRandom;
 import java.util.Base64;
@@ -13,7 +13,6 @@ import java.util.Map;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
@@ -24,6 +23,8 @@ public class OAuthRedirectHandler {
     private static final int PORT = 8888;
     private static final String CLIENT_ID = "ce5b82a8500d4fc1bbb089207a8e6260";
     private static final String REDIRECT_URI = "http://localhost:8888/callback";
+
+    private static final String CLIENT_SECRET = "b120c0262ebf45fd86bb7140185c9709";
     private static String respCode = null;
     private static String respState = null;
 
@@ -70,6 +71,49 @@ public class OAuthRedirectHandler {
             // Now you have the auth code, you can exchange it for an access token, etc.
             System.out.println("Captured code" + respCode);
             System.out.println("Captures state: "+ respState);
+
+            if (respState == null) {
+                // Handle state mismatch error by redirecting
+                String errorUrl = "/#error=state_mismatch"; // Modify this URL as needed
+                System.out.println("Redirect to: " + errorUrl);
+            } else {
+                String tokenUrl = "https://accounts.spotify.com/api/token";
+                try {
+                    URL url = new URL(tokenUrl);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("POST");
+                    connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                    String authString = CLIENT_ID + ":" + CLIENT_SECRET;
+                    String encodedAuthString = Base64.getEncoder().encodeToString(authString.getBytes());
+                    connection.setRequestProperty("Authorization", "Basic " + encodedAuthString);
+
+                    String postData = "code=" + respCode + "&redirect_uri=" + REDIRECT_URI + "&grant_type=authorization_code";
+                    connection.setDoOutput(true);
+                    try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
+                        wr.writeBytes(postData);
+                    }
+
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                            String inputLine;
+                            StringBuilder response2 = new StringBuilder();
+
+                            while ((inputLine = in.readLine()) != null) {
+                                response2.append(inputLine);
+                            }
+
+                            // Handle the response, which contains the access token and other information
+                            System.out.println("Response: " + response2.toString());
+                        }
+                    } else {
+                        // Handle the error
+                        System.err.println("Error response code: " + responseCode);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
