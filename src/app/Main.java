@@ -37,14 +37,13 @@ public class Main {
         String state = generateRandomString(16);
         String scope = "user-read-private user-read-email";
 
-        String redirectUrl = "response_type=code" +
-                "&client_id=" + CLIENT_ID +
-                "&scope=" + scope +
-                "&redirect_uri=" + REDIRECT_URI +
-                "&state=" + state;
-        String authURL = "https://accounts.spotify.com/authorize?" + redirectUrl;
-        // Complete this URL with your app details.
-        System.out.println(authURL.charAt(125));
+
+        String authURL = SPOTIFY_AUTHORIZE_URL +
+                "?response_type=code" +
+                "&client_id=" + URLEncoder.encode(CLIENT_ID, "UTF-8") +
+                "&scope=" + URLEncoder.encode(scope, "UTF-8") +
+                "&redirect_uri=" + URLEncoder.encode(REDIRECT_URI, "UTF-8") +
+                "&state=" + URLEncoder.encode(state, "UTF-8");
 
         try {
             Desktop.getDesktop().browse(new URI(authURL));
@@ -52,6 +51,7 @@ public class Main {
             e.printStackTrace();
         }
     }
+
 
     private static String generateRandomString(int length) {
         byte[] bytes = new byte[length];
