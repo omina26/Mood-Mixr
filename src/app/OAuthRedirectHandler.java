@@ -11,15 +11,6 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.view.RedirectView;
-
-import java.security.SecureRandom;
-import java.util.Base64;
-
 public class OAuthRedirectHandler {
 
     private static final int PORT = 8888;
@@ -73,29 +64,5 @@ public class OAuthRedirectHandler {
             }
         }
         return result;
-    }
-
-    public static class SpotifyController {
-
-        @GetMapping("/login")
-        public RedirectView login() {
-            String state = generateRandomString(16);
-            String scope = "user-read-private user-read-email";
-
-            String redirectUrl = SPOTIFY_AUTHORIZE_URL + "?" +
-                    "response_type=code" +
-                    "&client_id=" + CLIENT_ID +
-                    "&scope=" + scope +
-                    "&redirect_uri=" + REDIRECT_URI +
-                    "&state=" + state;
-
-            return new RedirectView(redirectUrl);
-        }
-    }
-
-    private static String generateRandomString(int length) {
-        byte[] bytes = new byte[length];
-        new SecureRandom().nextBytes(bytes);
-        return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
     }
 }
