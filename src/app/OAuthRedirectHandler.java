@@ -64,6 +64,7 @@ public class OAuthRedirectHandler {
 
             // Capture the auth code from the URL
             String query = uri.getQuery();
+            System.out.println(query);
             Map<String, String> parameters = queryToMap(query);
             respCode = parameters.get("code");
             respState = parameters.get("state");
@@ -71,7 +72,9 @@ public class OAuthRedirectHandler {
             // Now you have the auth code, you can exchange it for an access token, etc.
             System.out.println("Captured code" + respCode);
             System.out.println("Captures state: "+ respState);
-
+//------------------------------------------------------------------------
+            // code below gets accessToken
+            String accessToken = null;
             if (respState == null) {
                 // Handle state mismatch error by redirecting
                 String errorUrl = "/#error=state_mismatch"; // Modify this URL as needed
@@ -104,7 +107,9 @@ public class OAuthRedirectHandler {
                             }
 
                             // Handle the response, which contains the access token and other information
-                            System.out.println("Response: " + response2.toString());
+                            System.out.println("Response: " + response2);
+                            accessToken = getJSONDataAccessToken(response2.toString());
+                            System.out.println("access token: " + accessToken);
                         }
                     } else {
                         // Handle the error
@@ -113,6 +118,50 @@ public class OAuthRedirectHandler {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+//----------------------------------------------------------------
+            //code below gets user info from spotify using access code
+            try {
+                // Create the URL for the Spotify API endpoint
+                String endpoint = "https://api.spotify.com/v1/me";
+                URL url = new URL(endpoint);
+
+                // Open a connection to the URL
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+                // Set the request method to GET
+                connection.setRequestMethod("GET");
+
+                // Set the Authorization header with the access token
+                connection.setRequestProperty("Authorization", "Bearer " + accessToken);
+
+                // Get the response code
+                int responseCode = connection.getResponseCode();
+
+                if (responseCode == 200) {
+                    // The request was successful (HTTP status code 200)
+
+                    // Read the response
+                    BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String inputLine;
+                    StringBuilder response3 = new StringBuilder();
+
+                    while ((inputLine = in.readLine()) != null) {
+                        response3.append(inputLine);
+                    }
+                    in.close();
+
+                    // Print the response (JSON data)
+                    System.out.println("Response: " + response3.toString());
+                } else {
+                    // Handle the error, e.g., by checking the response code
+                    System.out.println("Error - Response Code: " + responseCode);
+                }
+
+                // Close the connection
+                connection.disconnect();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
@@ -137,5 +186,32 @@ public class OAuthRedirectHandler {
         byte[] bytes = new byte[length];
         new SecureRandom().nextBytes(bytes);
         return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
+    }
+
+    private static String getJSONDataAccessToken(String responseString) {
+        try {
+            // Locate the "access_token" field
+            int accessTokenIndex = responseString.indexOf("\"access_token\"");
+
+            if (accessTokenIndex != -1) {
+                // Find the opening quote of the access token value
+                int valueStart = responseString.indexOf("\"", accessTokenIndex + 15); // 15 is the length of "access_token" plus the ":"
+
+                if (valueStart != -1) {
+                    // Find the closing quote of the access token value
+                    int valueEnd = responseString.indexOf("\"", valueStart + 1);
+
+                    if (valueEnd != -1) {
+                        // Extract the access token
+                        String accessToken = responseString.substring(valueStart + 1, valueEnd);
+                        return accessToken;
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
