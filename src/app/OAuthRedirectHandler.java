@@ -70,6 +70,7 @@ public class OAuthRedirectHandler {
             // Now you have the auth code, you can exchange it for an access token, etc.
             System.out.println("Captured code" + respCode);
             System.out.println("Captures state: "+ respState);
+
         }
     }
 
@@ -94,4 +95,6 @@ public class OAuthRedirectHandler {
         new SecureRandom().nextBytes(bytes);
         return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
     }
+
+
 }
