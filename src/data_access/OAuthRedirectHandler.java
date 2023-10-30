@@ -1,4 +1,4 @@
-package app;
+package data_access;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -7,9 +7,7 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.*;
 import java.net.*;
 import java.security.SecureRandom;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,14 +19,14 @@ import java.util.Base64;
 public class OAuthRedirectHandler {
 
     private static final int PORT = 8888;
-    private static final String CLIENT_ID = "ce5b82a8500d4fc1bbb089207a8e6260";
+    private static final String CLIENT_ID = "1c6992172cb240fd85caa34bae033b94";
     private static final String REDIRECT_URI = "http://localhost:8888/callback";
 
-    private static final String CLIENT_SECRET = "b120c0262ebf45fd86bb7140185c9709";
+    private static final String CLIENT_SECRET = "6f843aec369846528a70b621a721e788";
     private static String respCode = null;
     private static String respState = null;
 
-    public static void main(String[] args) throws IOException, URISyntaxException {
+    public static void RedirectHandler() throws IOException, URISyntaxException {
         HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
         server.createContext("/callback", new MyHandler());
         server.setExecutor(null); // creates a default executor
@@ -47,12 +45,18 @@ public class OAuthRedirectHandler {
 
         // Here you would open the browser to initiate OAuth, e.g.:
         Desktop.getDesktop().browse(new URI(authURL));
-
         // After capturing the code, you'd typically shut down the server:
         //server.stop(0);
     }
 
+    public static String getAccessToken(){
+        return MyHandler.accessToken;
+    }
+
     static class MyHandler implements HttpHandler {
+
+        public static String accessToken = "";
+        public static String displayName = "";
         @Override
         public void handle(HttpExchange t) throws IOException {
             URI uri = t.getRequestURI();
@@ -110,6 +114,7 @@ public class OAuthRedirectHandler {
                             System.out.println("Response: " + response2);
                             accessToken = getJSONDataAccessToken(response2.toString());
                             System.out.println("access token: " + accessToken);
+                            this.accessToken = accessToken;
                         }
                     } else {
                         // Handle the error
@@ -137,27 +142,28 @@ public class OAuthRedirectHandler {
 
                 // Get the response code
                 int responseCode = connection.getResponseCode();
-
+                BufferedReader in;
                 if (responseCode == 200) {
                     // The request was successful (HTTP status code 200)
 
                     // Read the response
-                    BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                    String inputLine;
-                    StringBuilder response3 = new StringBuilder();
-
-                    while ((inputLine = in.readLine()) != null) {
-                        response3.append(inputLine);
-                    }
-                    in.close();
-
-                    // Print the response (JSON data)
-                    System.out.println("Response: " + response3.toString());
-                } else {
-                    // Handle the error, e.g., by checking the response code
-                    System.out.println("Error - Response Code: " + responseCode);
+                    in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 }
-
+                else {
+                    in = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+                }
+                String inputLine;
+                String[] splitLine;
+                ArrayList<String[]> response3 = new ArrayList<>();
+                StringBuilder stringRepresentation = new StringBuilder();
+                while ((inputLine = in.readLine()) != null) {
+                    stringRepresentation.append(inputLine);
+                    splitLine = inputLine.split(";");
+                    response3.add(splitLine);
+                }
+                in.close();
+                // Print the response (JSON data)
+                System.out.println("Response: " + stringRepresentation);
                 // Close the connection
                 connection.disconnect();
             } catch (Exception e) {
@@ -165,7 +171,6 @@ public class OAuthRedirectHandler {
             }
         }
     }
-
     /**
      * Convert a query string to a map of key-value pairs.
      */
