@@ -2,5 +2,5 @@ package entity;
 
 public class UserFactory {
 
-    public User create(String name){return new User(name);}
+    public User create(String name, String token){return new User(name, token);}
 }
