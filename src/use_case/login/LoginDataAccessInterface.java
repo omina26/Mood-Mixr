@@ -7,7 +7,7 @@ import java.net.URISyntaxException;
 
 public interface LoginDataAccessInterface {
 
-    User get(String username);
+    public String getAccessToken() throws IOException, URISyntaxException, InterruptedException;
 
-    void logUserIn() throws IOException, URISyntaxException;
+    public void saveUser();
 }
