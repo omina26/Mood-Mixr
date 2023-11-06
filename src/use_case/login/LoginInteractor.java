@@ -16,6 +16,6 @@ public class LoginInteractor implements LoginInputBoundary {
     }
     //@Override
     public void execute() throws IOException, URISyntaxException {
-        userDataAcessObject.saveUser();
+        userDataAcessObject.loginUser();
     }
 }
