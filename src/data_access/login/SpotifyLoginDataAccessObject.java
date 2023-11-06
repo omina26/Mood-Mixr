@@ -140,7 +140,7 @@ public class SpotifyLoginDataAccessObject implements LoginDataAccessInterface {
     }
 
     @Override
-    public void saveUser() {
+    public void loginUser() {
         BufferedWriter writer;
 
         User user = getUser();
