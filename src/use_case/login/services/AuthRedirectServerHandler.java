@@ -1,4 +1,4 @@
-package data_access.login;
+package use_case.login.services;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -20,14 +20,14 @@ public class AuthRedirectServerHandler {
 
     private static HttpServer server;
     private static final int PORT = 8888;
-    static final String REDIRECT_URI = "http://localhost:8888/callback";
+
 
     private static String authCode = "";
     private static String respState = "";
 
     private static CountDownLatch latch = new CountDownLatch(1);
 
-    public static String[] handleRedirectAndGetResponse(String clientID) throws IOException, URISyntaxException, InterruptedException {
+    public static String[] handleRedirectAndGetResponse(String clientID, String redirectUri) throws IOException, URISyntaxException, InterruptedException {
         server = HttpServer.create(new InetSocketAddress(PORT), 0);
         LoginHandler loginHandler = new LoginHandler();
         server.createContext("/callback", loginHandler);
@@ -41,7 +41,7 @@ public class AuthRedirectServerHandler {
         String redirectUrl = "response_type=code" +
                 "&client_id=" + URLEncoder.encode(clientID, "UTF-8") +
                 "&scope=" + URLEncoder.encode(scope, "UTF-8") +
-                "&redirect_uri=" + URLEncoder.encode(REDIRECT_URI, "UTF-8") +
+                "&redirect_uri=" + URLEncoder.encode(redirectUri, "UTF-8") +
                 "&state=" + URLEncoder.encode(state, "UTF-8");
         String authURL = "https://accounts.spotify.com/authorize?" + redirectUrl;
 
