@@ -1,5 +1,6 @@
 package data_access.login;
 
+import entity.AuthRedirectServerHandler;
 import entity.User;
 import use_case.login.LoginDataAccessInterface;
 
@@ -7,7 +8,6 @@ import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Base64;
