@@ -1,15 +1,21 @@
 package interface_adapter.logged_in;
 
-import interface_adapter.ViewModel;
+import interface_adapter.LogInViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class LoggedInViewModel extends ViewModel {
+public class LoggedInViewModel extends LogInViewModel {
 
     public final String TITLE_LABEL = "Logged In View";
 
     private LoggedInState state = new LoggedInState();
+
+    public final String LOGOUT_BUTTON_LABEL = "Log out";
+    public final String CREATE_MOOD_BUTTON_LABEL = "Create Custom Mood";
+    public final String GET_PLAYLIST_BUTTON_LABEL = "Get Custom Playlist";
+    public final String ANALYZE_PLAYLIST_BUTTON_LABEL = "Analyze Playlist";
+    public final String GROUP_PLAYLIST_BUTTON_LABEL = "Generate Group Playlist";
 
     private String loggedInUser;
 

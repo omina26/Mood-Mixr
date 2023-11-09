@@ -1,22 +1,72 @@
 package view;
 
-import interface_adapter.ViewModel;
 import interface_adapter.logged_in.LoggedInState;
+import interface_adapter.logged_in.LoggedInViewModel;
 
-public class LoggedInViewModel extends ViewModel {
-    public final String TITLE_LABEL = "Logged In View";
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-    private LoggedInState state = new LoggedInState();
+public class LoggedInView extends JPanel implements ActionListener, PropertyChangeListener {
+    public final String viewName = "logged in";
+    private final LoggedInViewModel loggedInViewModel;
 
-    public static final String LOGOUT_BUTTON_LABEL = "Log out";
-    private String loggedInUser;
+    JLabel name;
 
-    public LoggedInViewModel() {
-        super("logged in");
+    final JButton logOut;
+    final JButton createMood;
+    final JButton getPlaylist;
+    final JButton analyzePlaylist;
+    final JButton groupPlaylist;
+
+    public LoggedInView(LoggedInViewModel loggedInViewModel) {
+        this.loggedInViewModel = loggedInViewModel;
+        this.loggedInViewModel.addPropertyChangeListener(this);
+
+        JLabel title = new JLabel("Logged In Screen");
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel nameInfo = new JLabel("Welcome: ");
+        name = new JLabel();
+
+        JPanel buttons = new JPanel();
+        logOut = new JButton(loggedInViewModel.LOGOUT_BUTTON_LABEL);
+        buttons.add(logOut);
+        logOut.addActionListener(this);
+
+        createMood = new JButton(loggedInViewModel.CREATE_MOOD_BUTTON_LABEL);
+        buttons.add(createMood);
+        createMood.addActionListener(this);
+
+        getPlaylist = new JButton(loggedInViewModel.GET_PLAYLIST_BUTTON_LABEL);
+        buttons.add(getPlaylist);
+        getPlaylist.addActionListener(this);
+
+        analyzePlaylist = new JButton(loggedInViewModel.ANALYZE_PLAYLIST_BUTTON_LABEL);
+        buttons.add(analyzePlaylist);
+        analyzePlaylist.addActionListener(this);
+
+        groupPlaylist = new JButton(loggedInViewModel.GROUP_PLAYLIST_BUTTON_LABEL);
+        buttons.add(groupPlaylist);
+        groupPlaylist.addActionListener(this);
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        this.add(title);
+        this.add(nameInfo);
+        this.add(name);
+        this.add(buttons);
     }
 
-    public void setState(LoggedInState state) {
-        this.state = state;
+    public void actionPerformed(ActionEvent evt) {System.out.println("Click " + evt.getActionCommand());}
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        LoggedInState state = (LoggedInState) evt.getNewValue();
+        name.setText(state.getName());
     }
 }
 
