@@ -1,11 +1,11 @@
 package interface_adapter.login;
 
-import interface_adapter.ViewModel;
+import interface_adapter.LogInViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends LogInViewModel {
 
     public final String TITLE_LABEL = "Log In View";
 

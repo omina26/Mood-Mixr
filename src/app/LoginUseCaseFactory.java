@@ -1,7 +1,7 @@
 package app;
 
 import entity.UserFactory;
-import interface_adapter.ViewManagerModel;
+import interface_adapter.LogInViewManagerModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
@@ -16,7 +16,7 @@ public class LoginUseCaseFactory {
     private LoginUseCaseFactory(){}
 
     public static LoginView create(
-            ViewManagerModel viewManagerModel,
+            LogInViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
             LoggedInViewModel loggedInViewModel, LoginDataAccessInterface userDataAccessObject
     ){
@@ -31,7 +31,7 @@ public class LoginUseCaseFactory {
     }
 
     private static LoginController createLoginUseCase(
-            ViewManagerModel viewManagerModel,
+            LogInViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
             LoginDataAccessInterface userDataAccessObject) throws IOException{
         LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel, loginViewModel);

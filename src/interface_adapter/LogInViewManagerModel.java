@@ -1,11 +1,9 @@
 package interface_adapter;
 
-import view.ViewManager;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class ViewManagerModel {
+public class LogInViewManagerModel {
 
     private String activeView;
 
