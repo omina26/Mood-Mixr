@@ -13,6 +13,8 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
@@ -21,6 +23,7 @@ import java.net.URISyntaxException;
 public class CreateMoodView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "Create Mood";
+    final JTextField moodNameInputField = new JTextField();
     public final int DEFAULT_SLIDER_VALUE = 50;
 
     public final CreateMoodViewModel createMoodViewModel;
@@ -28,13 +31,33 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
     final JButton create;
 
     //private final CreateMoodController createMoodController;
-    public CreateMoodView(CreateMoodViewModel createMoodViewModel /*CreateMoodController createMoodController*/){
+    public CreateMoodView(CreateMoodViewModel createMoodViewModel, CreateMoodController createMoodController){
         //this.createMoodController = createMoodController;
         this.createMoodViewModel = createMoodViewModel;
         //this.createMoodViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel("Create Mood Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        LabelTextPanel moodInfo = new LabelTextPanel(
+                new JLabel("Mood name"), moodNameInputField);
+
+        moodNameInputField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+//                LoginState currentState = loginViewModel.getState();
+//                currentState.setUsername(usernameInputField.getText() + e.getKeyChar());
+//                loginViewModel.setState(currentState);
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
 
         JPanel setAcousticnessPanel = new JPanel();
         JLabel setAcousticnessLabel = new JLabel(CreateMoodViewModel.SET_ACOUSTICNESS_LABEL + " (" + DEFAULT_SLIDER_VALUE + ")");
@@ -152,6 +175,8 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
 //                            } catch (URISyntaxException ex) {
 //                                throw new RuntimeException(ex);
 //                            }
+                            //CreateMoodState currentState = createMoodViewModel.getState();
+                            //createMoodController.execute();
                             System.out.println(acousticnessSlider.getValue());
                         }
                     }
@@ -164,6 +189,7 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
+        this.add(moodInfo);
         this.add(setAcousticnessPanel);
         this.add(setDanceabilityPanel);
         this.add(setEnergyPanel);
