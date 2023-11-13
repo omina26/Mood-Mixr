@@ -4,9 +4,7 @@ import entity.Mood;
 import use_case.create_mood.MoodDataAccessInterface;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MoodDataAccessObject implements MoodDataAccessInterface {
 
@@ -51,6 +49,11 @@ public class MoodDataAccessObject implements MoodDataAccessInterface {
     @Override
     public Map<String, Mood> getMoods() {
         return this.moods;
+    }
+
+    @Override
+    public Set<String> getMoodNames() {
+        return this.moods.keySet();
     }
 
     @Override
