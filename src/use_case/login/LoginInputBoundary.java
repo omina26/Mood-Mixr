@@ -6,5 +6,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public interface LoginInputBoundary {
+
     public void execute() throws IOException, URISyntaxException;
 }
