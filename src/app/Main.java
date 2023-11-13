@@ -1,7 +1,10 @@
 package app;
 
-import data_access.login.SpotifyLoginDataAccessObject;
+
 import interface_adapter.ViewManagerModel;
+
+import data_access.UserDataAccessObject;
+
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
 import use_case.login.LoginDataAccessInterface;
@@ -32,7 +35,7 @@ public class Main {
 
         LoginDataAccessInterface userDataAccessObject;
 
-        userDataAccessObject = new SpotifyLoginDataAccessObject("./user.csv");
+        userDataAccessObject = new UserDataAccessObject("./user.csv");
 
         LoginView loginView =  LoginUseCaseFactory.create(viewManagerModel,loginViewModel, loggedInViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
@@ -45,4 +48,3 @@ public class Main {
     }
 
 }
-
