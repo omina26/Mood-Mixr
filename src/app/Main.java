@@ -1,10 +1,9 @@
 package app;
 
 
-import interface_adapter.LogInViewManagerModel;
+import interface_adapter.ViewManagerModel;
 
 import data_access.UserDataAccessObject;
-import interface_adapter.LogInViewManagerModel;
 
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
@@ -28,7 +27,7 @@ public class Main {
         application.add(views);
 
         // This keeps track of and manages which view is currently showing.
-        LogInViewManagerModel viewManagerModel = new LogInViewManagerModel();
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
         new ViewManager(views, cardLayout, viewManagerModel);
 
         LoginViewModel loginViewModel = new LoginViewModel();
