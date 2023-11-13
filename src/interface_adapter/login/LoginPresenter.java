@@ -29,7 +29,7 @@ public class LoginPresenter implements LoginOutputBoundary {
 
     public void prepareFailView(String error) {
         LoginState loginState = loginViewModel.getState();
-        //removed loginState.setUsernameError(error);
+        // removed loginState.setUsernameError(error);
         loginViewModel.firePropertyChanged();
     }
 
