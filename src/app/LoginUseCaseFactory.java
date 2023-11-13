@@ -21,8 +21,8 @@ public class LoginUseCaseFactory {
             LoggedInViewModel loggedInViewModel, LoginDataAccessInterface userDataAccessObject
     ){
         try {
-            LoginController loginController = createLoginUseCase(viewManagerModel, loginViewModel,
-                    userDataAccessObject);
+            LoginController loginController = createLoginUseCase(viewManagerModel, loggedInViewModel,
+                    loginViewModel, userDataAccessObject);
             return new LoginView(loginViewModel, loginController);
         } catch (IOException e){
             JOptionPane.showMessageDialog(null, "Could not Access User Data");
@@ -32,9 +32,10 @@ public class LoginUseCaseFactory {
 
     private static LoginController createLoginUseCase(
             ViewManagerModel viewManagerModel,
+            LoggedInViewModel loggedInViewModel,
             LoginViewModel loginViewModel,
             LoginDataAccessInterface userDataAccessObject) throws IOException{
-        LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel, loginViewModel);
+        LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel, loggedInViewModel, loginViewModel);
 
         UserFactory userFactory = new UserFactory();
         LoginInputBoundary loginInteractor = new LoginInteractor(userDataAccessObject, loginOutputBoundary);

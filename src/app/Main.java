@@ -8,6 +8,7 @@ import data_access.UserDataAccessObject;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
 import use_case.login.LoginDataAccessInterface;
+import view.LoggedInView;
 import view.LoginView;
 import view.ViewManager;
 
@@ -39,6 +40,9 @@ public class Main {
 
         LoginView loginView =  LoginUseCaseFactory.create(viewManagerModel,loginViewModel, loggedInViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
+
+        LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
+        views.add(loggedInView, loggedInView.viewName);
 
         viewManagerModel.setActiveView(loginView.viewName);
         viewManagerModel.firePropertyChanged();
