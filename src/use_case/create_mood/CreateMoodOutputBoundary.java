@@ -1,4 +1,6 @@
 package use_case.create_mood;
 
-public class CreateMoodOutputBoundary {
+public interface CreateMoodOutputBoundary {
+
+    void prepareMoodListView(CreateMoodOutputData data);
 }

@@ -8,6 +8,7 @@ import use_case.create_mood.CreateMoodOutputData;
 
 public class CreateMoodPresenter implements CreateMoodOutputBoundary{
 
+    private final CreateMoodViewModel createMoodViewModel;
     private final ViewMoodsViewModel viewMoodsViewModel;
     private ViewManagerModel viewManagerModel;
 
