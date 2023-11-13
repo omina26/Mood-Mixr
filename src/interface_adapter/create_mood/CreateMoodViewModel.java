@@ -18,9 +18,10 @@ public class CreateMoodViewModel extends ViewModel {
     public static final String SET_LIVENESS = "Set Liveness";
     public static final String SET_SPEECHINESS = "Set Speechiness";
     public static final String SET_VALENCE = "Set Valence";
+    public static final int DEFAULT_SLIDER_VALUE = 50;
 
 
-    private CreateMoodState state = new CreateMoodState();
+    private CreateMoodState state = new CreateMoodState(DEFAULT_SLIDER_VALUE);
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 

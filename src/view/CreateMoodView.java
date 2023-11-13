@@ -24,7 +24,6 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
 
     public final String viewName = "Create Mood";
     final JTextField moodNameInputField = new JTextField();
-    public final int DEFAULT_SLIDER_VALUE = 50;
 
     public final CreateMoodViewModel createMoodViewModel;
 
@@ -47,7 +46,10 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
             public void keyTyped(KeyEvent e) {
 //                LoginState currentState = loginViewModel.getState();
 //                currentState.setUsername(usernameInputField.getText() + e.getKeyChar());
-//                loginViewModel.setState(currentState);
+//                loginViewModel.setState(currentState)
+                CreateMoodState currentState = createMoodViewModel.getState();
+                currentState.setName(moodNameInputField.getText() + e.getKeyChar());
+                createMoodViewModel.setState(currentState);
             }
 
             @Override
@@ -60,12 +62,15 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         });
 
         JPanel setAcousticnessPanel = new JPanel();
-        JLabel setAcousticnessLabel = new JLabel(CreateMoodViewModel.SET_ACOUSTICNESS_LABEL + " (" + DEFAULT_SLIDER_VALUE + ")");
-        JSlider acousticnessSlider = new JSlider(0, 100, DEFAULT_SLIDER_VALUE);
+        JLabel setAcousticnessLabel = new JLabel(CreateMoodViewModel.SET_ACOUSTICNESS_LABEL + " (" + CreateMoodViewModel.DEFAULT_SLIDER_VALUE + ")");
+        JSlider acousticnessSlider = new JSlider(0, 100, CreateMoodViewModel.DEFAULT_SLIDER_VALUE);
         acousticnessSlider.addChangeListener(
                 new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
+                        CreateMoodState currentState = createMoodViewModel.getState();
+                        currentState.setAcousticness(acousticnessSlider.getValue());
+                        createMoodViewModel.setState(currentState);
                         setAcousticnessLabel.setText(CreateMoodViewModel.SET_ACOUSTICNESS_LABEL + " (" + acousticnessSlider.getValue() + ")");
                     }
                 }
@@ -74,12 +79,15 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         setAcousticnessPanel.add(acousticnessSlider);
 
         JPanel setDanceabilityPanel = new JPanel();
-        JLabel setDanceabilityLabel = new JLabel(CreateMoodViewModel.SET_DANCEABILITY_LABEL + " (" + DEFAULT_SLIDER_VALUE + ")");
-        JSlider danceabilitySlider = new JSlider(0, 100, DEFAULT_SLIDER_VALUE);
+        JLabel setDanceabilityLabel = new JLabel(CreateMoodViewModel.SET_DANCEABILITY_LABEL + " (" + CreateMoodViewModel.DEFAULT_SLIDER_VALUE + ")");
+        JSlider danceabilitySlider = new JSlider(0, 100, CreateMoodViewModel.DEFAULT_SLIDER_VALUE );
         danceabilitySlider.addChangeListener(
                 new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
+                        CreateMoodState currentState = createMoodViewModel.getState();
+                        currentState.setDanceability(danceabilitySlider.getValue());
+                        createMoodViewModel.setState(currentState);
                         setDanceabilityLabel.setText(CreateMoodViewModel.SET_DANCEABILITY_LABEL + " (" + danceabilitySlider.getValue() + ")");
                     }
                 }
@@ -88,12 +96,15 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         setDanceabilityPanel.add(danceabilitySlider);
 
         JPanel setEnergyPanel = new JPanel();
-        JLabel setEnergyLabel = new JLabel(CreateMoodViewModel.SET_ENERGY_LABEL + " (" + DEFAULT_SLIDER_VALUE + ")");
-        JSlider energySlider = new JSlider(0, 100, DEFAULT_SLIDER_VALUE);
+        JLabel setEnergyLabel = new JLabel(CreateMoodViewModel.SET_ENERGY_LABEL + " (" + CreateMoodViewModel.DEFAULT_SLIDER_VALUE + ")");
+        JSlider energySlider = new JSlider(0, 100, CreateMoodViewModel.DEFAULT_SLIDER_VALUE);
         energySlider.addChangeListener(
                 new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
+                        CreateMoodState currentState = createMoodViewModel.getState();
+                        currentState.setEnergy(energySlider.getValue());
+                        createMoodViewModel.setState(currentState);
                         setEnergyLabel.setText(CreateMoodViewModel.SET_ENERGY_LABEL + " (" + energySlider.getValue() + ")");
                     }
                 }
@@ -102,12 +113,15 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         setEnergyPanel.add(energySlider);
 
         JPanel setInstrumentalnessPanel = new JPanel();
-        JLabel setInstrumentalnessLabel = new JLabel(CreateMoodViewModel.SET_INSTRUMENTALNESS + " (" + DEFAULT_SLIDER_VALUE + ")");
-        JSlider instrumentalnessSlider = new JSlider(0, 100, DEFAULT_SLIDER_VALUE);
+        JLabel setInstrumentalnessLabel = new JLabel(CreateMoodViewModel.SET_INSTRUMENTALNESS + " (" + CreateMoodViewModel.DEFAULT_SLIDER_VALUE + ")");
+        JSlider instrumentalnessSlider = new JSlider(0, 100, CreateMoodViewModel.DEFAULT_SLIDER_VALUE);
         instrumentalnessSlider.addChangeListener(
                 new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
+                        CreateMoodState currentState = createMoodViewModel.getState();
+                        currentState.setInstrumentalness(instrumentalnessSlider.getValue());
+                        createMoodViewModel.setState(currentState);
                         setInstrumentalnessLabel.setText(CreateMoodViewModel.SET_INSTRUMENTALNESS + " (" + instrumentalnessSlider.getValue() + ")");
                     }
                 }
@@ -116,12 +130,15 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         setInstrumentalnessPanel.add(instrumentalnessSlider);
 
         JPanel setLivenessPanel = new JPanel();
-        JLabel setLivenessLabel = new JLabel(CreateMoodViewModel.SET_LIVENESS + " (" + DEFAULT_SLIDER_VALUE + ")");
-        JSlider livenessSlider = new JSlider(0, 100, DEFAULT_SLIDER_VALUE);
+        JLabel setLivenessLabel = new JLabel(CreateMoodViewModel.SET_LIVENESS + " (" + createMoodViewModel.DEFAULT_SLIDER_VALUE + ")");
+        JSlider livenessSlider = new JSlider(0, 100, createMoodViewModel.DEFAULT_SLIDER_VALUE);
         livenessSlider.addChangeListener(
                 new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
+                        CreateMoodState currentState = createMoodViewModel.getState();
+                        currentState.setLiveness(livenessSlider.getValue());
+                        createMoodViewModel.setState(currentState);
                         setLivenessLabel.setText(CreateMoodViewModel.SET_LIVENESS + " (" + livenessSlider.getValue() + ")");
                     }
                 }
@@ -130,12 +147,15 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         setLivenessPanel.add(livenessSlider);
 
         JPanel setSpeechinessPanel = new JPanel();
-        JLabel setSpeechinessLabel = new JLabel(CreateMoodViewModel.SET_SPEECHINESS + " (" + DEFAULT_SLIDER_VALUE + ")");
-        JSlider speechinessSlider = new JSlider(0, 100, DEFAULT_SLIDER_VALUE);
+        JLabel setSpeechinessLabel = new JLabel(CreateMoodViewModel.SET_SPEECHINESS + " (" + CreateMoodViewModel.DEFAULT_SLIDER_VALUE + ")");
+        JSlider speechinessSlider = new JSlider(0, 100, CreateMoodViewModel.DEFAULT_SLIDER_VALUE);
         speechinessSlider.addChangeListener(
                 new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
+                        CreateMoodState currentState = createMoodViewModel.getState();
+                        currentState.setSpeechiness(speechinessSlider.getValue());
+                        createMoodViewModel.setState(currentState);
                         setSpeechinessLabel.setText(CreateMoodViewModel.SET_SPEECHINESS + " (" + speechinessSlider.getValue() + ")");
                     }
                 }
@@ -144,12 +164,15 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         setSpeechinessPanel.add(speechinessSlider);
 
         JPanel setValencePanel = new JPanel();
-        JLabel setValenceLabel = new JLabel(CreateMoodViewModel.SET_VALENCE + " (" + DEFAULT_SLIDER_VALUE + ")");
-        JSlider valenceSlider = new JSlider(0, 100, DEFAULT_SLIDER_VALUE);
+        JLabel setValenceLabel = new JLabel(CreateMoodViewModel.SET_VALENCE + " (" + CreateMoodViewModel.DEFAULT_SLIDER_VALUE + ")");
+        JSlider valenceSlider = new JSlider(0, 100, CreateMoodViewModel.DEFAULT_SLIDER_VALUE);
         valenceSlider.addChangeListener(
                 new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
+                        CreateMoodState currentState = createMoodViewModel.getState();
+                        currentState.setValence(valenceSlider.getValue());
+                        createMoodViewModel.setState(currentState);
                         setValenceLabel.setText(CreateMoodViewModel.SET_VALENCE + " (" + valenceSlider.getValue() + ")");
                     }
                 }
@@ -167,6 +190,7 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(create)) {
+
 //                            LoginState currentState = loginViewModel.getState();
 //                            try {
 //                                loginController.executeUseCase();
@@ -177,7 +201,17 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
 //                            }
                             //CreateMoodState currentState = createMoodViewModel.getState();
                             //createMoodController.execute();
-                            System.out.println(acousticnessSlider.getValue());
+                            CreateMoodState currentState = createMoodViewModel.getState();
+                            createMoodController.execute(
+                                    currentState.getName(),
+                                    currentState.getAcousticness(),
+                                    currentState.getDanceability(),
+                                    currentState.getEnergy(),
+                                    currentState.getInstrumentalness(),
+                                    currentState.getLiveness(),
+                                    currentState.getSpeechiness(),
+                                    currentState.getValence()
+                            );
                         }
                     }
 

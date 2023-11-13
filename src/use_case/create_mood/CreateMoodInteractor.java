@@ -5,11 +5,11 @@ import entity.Mood;
 public class CreateMoodInteractor implements  CreateMoodInputBoundary{
 
     final MoodDataAccessInterface moodDataAccessObject;
-    final CreateMoodOutputBoundary createMoodOutputPresenter;
+    final CreateMoodOutputBoundary createMoodPresenter;
 
     public CreateMoodInteractor(MoodDataAccessInterface moodDataAccessObject, CreateMoodOutputBoundary createMoodOutputPresenter){
         this.moodDataAccessObject = moodDataAccessObject;
-        this.createMoodOutputPresenter = createMoodOutputPresenter;
+        this.createMoodPresenter = createMoodOutputPresenter;
     }
 
     @Override
@@ -24,5 +24,8 @@ public class CreateMoodInteractor implements  CreateMoodInputBoundary{
         double valence = createMoodInputData.getValence()/100.0;
 
         moodDataAccessObject.saveMood(name, acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence);
+
+        CreateMoodOutputData outputData = new CreateMoodOutputData(moodDataAccessObject.getMoodNames());
+        createMoodPresenter.prepareMoodListView(outputData);
     }
 }
