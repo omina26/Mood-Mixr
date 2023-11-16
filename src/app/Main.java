@@ -26,6 +26,7 @@ import view.ViewMoodsView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
 public class Main {
@@ -53,7 +54,7 @@ public class Main {
         MoodDataAccessObject moodDataAccessObject;
 
         try{
-            moodDataAccessObject = new MoodDataAccessObject("./moods.csv");
+            moodDataAccessObject = new MoodDataAccessObject(new File("./moods.csv"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -74,7 +75,6 @@ public class Main {
 
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
         //views.add(loggedInView, loggedInView.viewName);
-
 
        viewManagerModel.setActiveView(createMoodView.viewName);
 

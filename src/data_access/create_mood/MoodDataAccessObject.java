@@ -14,8 +14,8 @@ public class MoodDataAccessObject implements MoodDataAccessInterface {
 
     private final Map<String, Mood> moods = new HashMap<>();
 
-    public MoodDataAccessObject(String csvPath) throws IOException {
-        csvFile = new File(csvPath);
+    public MoodDataAccessObject(File csvFile) throws IOException {
+        this.csvFile = csvFile;
         headers.put("name", 0);
         headers.put("acousticness", 1);
         headers.put("danceability", 2);
