@@ -25,6 +25,11 @@ public class MoodDataAccessObject implements MoodDataAccessInterface {
         headers.put("speechiness", 6);
         headers.put("valence", 7);
 
+        if (csvFile.length() == 0){
+            save();
+            return;
+        }
+
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
             String header = reader.readLine();
 

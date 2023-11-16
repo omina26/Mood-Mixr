@@ -23,15 +23,16 @@ import java.net.URISyntaxException;
 public class CreateMoodView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "Create Mood";
-    final JTextField moodNameInputField = new JTextField();
+    private final JTextField moodNameInputField = new JTextField(15);
 
     public final CreateMoodViewModel createMoodViewModel;
+    private final CreateMoodController createMoodController;
 
     final JButton create;
 
     //private final CreateMoodController createMoodController;
     public CreateMoodView(CreateMoodViewModel createMoodViewModel, CreateMoodController createMoodController){
-        //this.createMoodController = createMoodController;
+        this.createMoodController = createMoodController;
         this.createMoodViewModel = createMoodViewModel;
         //this.createMoodViewModel.addPropertyChangeListener(this);
 
@@ -190,7 +191,7 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(create)) {
-
+                            System.out.println("clicked create");
 //                            LoginState currentState = loginViewModel.getState();
 //                            try {
 //                                loginController.executeUseCase();
