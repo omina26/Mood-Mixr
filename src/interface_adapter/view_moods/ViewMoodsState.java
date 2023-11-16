@@ -1,5 +1,6 @@
 package interface_adapter.view_moods;
 
+<<<<<<< HEAD
 import entity.Mood;
 
 import java.util.ArrayList;
@@ -24,4 +25,7 @@ public class ViewMoodsState {
     public void setMoodsList(Set<String> moodsList){
         this.moodsList = moodsList;
     }
+=======
+public class ViewMoodsState {
+>>>>>>> 0e14d91b4acbfe3ff49747794046439a63130d26
 }

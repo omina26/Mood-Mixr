@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ViewMoodsView extends JPanel implements ActionListener, PropertyChangeListener{
+public class ViewMoodsView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "view moods";
     private final ViewMoodsViewModel viewMoodsViewModel;
 
-    public ViewMoodsView(ViewMoodsViewModel viewMoodsViewModel){
+    public ViewMoodsView(ViewMoodsViewModel viewMoodsViewModel) {
 
         this.viewMoodsViewModel = viewMoodsViewModel;
         this.viewMoodsViewModel.addPropertyChangeListener(this);
@@ -39,8 +39,9 @@ public class ViewMoodsView extends JPanel implements ActionListener, PropertyCha
     public void propertyChange(PropertyChangeEvent evt) {
         System.out.println("view moods property change");
         ViewMoodsState state = (ViewMoodsState) evt.getNewValue();
-        for (String s : state.getMoodsList()){
+        for (String s : state.getMoodsList()) {
             this.add(new JLabel(s));
         }
     }
 }
+

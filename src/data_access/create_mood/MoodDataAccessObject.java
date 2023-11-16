@@ -25,11 +25,14 @@ public class MoodDataAccessObject implements MoodDataAccessInterface {
         headers.put("speechiness", 6);
         headers.put("valence", 7);
 
+<<<<<<< HEAD
         if (csvFile.length() == 0){
             save();
             return;
         }
 
+=======
+>>>>>>> 0e14d91b4acbfe3ff49747794046439a63130d26
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
             String header = reader.readLine();
 

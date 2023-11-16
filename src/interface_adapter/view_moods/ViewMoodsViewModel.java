@@ -1,5 +1,6 @@
 package interface_adapter.view_moods;
 
+<<<<<<< HEAD
 import interface_adapter.ViewModel;
 import interface_adapter.create_mood.CreateMoodState;
 
@@ -30,4 +31,7 @@ public class ViewMoodsViewModel extends ViewModel {
     }
 
     public ViewMoodsState getState(){return state;}
+=======
+public class ViewMoodsViewModel {
+>>>>>>> 0e14d91b4acbfe3ff49747794046439a63130d26
 }
