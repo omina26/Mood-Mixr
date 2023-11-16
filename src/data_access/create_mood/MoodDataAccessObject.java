@@ -30,6 +30,7 @@ public class MoodDataAccessObject implements MoodDataAccessInterface {
             return;
         }
 
+
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
             String header = reader.readLine();
 

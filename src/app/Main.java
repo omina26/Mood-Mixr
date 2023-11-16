@@ -26,7 +26,9 @@ import view.ViewMoodsView;
 
 import javax.swing.*;
 import java.awt.*;
+
 import java.io.File;
+
 import java.io.IOException;
 
 public class Main {
@@ -55,6 +57,7 @@ public class Main {
 
         try{
             moodDataAccessObject = new MoodDataAccessObject(new File("./moods.csv"));
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -77,6 +80,7 @@ public class Main {
         //views.add(loggedInView, loggedInView.viewName);
 
        viewManagerModel.setActiveView(createMoodView.viewName);
+//        viewManagerModel.setActiveView(createMoodView.viewName);
 
         viewManagerModel.firePropertyChanged();
 
