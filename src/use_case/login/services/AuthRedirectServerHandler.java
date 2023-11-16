@@ -1,6 +1,4 @@
-
 package use_case.login.services;
-
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -22,7 +20,6 @@ public class AuthRedirectServerHandler {
 
     private static HttpServer server;
     private static final int PORT = 8888;
-
     public static final String REDIRECT_URI = "http://localhost:8888/callback";
 
 

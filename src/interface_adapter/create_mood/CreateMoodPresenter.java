@@ -21,12 +21,15 @@ public class CreateMoodPresenter implements CreateMoodOutputBoundary{
 
     @Override
     public void prepareMoodListView(CreateMoodOutputData data) {
+
+        System.out.println("in prepare mood list view");
         ViewMoodsState viewMoodsState = viewMoodsViewModel.getState();
-        viewMoodsState.setMoods(data.getMoodNames());
+        viewMoodsState.setMoodsList(data.getMoodNames());
         this.viewMoodsViewModel.setState(viewMoodsState);
         this.viewMoodsViewModel.firePropertyChanged();
 
-        this.viewMoodsViewModel.setActiveView(viewMoodsViewModel.getViewName());
+        this.viewManagerModel.setActiveView(viewMoodsViewModel.getViewName());
+
         this.viewManagerModel.firePropertyChanged();
     }
 }
