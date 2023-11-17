@@ -20,6 +20,7 @@ public class AuthRedirectServerHandler {
 
     private static HttpServer server;
     private static final int PORT = 8888;
+    public static final String REDIRECT_URI = "http://localhost:8888/callback";
 
 
     private static String authCode = "";
