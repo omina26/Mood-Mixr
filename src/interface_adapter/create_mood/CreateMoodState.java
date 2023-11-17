@@ -3,6 +3,8 @@ package interface_adapter.create_mood;
 public class CreateMoodState {
 
     private String name;
+    private String saveError = null;
+
     private int acousticness;
     private int danceability;
     private int energy;
@@ -30,12 +32,14 @@ public class CreateMoodState {
         this.liveness = copy.liveness;
         this.speechiness = copy.speechiness;
         this.valence = copy.valence;
+        this.saveError = copy.saveError;
     }
 
     public String getName() {
         return this.name;
     }
 
+    public String getSaveError () {return this.saveError;}
     public int getAcousticness(){
         return this.acousticness;
     }
@@ -67,6 +71,8 @@ public class CreateMoodState {
     public void setName(String name){
         this.name = name;
     }
+
+    public void setSaveError(String saveError) { this.saveError = saveError; }
 
     public void setAcousticness(int acousticness){
         this.acousticness = acousticness;

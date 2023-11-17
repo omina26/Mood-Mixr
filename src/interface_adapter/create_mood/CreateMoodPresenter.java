@@ -32,4 +32,11 @@ public class CreateMoodPresenter implements CreateMoodOutputBoundary{
 
         this.viewManagerModel.firePropertyChanged();
     }
+
+    @Override
+    public void prepareFailView(String error) {
+        CreateMoodState createMoodState = createMoodViewModel.getState();
+        createMoodState.setSaveError(error);
+        createMoodViewModel.firePropertyChanged();
+    }
 }

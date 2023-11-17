@@ -64,16 +64,16 @@ public class MoodDataAccessObject implements MoodDataAccessInterface {
 
     @Override
     public void saveMood(String name, double acousticness, double danceability, double energy, double instrumentalness,
-                         double liveness, double speechiness, double valence) {
+                         double liveness, double speechiness, double valence) throws IOException {
         Mood mood = new Mood(name,acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence);
         this.moods.put(mood.getName(), mood);
         this.save();
     }
 
     @Override
-    public void save(){
+    public void save() throws IOException {
         BufferedWriter writer;
-        try {
+
             writer = new BufferedWriter(new FileWriter(csvFile));
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
@@ -88,8 +88,5 @@ public class MoodDataAccessObject implements MoodDataAccessInterface {
 
             writer.close();
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

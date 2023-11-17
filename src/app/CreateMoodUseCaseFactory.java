@@ -9,6 +9,7 @@ import interface_adapter.view_moods.ViewMoodsViewModel;
 import use_case.create_mood.CreateMoodInputBoundary;
 import use_case.create_mood.CreateMoodInteractor;
 import use_case.create_mood.CreateMoodOutputBoundary;
+import use_case.create_mood.MoodDataAccessInterface;
 import view.CreateMoodView;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class CreateMoodUseCaseFactory {
     private CreateMoodUseCaseFactory() {}
 
     public static CreateMoodView create(ViewManagerModel viewManagerModel, CreateMoodViewModel createMoodViewModel,
-                                        ViewMoodsViewModel viewMoodsViewModel, MoodDataAccessObject moodDataAccessObject){
+                                        ViewMoodsViewModel viewMoodsViewModel, MoodDataAccessInterface moodDataAccessObject){
 
             CreateMoodController createMoodController = createMoodUseCase(viewManagerModel,
                     createMoodViewModel, viewMoodsViewModel, moodDataAccessObject);
@@ -26,7 +27,7 @@ public class CreateMoodUseCaseFactory {
     }
 
     private static CreateMoodController createMoodUseCase(ViewManagerModel viewManagerModel, CreateMoodViewModel createMoodViewModel,
-                                                          ViewMoodsViewModel viewMoodsViewModel, MoodDataAccessObject moodDataAccessObject){
+                                                          ViewMoodsViewModel viewMoodsViewModel, MoodDataAccessInterface moodDataAccessObject){
         CreateMoodOutputBoundary createMoodOutputBoundary =
                 new CreateMoodPresenter(createMoodViewModel, viewMoodsViewModel, viewManagerModel);
 
