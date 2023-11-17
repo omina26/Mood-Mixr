@@ -54,4 +54,9 @@ public class CreateMoodInputData {
     int getValence(){
         return this.valence;
     }
+
+    public String toString(){
+        return this.name + " " + this.acousticness + " " + this.danceability + " " + this.energy + " " + this.instrumentalness
+                + " " + this.liveness + " " + this.speechiness + " " + this.valence;
+    }
 }

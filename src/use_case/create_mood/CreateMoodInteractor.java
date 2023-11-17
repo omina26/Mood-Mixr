@@ -2,6 +2,8 @@ package use_case.create_mood;
 
 import entity.Mood;
 
+import java.io.IOException;
+
 public class CreateMoodInteractor implements  CreateMoodInputBoundary{
 
     final MoodDataAccessInterface moodDataAccessObject;
@@ -23,9 +25,14 @@ public class CreateMoodInteractor implements  CreateMoodInputBoundary{
         double speechiness = createMoodInputData.getSpeechiness()/100.0;
         double valence = createMoodInputData.getValence()/100.0;
 
-        moodDataAccessObject.saveMood(name, acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence);
+        try {
+            moodDataAccessObject.saveMood(name, acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence);
 
-        CreateMoodOutputData outputData = new CreateMoodOutputData(moodDataAccessObject.getMoodNames());
-        createMoodPresenter.prepareMoodListView(outputData);
+            CreateMoodOutputData outputData = new CreateMoodOutputData(moodDataAccessObject.getMoodNames(), false);
+            createMoodPresenter.prepareMoodListView(outputData);
+        } catch(IOException e) {
+            CreateMoodOutputData outputData = new CreateMoodOutputData(null, true);
+            createMoodPresenter.prepareFailView("Could not save mood: "+ e);
+        }
     }
 }

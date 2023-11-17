@@ -32,6 +32,4 @@ public class LoginPresenter implements LoginOutputBoundary {
         // removed loginState.setUsernameError(error);
         loginViewModel.firePropertyChanged();
     }
-
-
 }

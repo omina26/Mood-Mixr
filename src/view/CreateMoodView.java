@@ -26,7 +26,7 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
 
     private final JTextField moodNameInputField = new JTextField(15);
 
-    public final CreateMoodViewModel createMoodViewModel;
+    private final CreateMoodViewModel createMoodViewModel;
     private final CreateMoodController createMoodController;
 
     final JButton create;
@@ -244,7 +244,12 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        if (evt.getSource() == this.createMoodViewModel){
+            CreateMoodState state = (CreateMoodState) evt.getNewValue();
+            if (state.getSaveError() != null){
+                JOptionPane.showMessageDialog(this, state.getSaveError());
+            }
+        }
     }
 
     private void setFields(CreateMoodState state) {
