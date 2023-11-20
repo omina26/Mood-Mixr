@@ -75,5 +75,6 @@ public class LoginView  extends JPanel implements ActionListener, PropertyChange
     }
 
     private void setFields(LoginState state) {
+
     }
 }
