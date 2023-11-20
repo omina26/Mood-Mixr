@@ -24,7 +24,7 @@ bin/
 .vscode/
 ### Mac OS ###
 .DS_Store!/users.csv
-/users.csv
+/user.csv
 
 
 
