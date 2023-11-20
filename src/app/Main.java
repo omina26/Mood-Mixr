@@ -62,12 +62,6 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        CreateMoodView createMoodView = CreateMoodUseCaseFactory.create(viewManagerModel, createMoodViewModel, viewMoodsViewModel, moodDataAccessObject);
-        views.add(createMoodView, createMoodView.viewName);
-
-        ViewMoodsView viewMoodsView = new ViewMoodsView(viewMoodsViewModel);
-        views.add(viewMoodsView, viewMoodsView.viewName);
-
         LoginDataAccessInterface userDataAccessObject;
 
         userDataAccessObject = new UserDataAccessObject("./user.csv");
@@ -77,10 +71,16 @@ public class Main {
 
 
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
-        //views.add(loggedInView, loggedInView.viewName);
+        views.add(loggedInView, loggedInView.viewName);
 
-       viewManagerModel.setActiveView(createMoodView.viewName);
-//        viewManagerModel.setActiveView(createMoodView.viewName);
+        CreateMoodView createMoodView = CreateMoodUseCaseFactory.create(viewManagerModel, createMoodViewModel, viewMoodsViewModel, moodDataAccessObject);
+        views.add(createMoodView, createMoodView.viewName);
+
+        ViewMoodsView viewMoodsView = new ViewMoodsView(viewMoodsViewModel);
+        views.add(viewMoodsView, viewMoodsView.viewName);
+
+        viewManagerModel.setActiveView(loginView.viewName);
+        //viewManagerModel.setActiveView(createMoodView.viewName);
 
         viewManagerModel.firePropertyChanged();
 
