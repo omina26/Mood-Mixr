@@ -1,5 +1,5 @@
 ### IntelliJ IDEA ###
-out/
+/out
 !**/src/main/**/out/
 !**/src/test/**/out/
 /.idea/sonarlint
@@ -24,8 +24,8 @@ bin/
 .vscode/
 ### Mac OS ###
 .DS_Store!/users.csv
-/users.csv
-
+/user.csv
+/moods.csv
 
 
 
