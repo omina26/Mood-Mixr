@@ -25,7 +25,7 @@ bin/
 ### Mac OS ###
 .DS_Store!/users.csv
 /user.csv
-
+/moods.csv
 
 
 
