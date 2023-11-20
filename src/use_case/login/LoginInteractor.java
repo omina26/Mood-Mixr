@@ -10,8 +10,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Base64;
+import java.util.*;
 
 public class LoginInteractor implements LoginInputBoundary {
 
@@ -157,11 +156,31 @@ public class LoginInteractor implements LoginInputBoundary {
 
         // Close the connection
         connection.disconnect();
-        User user = new User(stringRepresentation.toString(), accessToken);
+        HashMap<String, String> userData = stringToMap(stringRepresentation);
+        User user = new User(userData.get("display_name"), accessToken);
 
         userDataAcessObject.loginUser(user);
 
         LoginOutputData loginOutputData = new LoginOutputData(user.getName(), false);
         loginPresenter.prepareSuccessView(loginOutputData);
+    }
+
+    private static HashMap<String, String> stringToMap(StringBuilder response){
+        HashMap<String, String> userData = new HashMap<>();
+        String key = "display_name";
+        int i = 0;
+        int n;
+        while (i < response.length()){
+            if (key.equals(response.substring(i, i + 12))){
+                n = i + 12 + 5;
+                while(response.charAt(n) != ','){
+                    n = n + 1;
+                }
+                userData.put("display_name", response.substring(i + 12 + 5, n - 1));
+                return userData;
+            }
+            i = i + 1;
+        }
+        return userData;
     }
 }

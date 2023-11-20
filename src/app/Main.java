@@ -77,9 +77,9 @@ public class Main {
 
 
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
-        //views.add(loggedInView, loggedInView.viewName);
+        views.add(loggedInView, loggedInView.viewName);
 
-       viewManagerModel.setActiveView(createMoodView.viewName);
+        viewManagerModel.setActiveView(loginView.viewName);
 //        viewManagerModel.setActiveView(createMoodView.viewName);
 
         viewManagerModel.firePropertyChanged();
