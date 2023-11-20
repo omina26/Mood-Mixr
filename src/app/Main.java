@@ -79,8 +79,8 @@ public class Main {
         ViewMoodsView viewMoodsView = new ViewMoodsView(viewMoodsViewModel);
         views.add(viewMoodsView, viewMoodsView.viewName);
 
-        viewManagerModel.setActiveView(loginView.viewName);
-        //viewManagerModel.setActiveView(createMoodView.viewName);
+        //viewManagerModel.setActiveView(loginView.viewName);
+        viewManagerModel.setActiveView(createMoodView.viewName);
 
         viewManagerModel.firePropertyChanged();
 
