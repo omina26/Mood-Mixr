@@ -9,14 +9,13 @@ import data_access.login.UserDataAccessObject;
 
 import data_access.create_mood.MoodDataAccessObject;
 
-import interface_adapter.ViewManagerModel;
 import interface_adapter.create_mood.CreateMoodViewModel;
 
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.view_moods.ViewMoodsViewModel;
-import use_case.login.LoginDataAccessInterface;
 
+import use_case.login.LoginDataAccessInterface;
 import view.LoggedInView;
 
 import view.CreateMoodView;
@@ -27,6 +26,8 @@ import view.ViewMoodsView;
 import javax.swing.*;
 import java.awt.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 import java.io.IOException;
@@ -54,15 +55,16 @@ public class Main {
         ViewMoodsViewModel viewMoodsViewModel = new ViewMoodsViewModel();
 
         MoodDataAccessObject moodDataAccessObject;
+
         LoginDataAccessInterface userDataAccessObject;
 
         try{
             moodDataAccessObject = new MoodDataAccessObject(new File("./moods.csv"));
-            userDataAccessObject = new UserDataAccessObject("./user.csv");
+            userDataAccessObject = new UserDataAccessObject(new File("./user.csv"));
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
 
 
         LoginView loginView =  LoginUseCaseFactory.create(viewManagerModel,loginViewModel, loggedInViewModel, userDataAccessObject);

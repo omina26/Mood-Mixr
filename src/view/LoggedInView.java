@@ -22,9 +22,11 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     final JButton analyzePlaylist;
     final JButton groupPlaylist;
 
+
     public LoggedInView(LoggedInViewModel loggedInViewModel) {
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
+
 
         JLabel title = new JLabel("Logged In Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
