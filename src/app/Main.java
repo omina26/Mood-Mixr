@@ -55,8 +55,8 @@ public class Main {
         ViewMoodsViewModel viewMoodsViewModel = new ViewMoodsViewModel();
 
         MoodDataAccessObject moodDataAccessObject;
+        UserDataAccessObject userDataAccessObject;
 
-        LoginDataAccessInterface userDataAccessObject;
 
         try{
             moodDataAccessObject = new MoodDataAccessObject(new File("./moods.csv"));
@@ -67,21 +67,21 @@ public class Main {
         }
 
 
-        LoginView loginView =  LoginUseCaseFactory.create(viewManagerModel,loginViewModel, loggedInViewModel, userDataAccessObject);
-        views.add(loginView, loginView.viewName);
-
-
-        LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
-        views.add(loggedInView, loggedInView.viewName);
-
         CreateMoodView createMoodView = CreateMoodUseCaseFactory.create(viewManagerModel, createMoodViewModel, viewMoodsViewModel, moodDataAccessObject);
         views.add(createMoodView, createMoodView.viewName);
+
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
 
         ViewMoodsView viewMoodsView = new ViewMoodsView(viewMoodsViewModel);
         views.add(viewMoodsView, viewMoodsView.viewName);
 
-        viewManagerModel.setActiveView(loginView.viewName);
-        //viewManagerModel.setActiveView(createMoodView.viewName);
+        LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
+        views.add(loggedInView, loggedInView.viewName);
+
+        views.add(loggedInView, loggedInView.viewName);
+
+       viewManagerModel.setActiveView(loginView.viewName);
+//        viewManagerModel.setActiveView(createMoodView.viewName);
 
         viewManagerModel.firePropertyChanged();
 

@@ -24,6 +24,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
 
     public LoggedInView(LoggedInViewModel loggedInViewModel) {
+
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
 
@@ -41,7 +42,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
         createMood = new JButton(loggedInViewModel.CREATE_MOOD_BUTTON_LABEL);
         buttons.add(createMood);
-        createMood.addActionListener(this);
+
 
         getPlaylist = new JButton(loggedInViewModel.GET_PLAYLIST_BUTTON_LABEL);
         buttons.add(getPlaylist);

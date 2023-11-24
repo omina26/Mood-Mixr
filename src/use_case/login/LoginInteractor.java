@@ -169,6 +169,7 @@ public class LoginInteractor implements LoginInputBoundary {
             loginPresenter.prepareFailView(e.getMessage());
         }
 
+
     }
 
     private static HashMap<String, String> stringToMap(StringBuilder response){
@@ -188,5 +189,6 @@ public class LoginInteractor implements LoginInputBoundary {
             i = i + 1;
         }
         return userData;
+
     }
 }
