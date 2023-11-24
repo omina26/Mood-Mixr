@@ -44,9 +44,7 @@ public class LoginView  extends JPanel implements ActionListener, PropertyChange
                             LoginState currentState = loginViewModel.getState();
                             try {
                                 loginController.executeUseCase();
-                            } catch (IOException ex) {
-                                throw new RuntimeException(ex);
-                            } catch (URISyntaxException ex) {
+                            } catch (IOException | URISyntaxException ex) {
                                 throw new RuntimeException(ex);
                             }
                         }
