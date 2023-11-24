@@ -65,8 +65,11 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         });
 
         JPanel setAcousticnessPanel = new JPanel();
+        setAcousticnessPanel.setLayout(new BoxLayout(setAcousticnessPanel, BoxLayout.Y_AXIS));
+
         JLabel setAcousticnessLabel = new JLabel(CreateMoodViewModel.SET_ACOUSTICNESS_LABEL + " (" + CreateMoodViewModel.DEFAULT_SLIDER_VALUE + ")");
         JSlider acousticnessSlider = new JSlider(0, 100, CreateMoodViewModel.DEFAULT_SLIDER_VALUE);
+        JLabel acousticnessInfo = new JLabel(CreateMoodViewModel.ACOUSTICNESS_INFO + "\n");
         acousticnessSlider.addChangeListener(
                 new ChangeListener() {
                     @Override
@@ -80,10 +83,15 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         );
         setAcousticnessPanel.add(setAcousticnessLabel);
         setAcousticnessPanel.add(acousticnessSlider);
+        setAcousticnessPanel.add(acousticnessInfo);
+        setAcousticnessPanel.add(Box.createVerticalStrut(50));
 
         JPanel setDanceabilityPanel = new JPanel();
+        setDanceabilityPanel.setLayout(new BoxLayout(setDanceabilityPanel, BoxLayout.Y_AXIS));
+
         JLabel setDanceabilityLabel = new JLabel(CreateMoodViewModel.SET_DANCEABILITY_LABEL + " (" + CreateMoodViewModel.DEFAULT_SLIDER_VALUE + ")");
         JSlider danceabilitySlider = new JSlider(0, 100, CreateMoodViewModel.DEFAULT_SLIDER_VALUE );
+        JLabel danceabilityInfo = new JLabel(CreateMoodViewModel.DANCEABILITY_INFO + "\n");
         danceabilitySlider.addChangeListener(
                 new ChangeListener() {
                     @Override
@@ -97,10 +105,15 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         );
         setDanceabilityPanel.add(setDanceabilityLabel);
         setDanceabilityPanel.add(danceabilitySlider);
+        setDanceabilityPanel.add(danceabilityInfo);
+        setDanceabilityPanel.add(Box.createVerticalStrut(50));
 
         JPanel setEnergyPanel = new JPanel();
+        setEnergyPanel.setLayout(new BoxLayout(setEnergyPanel, BoxLayout.Y_AXIS));
+
         JLabel setEnergyLabel = new JLabel(CreateMoodViewModel.SET_ENERGY_LABEL + " (" + CreateMoodViewModel.DEFAULT_SLIDER_VALUE + ")");
         JSlider energySlider = new JSlider(0, 100, CreateMoodViewModel.DEFAULT_SLIDER_VALUE);
+        JLabel energyInfo = new JLabel(CreateMoodViewModel.ENERGY_INFO + "\n");
         energySlider.addChangeListener(
                 new ChangeListener() {
                     @Override
@@ -114,10 +127,15 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         );
         setEnergyPanel.add(setEnergyLabel);
         setEnergyPanel.add(energySlider);
+        setEnergyPanel.add(energyInfo);
+        setEnergyPanel.add(Box.createVerticalStrut(50));
 
         JPanel setInstrumentalnessPanel = new JPanel();
+        setInstrumentalnessPanel.setLayout(new BoxLayout(setInstrumentalnessPanel, BoxLayout.Y_AXIS));
+
         JLabel setInstrumentalnessLabel = new JLabel(CreateMoodViewModel.SET_INSTRUMENTALNESS + " (" + CreateMoodViewModel.DEFAULT_SLIDER_VALUE + ")");
         JSlider instrumentalnessSlider = new JSlider(0, 100, CreateMoodViewModel.DEFAULT_SLIDER_VALUE);
+        JLabel instrumentalnessInfo = new JLabel(CreateMoodViewModel.INSTRUMENTALNESS_INFO + "\n");
         instrumentalnessSlider.addChangeListener(
                 new ChangeListener() {
                     @Override
@@ -131,10 +149,15 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         );
         setInstrumentalnessPanel.add(setInstrumentalnessLabel);
         setInstrumentalnessPanel.add(instrumentalnessSlider);
+        setInstrumentalnessPanel.add(instrumentalnessInfo);
+        setInstrumentalnessPanel.add(Box.createVerticalStrut(50));
 
         JPanel setLivenessPanel = new JPanel();
+        setLivenessPanel.setLayout(new BoxLayout(setLivenessPanel, BoxLayout.Y_AXIS));
+
         JLabel setLivenessLabel = new JLabel(CreateMoodViewModel.SET_LIVENESS + " (" + createMoodViewModel.DEFAULT_SLIDER_VALUE + ")");
         JSlider livenessSlider = new JSlider(0, 100, createMoodViewModel.DEFAULT_SLIDER_VALUE);
+        JLabel livenessInfo = new JLabel(CreateMoodViewModel.LIVENESS_LABEL + "\n");
         livenessSlider.addChangeListener(
                 new ChangeListener() {
                     @Override
@@ -148,10 +171,15 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         );
         setLivenessPanel.add(setLivenessLabel);
         setLivenessPanel.add(livenessSlider);
+        setLivenessPanel.add(livenessInfo);
+        setLivenessPanel.add(Box.createVerticalStrut(50));
 
         JPanel setSpeechinessPanel = new JPanel();
+        setSpeechinessPanel.setLayout(new BoxLayout(setSpeechinessPanel, BoxLayout.Y_AXIS));
+
         JLabel setSpeechinessLabel = new JLabel(CreateMoodViewModel.SET_SPEECHINESS + " (" + CreateMoodViewModel.DEFAULT_SLIDER_VALUE + ")");
         JSlider speechinessSlider = new JSlider(0, 100, CreateMoodViewModel.DEFAULT_SLIDER_VALUE);
+        JLabel speechinessInfo = new JLabel(CreateMoodViewModel.SPEECHINESS_INFO + "\n");
         speechinessSlider.addChangeListener(
                 new ChangeListener() {
                     @Override
@@ -165,10 +193,15 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         );
         setSpeechinessPanel.add(setSpeechinessLabel);
         setSpeechinessPanel.add(speechinessSlider);
+        setSpeechinessPanel.add(speechinessInfo);
+        setSpeechinessPanel.add(Box.createVerticalStrut(50));
 
         JPanel setValencePanel = new JPanel();
+        setValencePanel.setLayout(new BoxLayout(setValencePanel, BoxLayout.Y_AXIS));
+
         JLabel setValenceLabel = new JLabel(CreateMoodViewModel.SET_VALENCE + " (" + CreateMoodViewModel.DEFAULT_SLIDER_VALUE + ")");
         JSlider valenceSlider = new JSlider(0, 100, CreateMoodViewModel.DEFAULT_SLIDER_VALUE);
+        JLabel valenceInfo = new JLabel(CreateMoodViewModel.VALENCE_INFO + "\n");
         valenceSlider.addChangeListener(
                 new ChangeListener() {
                     @Override
@@ -182,6 +215,8 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         );
         setValencePanel.add(setValenceLabel);
         setValencePanel.add(valenceSlider);
+        setValencePanel.add(valenceInfo);
+        setValencePanel.add(Box.createVerticalStrut(50));
 
         JPanel buttons = new JPanel();
 

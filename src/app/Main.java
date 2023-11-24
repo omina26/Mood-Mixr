@@ -4,7 +4,7 @@ package app;
 
 import interface_adapter.ViewManagerModel;
 
-import data_access.UserDataAccessObject;
+import data_access.login.UserDataAccessObject;
 
 
 import data_access.create_mood.MoodDataAccessObject;
@@ -54,17 +54,16 @@ public class Main {
         ViewMoodsViewModel viewMoodsViewModel = new ViewMoodsViewModel();
 
         MoodDataAccessObject moodDataAccessObject;
+        LoginDataAccessInterface userDataAccessObject;
 
         try{
             moodDataAccessObject = new MoodDataAccessObject(new File("./moods.csv"));
-
+            userDataAccessObject = new UserDataAccessObject("./user.csv");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        LoginDataAccessInterface userDataAccessObject;
 
-        userDataAccessObject = new UserDataAccessObject("./user.csv");
 
         LoginView loginView =  LoginUseCaseFactory.create(viewManagerModel,loginViewModel, loggedInViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
