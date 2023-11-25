@@ -1,3 +1,5 @@
+package CreateMood;
+
 import interface_adapter.create_mood.CreateMoodController;
 import interface_adapter.create_mood.CreateMoodViewModel;
 import org.junit.Test;

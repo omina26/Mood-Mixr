@@ -1,3 +1,5 @@
+package CreateMood;
+
 import interface_adapter.ViewManagerModel;
 import interface_adapter.create_mood.CreateMoodPresenter;
 import interface_adapter.create_mood.CreateMoodViewModel;
