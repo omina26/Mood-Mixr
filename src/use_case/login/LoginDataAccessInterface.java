@@ -8,4 +8,6 @@ import java.net.URISyntaxException;
 public interface LoginDataAccessInterface {
 
     public void loginUser(User user);
+
+    public User getCurrentUser();
 }
