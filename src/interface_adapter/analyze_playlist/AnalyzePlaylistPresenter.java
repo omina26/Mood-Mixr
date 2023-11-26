@@ -13,6 +13,4 @@ public class AnalyzePlaylistPresenter implements AnalyzePlaylistOutputBoundary {
         this.analyzePlaylistViewModel = analyzePlaylistViewModel;
         this.viewManagerModel = viewManagerModel;
     }
-
-    }
 }
