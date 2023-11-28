@@ -12,17 +12,14 @@ import data_access.create_mood.MoodDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.create_mood.CreateMoodViewModel;
 
+import interface_adapter.create_playlist.CreatePlaylistState;
+import interface_adapter.create_playlist.CreatePlaylistViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.view_moods.ViewMoodsViewModel;
 import use_case.login.LoginDataAccessInterface;
 
-import view.LoggedInView;
-
-import view.CreateMoodView;
-import view.LoginView;
-import view.ViewManager;
-import view.ViewMoodsView;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,6 +50,8 @@ public class Main {
         CreateMoodViewModel createMoodViewModel = new CreateMoodViewModel();
         ViewMoodsViewModel viewMoodsViewModel = new ViewMoodsViewModel();
 
+        CreatePlaylistViewModel createPlaylistViewModel = new CreatePlaylistViewModel();
+
         MoodDataAccessObject moodDataAccessObject;
 
         try{
@@ -78,6 +77,10 @@ public class Main {
 
         ViewMoodsView viewMoodsView = new ViewMoodsView(viewMoodsViewModel);
         views.add(viewMoodsView, viewMoodsView.viewName);
+
+        CreatePlaylistState createPlaylistState = new CreatePlaylistState("");
+        CreatePlaylistView createPlaylistView = CreatePlaylistUseCaseFactory.create(viewManagerModel, createPlaylistViewModel, createPlaylistState);
+        views.add(createPlaylistView, createPlaylistView.viewName);
 
         viewManagerModel.setActiveView(loginView.viewName);
         //viewManagerModel.setActiveView(createMoodView.viewName);
