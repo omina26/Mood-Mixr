@@ -17,12 +17,7 @@ import interface_adapter.login.LoginViewModel;
 import interface_adapter.view_moods.ViewMoodsViewModel;
 import use_case.login.LoginDataAccessInterface;
 
-import view.LoggedInView;
-
-import view.CreateMoodView;
-import view.LoginView;
-import view.ViewManager;
-import view.ViewMoodsView;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -79,7 +74,7 @@ public class Main {
         ViewMoodsView viewMoodsView = new ViewMoodsView(viewMoodsViewModel);
         views.add(viewMoodsView, viewMoodsView.viewName);
 
-        viewManagerModel.setActiveView(loginView.viewName);
+        viewManagerModel.setActiveView(AnalyzePlaylistView.viewName);
         //viewManagerModel.setActiveView(createMoodView.viewName);
 
         viewManagerModel.firePropertyChanged();
