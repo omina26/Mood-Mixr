@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
 
-public class LoginAPIHandler {
+public class LoginAPIHandler implements LoginAPIInterface{
 
     final String TOKEN_URL = "https://accounts.spotify.com/api/token";
     final String CLIENT_ID = "1c6992172cb240fd85caa34bae033b94";

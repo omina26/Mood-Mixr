@@ -38,7 +38,6 @@ public class LoginUseCaseFactory {
             LoginDataAccessInterface userDataAccessObject) throws IOException{
         LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel, loggedInViewModel, loginViewModel);
 
-        UserFactory userFactory = new UserFactory();
         LoginAPIHandler handler = new LoginAPIHandler();
         LoginInputBoundary loginInteractor = new LoginInteractor(userDataAccessObject, loginOutputBoundary, handler);
         return new LoginController(loginInteractor);

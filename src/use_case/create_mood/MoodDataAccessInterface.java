@@ -7,12 +7,12 @@ import java.util.*;
 
 public interface MoodDataAccessInterface {
 
-    public Map<String, Mood> getMoods();
+    Map<String, Mood> getMoods();
 
-    public Set<String> getMoodNames();
+    Set<String> getMoodNames();
 
-    public void saveMood(String name, double acousticness, double danceability, double energy, double instrumentalness,
+    void saveMood(String name, double acousticness, double danceability, double energy, double instrumentalness,
                          double liveness, double speechiness, double valence) throws IOException;
 
-    public void save() throws IOException;
+    void save() throws IOException;
 }

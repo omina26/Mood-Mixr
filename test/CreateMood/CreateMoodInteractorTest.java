@@ -1,3 +1,5 @@
+package CreateMood;
+
 import entity.Mood;
 import org.junit.Test;
 import use_case.create_mood.*;
