@@ -3,17 +3,13 @@ package view;
 import interface_adapter.analyze_playlist.AnalyzePlaylistController;
 import interface_adapter.analyze_playlist.AnalyzePlaylistState;
 import interface_adapter.analyze_playlist.AnalyzePlaylistViewModel;
-import interface_adapter.login.LoginState;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.time.chrono.JapaneseChronology;
 
 public class AnalyzePlaylistView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -23,6 +19,7 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
     private final JTextField analyzePlaylistInputField = new JTextField(15);
 
     final JButton AnalyzePlaylist;
+    private JButton back;
 
     private final AnalyzePlaylistController analyzePlaylistController;
 
@@ -33,57 +30,60 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
 
         JLabel title = new JLabel("Analyze Playlist Screen");
         JLabel directions = new JLabel("Input the playlist ID for a public playlist you would like to analyze. " +
-                "You can find the ID by selecing 'copy playlist link' in Spotify. The playlist IF will be series of letters " +
+                "You can find the ID by selecting 'copy playlist link' in Spotify. The playlist IF will be series of letters " +
                 "and numbers after 'playlist/ and before the '?'");
+
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        directions.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         LabelTextPanel playlistInfo = new LabelTextPanel(
                 new JLabel("Playlist ID"), analyzePlaylistInputField);
 
         JPanel buttons = new JPanel();
-        AnalyzePlaylist = new JButton();
 
+        back = new JButton(AnalyzePlaylistView.BACK_BUTTON_LABEL);
+        buttons.add(back);
+
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+
+        AnalyzePlaylist = new JButton();
         AnalyzePlaylist.addActionListener(                // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(AnalyzePlaylist)) {
-                            AnalyzePlaylistState currentState = AnalyzePlaylistViewModel.getState();
+                            AnalyzePlaylistState currentState =
+                                    AnalyzePlaylistViewModel.getState();
 
                             AnalyzePlaylistController.execute(
-                                    currentState.getPlaylist()
-                            );
+                                    currentState.getPlaylist());
                         }
                     }
                 }
         );
 
-       // cancel.addActionListener(this);
-
-        analyzePlaylistInputField.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                AnalyzePlaylistState currentState = analyzePlaylistViewModel.getState();
-                currentState.setName(analyzePlaylistInputField.getText()+e.getKeyChar());
-                analyzePlaylistViewModel.setState(currentState);
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-            }
-        });
-
+        this.add(title);
+        this.add(directions);
+        this.add(buttons);
     }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
+    public void actionPerformed(ActionEvent evt) {
+        System.out.println("Click " + evt.getActionCommand());
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        AnalyzePlaylistState state = (AnalyzePlaylistState) evt.getNewValue();
+        setFields(state);
     }
+
+    private void setFields(AnalyzePlaylistState state) {
+        analyzePlaylistInputField.setText(state.getPlaylist());
+    }
+
+}
 }

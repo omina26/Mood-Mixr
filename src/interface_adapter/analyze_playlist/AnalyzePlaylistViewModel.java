@@ -9,17 +9,15 @@ import java.beans.PropertyChangeSupport;
 public class AnalyzePlaylistViewModel extends ViewModel {
     public final String TITLE_LABLE = "Analyze Playlist View";
 
-    public static final String SELECT_PLAYLIST_LABLE = "Select Playlist";
+    public static final String ANALYZE_PLAYLIST_BUTTON_LABEL = "Analyze Playlist";
+    public static final String BACK_BUTTON_LABEL = "Back";
 
-    private AnalyzePlaylistState state = new AnalyzePlaylistState(SELECT_PLAYLIST_LABLE);
+    private AnalyzePlaylistState state = new AnalyzePlaylistState(ANALYZE_PLAYLIST_BUTTON_LABEL);
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public AnalyzePlaylistViewModel(String viewName) {
-        super("Analyze Playlist");
-    }
+    //public AnalyzePlaylistViewModel(String viewName) {super("Analyze Playlist");}
 
-    public void setState (AnalyzePlaylistState state){
-        this.state = state;}
+    public void setState (AnalyzePlaylistState state){this.state = state;}
 
     @Override
     public void firePropertyChanged() {
