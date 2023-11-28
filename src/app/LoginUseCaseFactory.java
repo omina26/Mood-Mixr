@@ -7,6 +7,7 @@ import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
 import use_case.login.*;
+import use_case.login.services.LoginAPIHandler;
 import view.LoginView;
 
 import javax.swing.*;
@@ -38,7 +39,8 @@ public class LoginUseCaseFactory {
         LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel, loggedInViewModel, loginViewModel);
 
         UserFactory userFactory = new UserFactory();
-        LoginInputBoundary loginInteractor = new LoginInteractor(userDataAccessObject, loginOutputBoundary);
+        LoginAPIHandler handler = new LoginAPIHandler();
+        LoginInputBoundary loginInteractor = new LoginInteractor(userDataAccessObject, loginOutputBoundary, handler);
         return new LoginController(loginInteractor);
     }
 }

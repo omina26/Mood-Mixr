@@ -22,9 +22,12 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     final JButton analyzePlaylist;
     final JButton groupPlaylist;
 
+
     public LoggedInView(LoggedInViewModel loggedInViewModel) {
+
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
+
 
         JLabel title = new JLabel("Logged In Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -39,7 +42,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
         createMood = new JButton(loggedInViewModel.CREATE_MOOD_BUTTON_LABEL);
         buttons.add(createMood);
-        createMood.addActionListener(this);
+
 
         getPlaylist = new JButton(loggedInViewModel.GET_PLAYLIST_BUTTON_LABEL);
         buttons.add(getPlaylist);
@@ -68,5 +71,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         LoggedInState state = (LoggedInState) evt.getNewValue();
         name.setText(state.getName());
     }
+
+
 }
 

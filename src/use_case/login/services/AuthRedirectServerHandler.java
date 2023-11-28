@@ -97,4 +97,5 @@ public class AuthRedirectServerHandler {
         new SecureRandom().nextBytes(bytes);
         return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
     }
+
 }
