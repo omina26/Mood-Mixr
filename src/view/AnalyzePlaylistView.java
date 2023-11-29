@@ -24,7 +24,7 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
     private final AnalyzePlaylistController analyzePlaylistController;
 
     public AnalyzePlaylistView(AnalyzePlaylistViewModel analyzePlaylistViewModel,
-                               AnalyzePlaylistController analyzePlaylistController, JButton create) {
+                               AnalyzePlaylistController analyzePlaylistController) {
         this.analyzePlaylistController = analyzePlaylistController;
         this.analyzePlaylistViewModel = analyzePlaylistViewModel;
 
@@ -41,7 +41,7 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
 
         JPanel buttons = new JPanel();
 
-        back = new JButton(AnalyzePlaylistView.BACK_BUTTON_LABEL);
+        back = new JButton(AnalyzePlaylistViewModel.BACK_BUTTON_LABEL);
         buttons.add(back);
 
         back.addActionListener(new ActionListener() {
@@ -58,32 +58,32 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(AnalyzePlaylist)) {
                             AnalyzePlaylistState currentState =
-                                    AnalyzePlaylistViewModel.getState();
+                                    analyzePlaylistViewModel.getState();
 
-                            AnalyzePlaylistController.execute(
+                            analyzePlaylistController.execute(
                                     currentState.getPlaylist());
                         }
                     }
                 }
         );
 
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
         this.add(title);
         this.add(directions);
         this.add(buttons);
     }
-    public void actionPerformed(ActionEvent evt) {
-        System.out.println("Click " + evt.getActionCommand());
-    }
+    public void actionPerformed(ActionEvent e) {System.out.println("Click" + e.getActionCommand());}
 
-    @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        AnalyzePlaylistState state = (AnalyzePlaylistState) evt.getNewValue();
-        setFields(state);
+        if (evt.getSource() == this.analyzePlaylistViewModel) {
+            AnalyzePlaylistState state = (AnalyzePlaylistState) evt.getNewValue();
+            if (state.getSaveError() != null){
+                JOptionPane.showMessageDialog(this, state.getSaveError());
+            }
+        }
     }
 
-    private void setFields(AnalyzePlaylistState state) {
-        analyzePlaylistInputField.setText(state.getPlaylist());
-    }
 
 }
-}
+

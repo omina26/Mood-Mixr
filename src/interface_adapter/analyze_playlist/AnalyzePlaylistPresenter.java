@@ -13,4 +13,14 @@ public class AnalyzePlaylistPresenter implements AnalyzePlaylistOutputBoundary {
         this.analyzePlaylistViewModel = analyzePlaylistViewModel;
         this.viewManagerModel = viewManagerModel;
     }
+
+    @Override
+    public void analyzePlaylistView(AnalyzePlaylistOutputData data) {
+
+    }
+
+    @Override
+    public void prepareFailView(String error) {
+
+    }
 }
