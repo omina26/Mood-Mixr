@@ -29,8 +29,8 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
         this.analyzePlaylistViewModel = analyzePlaylistViewModel;
 
         JLabel title = new JLabel("Analyze Playlist Screen");
-        JLabel directions = new JLabel("Input the playlist ID for a public playlist you would like to analyze. " +
-                "You can find the ID by selecting 'copy playlist link' in Spotify. The playlist IF will be series of letters " +
+        JLabel directions = new JLabel("Input the playlist ID for a public playlist you would like to analyze. "  +
+                "You can find the ID by selecting 'copy playlist link' in Spotify. The playlist ID will be series of letters " +
                 "and numbers after 'playlist/ and before the '?'");
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);

@@ -74,7 +74,7 @@ public class Main {
         AnalyzePlaylistDataAccessObject analyzePlaylistDataAccessObject;
 
         try{
-            analyzePlaylistDataAccessObject = new AnalyzePlaylistDataAccessObject(new File("./songs.csv"));
+            analyzePlaylistDataAccessObject = new AnalyzePlaylistDataAccessObject(new File("./playlistIDs.csv"));
 
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -1,11 +1,15 @@
 package use_case.analyze_playlist;
 
 public class AnalyzePlaylistInputData {
-    private final String playlist;
+    final private String playlistID;
 
-    public AnalyzePlaylistInputData(String playlist) {
-        this.playlist = playlist;
+    public AnalyzePlaylistInputData(String playlistID) {
+        this.playlistID = playlistID;
     }
 
-    String getPlaylist() {return playlist;}
+    String getPlaylistID() {return playlistID;}
+
+    public String toString(){
+        return this.playlistID;
+    }
 }
