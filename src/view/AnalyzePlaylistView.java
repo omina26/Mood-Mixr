@@ -18,8 +18,8 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
     private final AnalyzePlaylistViewModel analyzePlaylistViewModel;
     private final JTextField analyzePlaylistInputField = new JTextField(15);
 
-    final JButton AnalyzePlaylist;
-    private JButton back;
+    final JButton analyze;
+    final JButton back;
 
     private final AnalyzePlaylistController analyzePlaylistController;
 
@@ -52,11 +52,13 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
         });
 
 
-        AnalyzePlaylist = new JButton();
-        AnalyzePlaylist.addActionListener(                // This creates an anonymous subclass of ActionListener and instantiates it.
+        analyze = new JButton(AnalyzePlaylistViewModel.ANALYZE_PLAYLIST_BUTTON_LABEL);
+        buttons.add(analyze);
+
+        analyze.addActionListener(                // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        if (evt.getSource().equals(AnalyzePlaylist)) {
+                        if (evt.getSource().equals(analyze)) {
                             AnalyzePlaylistState currentState =
                                     analyzePlaylistViewModel.getState();
 
@@ -71,7 +73,9 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
 
         this.add(title);
         this.add(directions);
+        this.add(playlistInfo);
         this.add(buttons);
+
     }
     public void actionPerformed(ActionEvent e) {System.out.println("Click" + e.getActionCommand());}
 
