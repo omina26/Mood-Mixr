@@ -22,8 +22,7 @@ public class AnalyzePlaylistDataAccessObject implements AnalyzePlaylistDataAcces
         headers.put("average speechiness", 6);
         headers.put("average valance", 7);
 
-        File cvsFile = null;
-        if (cvsFile.length() == 0){
+        if (csvFile.length() == 0){
             save();
             return;
         }

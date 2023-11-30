@@ -2,6 +2,7 @@ package app;
 
 
 
+import data_access.analyze_playlist.AnalyzePlaylistDataAccessObject;
 import interface_adapter.ViewManagerModel;
 
 import data_access.UserDataAccessObject;
@@ -70,10 +71,20 @@ public class Main {
             throw new RuntimeException(e);
         }
 
+        AnalyzePlaylistDataAccessObject analyzePlaylistDataAccessObject;
+
+        try{
+            analyzePlaylistDataAccessObject = new AnalyzePlaylistDataAccessObject(new File("./songs.csv"));
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
         CreateMoodView createMoodView = CreateMoodUseCaseFactory.create(viewManagerModel, createMoodViewModel, viewMoodsViewModel, moodDataAccessObject);
         views.add(createMoodView, createMoodView.viewName);
 
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
+        //LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
 
         ViewMoodsView viewMoodsView = new ViewMoodsView(viewMoodsViewModel);
         views.add(viewMoodsView, viewMoodsView.viewName);
@@ -88,7 +99,7 @@ public class Main {
         views.add(analyzePlaylistView, analyzePlaylistView.viewName);
 
         //viewManagerModel.setActiveView(loginView.viewName);
-        viewManagerModel.setActiveView(analyzePlaylistViewModel.viewName);
+        viewManagerModel.setActiveView(analyzePlaylistViewModel.getViewName());
 
         viewManagerModel.firePropertyChanged();
 
