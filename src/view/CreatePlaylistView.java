@@ -16,14 +16,12 @@ public class CreatePlaylistView extends JPanel implements ActionListener, Proper
     private final JFrame frame = new JFrame("Select a mood:");
     private final CreatePlaylistViewModel createPlaylistViewModel;
     private final CreatePlaylistController createPlaylistController;
-    private final CreatePlaylistState createPlaylistState;
     private JButton create;
     private JButton back;
 
-    public CreatePlaylistView(CreatePlaylistViewModel createPlaylistViewModel, CreatePlaylistController createPlaylistController, CreatePlaylistState createPlaylistState) {
+    public CreatePlaylistView(CreatePlaylistViewModel createPlaylistViewModel, CreatePlaylistController createPlaylistController) {
         this.createPlaylistController = createPlaylistController;
         this.createPlaylistViewModel = createPlaylistViewModel;
-        this.createPlaylistState = createPlaylistState;
 
         JLabel title = new JLabel("Create a Playlist");
         JLabel directions = new JLabel("Select the mood for the playlist:");
@@ -35,6 +33,7 @@ public class CreatePlaylistView extends JPanel implements ActionListener, Proper
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 400);
 
+        CreatePlaylistState createPlaylistState = createPlaylistViewModel.getState();
         String[] moodsList = createPlaylistState.getMoodsList();
         JComboBox<String> dropdown = new JComboBox<>(moodsList);
         dropdown.setEditable(true);

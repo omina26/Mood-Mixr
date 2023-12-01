@@ -5,7 +5,7 @@ import interface_adapter.playlist_created.PlaylistCreatedState;
 import interface_adapter.playlist_created.PlaylistCreatedViewModel;
 import use_case.create_playlist.CreatePlaylistOutputBoundary;
 
-public class CreatePlaylistPresenter implements CreatePlaylistOutputBoundary {
+public class CreatePlaylistPresenter implements CreatePlaylistOutputBoundary{
 
     private final CreatePlaylistViewModel createPlaylistViewModel;
 
@@ -20,7 +20,7 @@ public class CreatePlaylistPresenter implements CreatePlaylistOutputBoundary {
         this.viewManagerModel = viewManagerModel;
     }
 
-    //@Override
+    @Override
     public void prepareSuccessView() {
         System.out.println("Playlist successfully created");
         PlaylistCreatedState playlistCreatedState = playlistCreatedViewModel.getState();
@@ -30,7 +30,7 @@ public class CreatePlaylistPresenter implements CreatePlaylistOutputBoundary {
         this.viewManagerModel.firePropertyChanged();
     }
 
-    //@Override
+    @Override
     public void prepareFailView(String error) {
         CreatePlaylistState createPlaylistState = createPlaylistViewModel.getState();
         createPlaylistState.setSaveError(error);
