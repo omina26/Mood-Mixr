@@ -6,22 +6,14 @@ import org.junit.Test;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class MoodDataAccessObjectTest {
-
-    @Test
-    public void testSave() throws IOException {
-        File tempFile = new File("moods.csv");
-        PrintWriter writer = new PrintWriter(tempFile);
-        writer.print("");
-        writer.close();
-        BufferedReader reader = new BufferedReader(new FileReader(tempFile));
-        String header = reader.readLine();
-        assertEquals(header, "name,acousticness,danceability,energy,instrumentalness,liveness,speechiness,valence");
-    }
 
     @Test
     public void tesCreateMoodDataAccessObjectEmptyFile() throws IOException {
@@ -95,5 +87,26 @@ public class MoodDataAccessObjectTest {
         assertEquals(header, "name,acousticness,danceability,energy,instrumentalness,liveness,speechiness,valence");
         String nextLine = reader.readLine();
         assertEquals(nextLine, "mockname,1.0,1.0,1.0,1.0,1.0,1.0,1.0");
+    }
+
+    @Test
+    public void testGetMoodNames() throws IOException {
+        File tempFile = new File("moods.csv");
+        PrintWriter writer = new PrintWriter(tempFile);
+        writer.print("name,acousticness,danceability,energy,instrumentalness,liveness,speechiness,valence");
+        writer.close();
+
+        MoodDataAccessObject moodDataAccessObject = new MoodDataAccessObject(tempFile);
+
+        Mood mockMood = new Mood("mockname", 1,1,1,1,1,1,1);
+
+
+        moodDataAccessObject.saveMood("mockname", 1, 1, 1, 1, 1, 1, 1);
+
+        Set<String> moodNames = moodDataAccessObject.getMoodNames();
+        Set<String> expected = new HashSet<String>();
+        expected.add("mockname");
+
+        assertTrue(moodNames.equals(expected));
     }
 }
