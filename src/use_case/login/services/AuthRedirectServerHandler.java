@@ -15,7 +15,9 @@ import java.net.URLEncoder;
 import java.util.Base64;
 import java.util.concurrent.CountDownLatch;
 
-
+/**
+ * A class that contains functions to handle redirect after logging into spotify via the API
+ */
 public class AuthRedirectServerHandler {
 
     private static HttpServer server;
@@ -28,6 +30,15 @@ public class AuthRedirectServerHandler {
 
     private static CountDownLatch latch = new CountDownLatch(1);
 
+    /**
+     * Handles the redirect and get the response from the login request made
+     * @param clientID The client ID
+     * @param redirectUri the uri for the redirect
+     * @return An array containing the auth code and response state respectively
+     * @throws IOException
+     * @throws URISyntaxException
+     * @throws InterruptedException
+     */
     public static String[] handleRedirectAndGetResponse(String clientID, String redirectUri) throws IOException, URISyntaxException, InterruptedException {
         server = HttpServer.create(new InetSocketAddress(PORT), 0);
         LoginHandler loginHandler = new LoginHandler();

@@ -7,7 +7,7 @@ import java.net.URISyntaxException;
 
 public interface LoginDataAccessInterface {
 
-    public void loginUser(User user);
+    public void loginUser(User user) throws IOException;
 
 
     public User getCurrentUser();
