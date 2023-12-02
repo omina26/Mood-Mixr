@@ -29,12 +29,12 @@ public class AnalyzePlaylistDataAccessObject implements AnalyzePlaylistDataAcces
 
             String row;
             while ((row = reader.readLine()) != null) {
+                String[] col = row.split(",");
+                String playlistID = String.valueOf(col[headers.get("playlist ID")]);
+                String name = String.valueOf(col[headers.get("name")]);
+                AnalyzedPlaylist analyzedPlaylist = new AnalyzedPlaylist(playlistID);
+                playlistIDs.put(name, analyzedPlaylist);
             }
-            String[] col = row.split(",");
-            String playlistID = String.valueOf(col[headers.get("playlist ID")]);
-            String name = String.valueOf(col[headers.get("name")]);
-            AnalyzedPlaylist analyzedPlaylist = new AnalyzedPlaylist(playlistID);
-            playlistIDs.put(name, analyzedPlaylist);
         }
     }
 

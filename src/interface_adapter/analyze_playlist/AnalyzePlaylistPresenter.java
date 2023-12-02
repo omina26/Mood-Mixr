@@ -23,4 +23,9 @@ public class AnalyzePlaylistPresenter implements AnalyzePlaylistOutputBoundary {
     public void prepareFailView(String error) {
 
     }
+
+    @Override
+    public void prepareSuccessView() {
+
+    }
 }

@@ -33,7 +33,7 @@ public class CreatePlaylistInteractor implements CreatePlaylistInputBoundary{
         try {
             User user = userDataAccessObject.getCurrentUser();
             String token = user.getToken();
-            Set<String> seedTracks = user.getTopTracks();
+            //Set<String> seedTracks = user.getTopTracks();
             String selectedMood = createPlaylistInputData.getSelectedMoodName();
             Mood moodDetails = moodDataAccessObject.getMoods().get(selectedMood);
             double acousticness = moodDetails.getAcousticness();
@@ -43,8 +43,8 @@ public class CreatePlaylistInteractor implements CreatePlaylistInputBoundary{
             double liveness = moodDetails.getLiveness();
             double speechiness = moodDetails.getSpeechiness();
             double valence = moodDetails.getValence();
-            Set<String> recommendations = this.getRecommendationHandler.getRecommendation(seedTracks, acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence);
-            this.playlistHandler.getPlaylistInfo(selectedMood + " Playlist", recommendations);
+            //Set<String> recommendations = this.getRecommendationHandler.getRecommendation(seedTracks, acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence);
+            //this.playlistHandler.getPlaylistInfo(selectedMood + " Playlist", recommendations);
             createPlaylistPresenter.prepareSuccessView();
         } catch (Exception e) {
             createPlaylistPresenter.prepareFailView(e.getMessage());
