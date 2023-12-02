@@ -4,16 +4,28 @@ import entity.Mood;
 
 import java.io.IOException;
 
+/**
+ * Represents the interactor for the Create Mood use case
+ */
 public class CreateMoodInteractor implements  CreateMoodInputBoundary{
 
     final MoodDataAccessInterface moodDataAccessObject;
     final CreateMoodOutputBoundary createMoodPresenter;
 
+    /**
+     * The constructor for the Create Mood Interactor object
+     * @param moodDataAccessObject The Data Access Object that handles stored Moods
+     * @param createMoodOutputPresenter The Presenter to handle the output
+     */
     public CreateMoodInteractor(MoodDataAccessInterface moodDataAccessObject, CreateMoodOutputBoundary createMoodOutputPresenter){
         this.moodDataAccessObject = moodDataAccessObject;
         this.createMoodPresenter = createMoodOutputPresenter;
     }
 
+    /**
+     * Saves the created mood using the input data and sends the correct output data to the presenter
+     * @param createMoodInputData The input data for the mood
+     */
     @Override
     public void execute(CreateMoodInputData createMoodInputData) {
         String name = createMoodInputData.getName();

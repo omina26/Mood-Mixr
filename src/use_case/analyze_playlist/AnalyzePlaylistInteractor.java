@@ -1,6 +1,6 @@
 package use_case.analyze_playlist;
 
-import data_access.UserDataAccessObject;
+import data_access.login.UserDataAccessObject;
 import entity.User;
 import interface_adapter.logged_in.LoggedInViewModel;
 import org.apache.commons.logging.Log;

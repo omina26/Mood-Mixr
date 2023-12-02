@@ -5,9 +5,12 @@ import interface_adapter.ViewModel;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+/**
+ * The view model class for the Create Mood View
+ */
 public class CreateMoodViewModel extends ViewModel {
 
-    public final String TITLE_LABEL = "Create Mood View";
+    public static final String TITLE_LABEL = "Create Mood View";
 
     public static final String CREATE_BUTTON_LABEL = "Create";
     public static final String SET_ACOUSTICNESS_LABEL = "Set Acousticness";
@@ -34,19 +37,45 @@ public class CreateMoodViewModel extends ViewModel {
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
+    /**
+     * Constructor for the Create Mood View Model object
+     */
     public CreateMoodViewModel(){super("Create Mood");}
 
+    /**
+     * Sets the state for the current view
+     * @param state The state to set
+     */
     public void setState(CreateMoodState state){this.state = state;}
 
+    /**
+     * triggers a change for the state
+     */
     @Override
     public void firePropertyChanged() {
         support.firePropertyChange("state", null, this.state);
     }
 
+    /**
+     * Adds a property change listener to the view
+     * @param listener The listener to add
+     */
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
 
+    /**
+     * Gets the current state of the view
+     * @return the current state
+     */
     public CreateMoodState getState(){return state;}
+
+    /**
+     * Gets the property change support being used
+     * @return the property change support being used
+     */
+    public PropertyChangeSupport getSupport(){
+        return this.support;
+    }
 }

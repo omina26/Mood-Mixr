@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.List;
+
 public class User {
 
     public final String name;

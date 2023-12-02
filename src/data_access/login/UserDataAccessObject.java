@@ -10,12 +10,20 @@ import entity.Mood;
 import entity.User;
 import use_case.login.LoginDataAccessInterface;
 
+/**
+ * This class represents the Data Access Object that handles the User
+ */
 public class UserDataAccessObject implements LoginDataAccessInterface {
 
     private File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private User loggedInUser;
 
+    /**
+     * The constructor for the UserDataAccessObject type
+     * @param csvFile The file to store the User attributes
+     * @throws IOException
+     */
     public UserDataAccessObject(File csvFile) throws IOException {
         this.csvFile = csvFile;
         headers.put("name", 0);
@@ -44,12 +52,16 @@ public class UserDataAccessObject implements LoginDataAccessInterface {
     }
 
 
+    /**
+     * Logs in the provided user into the program
+     * @param user The user to be logged in
+     */
     @Override
-    public void loginUser(User user) {
+    public void loginUser(User user) throws IOException {
         BufferedWriter writer;
         this.loggedInUser = user;
 
-        try {
+
             writer = new BufferedWriter(new FileWriter(csvFile));
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
@@ -59,12 +71,12 @@ public class UserDataAccessObject implements LoginDataAccessInterface {
             writer.newLine();
 
             writer.close();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
+    /**
+     * Gets the current logged in user
+     * @return User currently logged in
+     */
     @Override
     public User getCurrentUser() {
         return this.loggedInUser;
