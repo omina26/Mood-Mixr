@@ -30,19 +30,18 @@ public class CreateMoodState {
     }
 
     /**
-     * A constructor for the CreateMoodState object which sets all the attributes to those of the copy
-     * @param 'defaultValue' The copy to set all the attributes
+     * A constructor for the CreateMoodState object which sets all the attributes to the values entered
      */
-    public CreateMoodState(CreateMoodState copy) {
-        this.name = copy.name;
-        this.acousticness = copy.acousticness;
-        this.danceability = copy.danceability;
-        this.energy = copy.energy;
-        this.instrumentalness = copy.instrumentalness;
-        this.liveness = copy.liveness;
-        this.speechiness = copy.speechiness;
-        this.valence = copy.valence;
-        this.saveError = copy.saveError;
+    public CreateMoodState(String name, int defaultAcousticness, int defaultDanceability, int defaultEnergy,
+                           int defaultInstrumentalness, int defaultLiveness, int defaultSpeechiness, int defaultValence) {
+        this.name = name;
+        this.acousticness = defaultAcousticness;
+        this.danceability = defaultDanceability;
+        this.energy = defaultEnergy;
+        this.instrumentalness = defaultInstrumentalness;
+        this.liveness = defaultLiveness;
+        this.speechiness = defaultSpeechiness;
+        this.valence = defaultValence;
     }
 
     /**
