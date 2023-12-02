@@ -116,7 +116,8 @@ public class Main {
         views.add(loggedInView, loggedInView.viewName);
 
 
-        AnalyzePlaylistView analyzePlaylistView = AnalyzePlaylistUseCaseFactory.create(viewManagerModel, analyzePlaylistViewModel, analyzePlaylistDataAccessObject);
+        AnalyzePlaylistView analyzePlaylistView = AnalyzePlaylistUseCaseFactory.create(viewManagerModel,
+                analyzePlaylistViewModel, analyzePlaylistDataAccessObject, userDataAccessObject);
         views.add(analyzePlaylistView, analyzePlaylistView.viewName);
 
         PlaylistCreatedViewModel playlistCreatedViewModel = new PlaylistCreatedViewModel();
