@@ -15,6 +15,7 @@ import interface_adapter.create_playlist.CreatePlaylistState;
 import interface_adapter.create_playlist.CreatePlaylistViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.playlist_created.PlaylistCreatedViewModel;
 import interface_adapter.view_moods.ViewMoodsViewModel;
 
 import view.*;
@@ -86,8 +87,8 @@ public class Main {
 
         views.add(loggedInView, loggedInView.viewName);
 
-        CreatePlaylistState createPlaylistState = new CreatePlaylistState("");
-        CreatePlaylistView createPlaylistView = CreatePlaylistUseCaseFactory.create(viewManagerModel, createPlaylistViewModel, createPlaylistState);
+        PlaylistCreatedViewModel playlistCreatedViewModel = new PlaylistCreatedViewModel();
+        CreatePlaylistView createPlaylistView = CreatePlaylistUseCaseFactory.create(viewManagerModel, createPlaylistViewModel, playlistCreatedViewModel, userDataAccessObject, moodDataAccessObject);
         views.add(createPlaylistView, createPlaylistView.viewName);
 
         viewManagerModel.setActiveView(loginView.viewName);
