@@ -48,19 +48,13 @@ public class AnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary {
                 String trackId = trackFeatures.getString("id");
                 Map<String, Object> features = new HashMap<>();
 
+                features.put("acousticness", trackFeatures.getJsonNumber("acousticness").doubleValue());
                 features.put("danceability", trackFeatures.getJsonNumber("danceability").doubleValue());
                 features.put("energy", trackFeatures.getJsonNumber("energy").doubleValue());
-                features.put("key", trackFeatures.getInt("key"));
-                features.put("loudness", trackFeatures.getJsonNumber("loudness").doubleValue());
-                features.put("mode", trackFeatures.getInt("mode"));
-                features.put("speechiness", trackFeatures.getJsonNumber("speechiness").doubleValue());
-                features.put("acousticness", trackFeatures.getJsonNumber("acousticness").doubleValue());
                 features.put("instrumentalness", trackFeatures.getJsonNumber("instrumentalness").doubleValue());
                 features.put("liveness", trackFeatures.getJsonNumber("liveness").doubleValue());
+                features.put("speechiness", trackFeatures.getJsonNumber("speechiness").doubleValue());
                 features.put("valence", trackFeatures.getJsonNumber("valence").doubleValue());
-                features.put("tempo", trackFeatures.getJsonNumber("tempo").doubleValue());
-                features.put("duration_ms", trackFeatures.getInt("duration_ms"));
-                features.put("time_signature", trackFeatures.getInt("time_signature"));
 
                 trackFeaturesMap.put(trackId, features);
                 }
