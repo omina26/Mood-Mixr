@@ -1,7 +1,6 @@
 package data_access;
 
 import java.io.*;
-import java.net.*;
 import java.time.LocalTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -13,6 +12,7 @@ public class UserDataAccessObject implements LoginDataAccessInterface {
 
     private File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
+    private User loggedInUser;
 
     public UserDataAccessObject(String csvPath) {
         this.csvFile = new File(csvPath);
@@ -25,6 +25,7 @@ public class UserDataAccessObject implements LoginDataAccessInterface {
     @Override
     public void loginUser(User user) {
         BufferedWriter writer;
+        this.loggedInUser = user;
 
         try {
             writer = new BufferedWriter(new FileWriter(csvFile));
@@ -40,5 +41,10 @@ public class UserDataAccessObject implements LoginDataAccessInterface {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public User getCurrentUser() {
+        return this.loggedInUser;
     }
 }
