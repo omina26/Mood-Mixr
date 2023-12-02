@@ -15,6 +15,6 @@ public interface TracksAudioFeaturesAPIHandlerInterface {
      * @throws InterruptedException If the operation is interrupted.
      */
 
-    JsonObject getTracksAudioFeatures(List<String> trackIds, String accessToken) throws IOException, InterruptedException;
+    JsonObject getTracksAudioFeatures(List<String> trackIDs, String accessToken) throws IOException, InterruptedException;
 
 }
