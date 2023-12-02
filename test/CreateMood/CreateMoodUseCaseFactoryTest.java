@@ -1,3 +1,5 @@
+package CreateMood;
+
 import app.CreateMoodUseCaseFactory;
 import entity.Mood;
 import interface_adapter.ViewManagerModel;

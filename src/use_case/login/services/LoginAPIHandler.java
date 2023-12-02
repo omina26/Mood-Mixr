@@ -14,7 +14,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
 
-public class LoginAPIHandler {
+/**
+ * A Handler class for dealing with the login API for Spotify
+ */
+public class LoginAPIHandler implements LoginAPIInterface{
 
     final String TOKEN_URL = "https://accounts.spotify.com/api/token";
     final String CLIENT_ID = "1c6992172cb240fd85caa34bae033b94";
@@ -101,6 +104,13 @@ public class LoginAPIHandler {
         return null;
     }
 
+    /**
+     * Get the User info of the user that logged in
+     * @return User object representing the user that was logged in
+     * @throws IOException
+     * @throws URISyntaxException
+     * @throws InterruptedException
+     */
     public User getLoginUserInfo() throws IOException, URISyntaxException, InterruptedException {
         String accessToken = getAccessToken();
         String endpoint = "https://api.spotify.com/v1/me";

@@ -1,3 +1,5 @@
+package CreateMood;
+
 import interface_adapter.create_mood.CreateMoodController;
 import org.junit.Test;
 import use_case.create_mood.CreateMoodInputBoundary;

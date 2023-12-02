@@ -10,7 +10,6 @@ public class LoginOutputData {
         this.name = name;
         this.useCaseFailed = useCaseFailed;
     }
-
     public String getName() {
         return name;
     }

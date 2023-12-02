@@ -19,7 +19,8 @@ public class LoginUseCaseFactory {
     public static LoginView create(
             ViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
-            LoggedInViewModel loggedInViewModel, LoginDataAccessInterface userDataAccessObject
+            LoggedInViewModel loggedInViewModel,
+            LoginDataAccessInterface userDataAccessObject
     ){
         try {
             LoginController loginController = createLoginUseCase(viewManagerModel, loggedInViewModel,
@@ -38,7 +39,6 @@ public class LoginUseCaseFactory {
             LoginDataAccessInterface userDataAccessObject) throws IOException{
         LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel, loggedInViewModel, loginViewModel);
 
-        UserFactory userFactory = new UserFactory();
         LoginAPIHandler handler = new LoginAPIHandler();
         LoginInputBoundary loginInteractor = new LoginInteractor(userDataAccessObject, loginOutputBoundary, handler);
         return new LoginController(loginInteractor);
