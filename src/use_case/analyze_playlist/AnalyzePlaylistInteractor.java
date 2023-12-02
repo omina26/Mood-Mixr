@@ -32,15 +32,15 @@ public class AnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary {
 
 
 
-    public AnalyzePlaylistInteractor(LoginDataAccessInterface userDataAccessObject,
+    public AnalyzePlaylistInteractor(//LoginDataAccessInterface userDataAccessObject,
                                      AnalyzePlaylistDataAccessInterface analyzePlaylistDataAccessObject,
                                      AnalyzePlaylistOutputBoundary analyzePlaylistPresenter) {
-        this.userDataAccessObject = userDataAccessObject;
+        //this.userDataAccessObject = userDataAccessObject;
         this.analyzePlaylistDataAccessObject = analyzePlaylistDataAccessObject;
         this.analyzePlaylistPresenter = analyzePlaylistPresenter;
     }
 
-    User user = userDataAccessObject.getCurrentUser();
+    //User user = userDataAccessObject.getCurrentUser();
 
     private String getPlaylistItems() {
 
