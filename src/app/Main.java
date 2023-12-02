@@ -16,10 +16,14 @@ import interface_adapter.analyze_playlist.AnalyzePlaylistState;
 
 import interface_adapter.create_mood.CreateMoodViewModel;
 
+import interface_adapter.create_playlist.CreatePlaylistState;
+import interface_adapter.create_playlist.CreatePlaylistViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.playlist_created.PlaylistCreatedViewModel;
 import interface_adapter.view_moods.ViewMoodsViewModel;
 
+import view.*;
 import use_case.analyze_playlist.AnalyzePlaylistDataAccessInterface;
 import use_case.login.LoginDataAccessInterface;
 
@@ -70,6 +74,7 @@ public class Main {
         CreateMoodViewModel createMoodViewModel = new CreateMoodViewModel();
         ViewMoodsViewModel viewMoodsViewModel = new ViewMoodsViewModel();
 
+        CreatePlaylistViewModel createPlaylistViewModel = new CreatePlaylistViewModel();
         AnalyzePlaylistViewModel analyzePlaylistViewModel = new AnalyzePlaylistViewModel();
 
         MoodDataAccessObject moodDataAccessObject;
@@ -114,8 +119,15 @@ public class Main {
         AnalyzePlaylistView analyzePlaylistView = AnalyzePlaylistUseCaseFactory.create(viewManagerModel, analyzePlaylistViewModel, analyzePlaylistDataAccessObject);
         views.add(analyzePlaylistView, analyzePlaylistView.viewName);
 
+        PlaylistCreatedViewModel playlistCreatedViewModel = new PlaylistCreatedViewModel();
+        CreatePlaylistView createPlaylistView = CreatePlaylistUseCaseFactory.create(viewManagerModel, createPlaylistViewModel, playlistCreatedViewModel, userDataAccessObject, moodDataAccessObject);
+        views.add(createPlaylistView, createPlaylistView.viewName);
+
+//         viewManagerModel.setActiveView(loginView.viewName);
+        //viewManagerModel.setActiveView(createMoodView.viewName);
+
         //viewManagerModel.setActiveView(loginView.viewName);
-        viewManagerModel.setActiveView(analyzePlaylistViewModel.getViewName());
+//         viewManagerModel.setActiveView(analyzePlaylistViewModel.getViewName());
 
 
         viewManagerModel.setActiveView(loginView.viewName);
