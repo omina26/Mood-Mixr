@@ -5,6 +5,7 @@ import interface_adapter.analyze_playlist.AnalyzePlaylistController;
 import interface_adapter.analyze_playlist.AnalyzePlaylistPresenter;
 import interface_adapter.analyze_playlist.AnalyzePlaylistViewModel;
 import use_case.analyze_playlist.*;
+import use_case.login.LoginDataAccessInterface;
 import view.AnalyzePlaylistView;
 import view.AnalyzedPlaylistView;
 import view.CreatePlaylistView;
@@ -13,6 +14,7 @@ public class AnalyzePlaylistUseCaseFactory {
     private AnalyzePlaylistUseCaseFactory() {}
 
     public static AnalyzePlaylistView create (ViewManagerModel viewManagerModel,
+
                                               AnalyzePlaylistViewModel analyzePlaylistViewModel,
                                               AnalyzePlaylistDataAccessInterface analyzePlaylistDataAccessObject){
         AnalyzePlaylistController analyzePlaylistController = analyzePlaylistUseCase(viewManagerModel,
@@ -23,10 +25,11 @@ public class AnalyzePlaylistUseCaseFactory {
     private static AnalyzePlaylistController analyzePlaylistUseCase(ViewManagerModel viewManagerModel,
                                                                     AnalyzePlaylistViewModel analyzePlaylistViewModel,
                                                                     AnalyzePlaylistDataAccessInterface analyzePlaylistDataAccessObject) {
+
         AnalyzePlaylistOutputBoundary analyzePlaylistOutputBoundary = new AnalyzePlaylistPresenter(analyzePlaylistViewModel,
                 viewManagerModel);
 
-        AnalyzePlaylistInputBoundary analyzePlaylistInputBoundary = new AnalyzePlaylistInteractor(analyzePlaylistDataAccessObject,
+                AnalyzePlaylistInputBoundary analyzePlaylistInputBoundary = new AnalyzePlaylistInteractor(userDataAccessObject, analyzePlaylistDataAccessObject,
                 analyzePlaylistOutputBoundary);
 
         return new AnalyzePlaylistController(analyzePlaylistInputBoundary);
