@@ -1,3 +1,5 @@
+package CreateMood;
+
 import data_access.create_mood.MoodDataAccessObject;
 import entity.Mood;
 import org.junit.Test;

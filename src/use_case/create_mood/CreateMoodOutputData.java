@@ -16,4 +16,6 @@ public class CreateMoodOutputData {
     public Set<String> getMoodNames(){
         return this.moodNames;
     }
+
+    public boolean getUseCaseFailed() { return this.useCaseFailed; }
 }

@@ -9,5 +9,6 @@ public interface LoginDataAccessInterface {
 
     public void loginUser(User user);
 
-    User getCurrentUser();
+
+    public User getCurrentUser();
 }
