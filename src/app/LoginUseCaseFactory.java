@@ -19,7 +19,8 @@ public class LoginUseCaseFactory {
     public static LoginView create(
             ViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
-            LoggedInViewModel loggedInViewModel, LoginDataAccessInterface userDataAccessObject
+            LoggedInViewModel loggedInViewModel,
+            LoginDataAccessInterface userDataAccessObject
     ){
         try {
             LoginController loginController = createLoginUseCase(viewManagerModel, loggedInViewModel,
