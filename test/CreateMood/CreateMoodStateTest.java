@@ -10,7 +10,11 @@ public class CreateMoodStateTest {
     @Test
     public void TestCreateMoodStateWithCopy(){
         CreateMoodState copy = new CreateMoodState(1);
+<<<<<<< HEAD
         CreateMoodState main = new CreateMoodState("mock",1,1,1,1,1,1,1);
+=======
+        CreateMoodState main = new CreateMoodState(copy);
+>>>>>>> 9dd92385aba1d5581437af78b09fbba50676707e
 
         assertEquals(main.getName(), copy.getName());
         assertEquals(main.getSaveError(), copy.getSaveError());
