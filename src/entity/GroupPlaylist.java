@@ -1,2 +1,4 @@
-package entity;public class GroupPlaylist {
+package entity;
+
+public class GroupPlaylist {
 }

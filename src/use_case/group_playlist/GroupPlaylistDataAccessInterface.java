@@ -1,2 +1,9 @@
-package use_case.group_playlist;public interface GroupPlaylistDataAccessInterface {
+package use_case.group_playlist;
+
+import entity.Playlist;
+
+import java.util.ArrayList;
+
+public interface GroupPlaylistDataAccessInterface {
+    ArrayList<Playlist> getPlaylists();
 }

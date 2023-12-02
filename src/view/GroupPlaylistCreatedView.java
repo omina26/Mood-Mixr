@@ -1,2 +1,4 @@
-package view;public class GroupPlaylistCreatedView {
+package view;
+
+public class GroupPlaylistCreatedView {
 }

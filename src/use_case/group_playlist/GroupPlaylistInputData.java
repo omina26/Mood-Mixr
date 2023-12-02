@@ -1,2 +1,4 @@
-package use_case.group_playlist;public class GroupPlaylistInputData {
+package use_case.group_playlist;
+
+public class GroupPlaylistInputData {
 }

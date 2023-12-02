@@ -1,2 +1,4 @@
-package interface_adapter.group_playlist;public class GroupPlaylistPresenter {
+package interface_adapter.group_playlist;
+
+public class GroupPlaylistPresenter {
 }

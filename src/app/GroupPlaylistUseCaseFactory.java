@@ -1,2 +1,4 @@
-package app;public class GroupPlaylistUseCaseFactory {
+package app;
+
+public class GroupPlaylistUseCaseFactory {
 }

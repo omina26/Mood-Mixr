@@ -1,2 +1,4 @@
-package use_case.group_playlist;public interface GroupPlaylistOutputBoundary {
+package use_case.group_playlist;
+
+public interface GroupPlaylistOutputBoundary {
 }
