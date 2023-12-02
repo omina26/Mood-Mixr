@@ -23,12 +23,14 @@ import interface_adapter.view_moods.ViewMoodsViewModel;
 import use_case.analyze_playlist.AnalyzePlaylistDataAccessInterface;
 import use_case.login.LoginDataAccessInterface;
 
+
 import view.*;
 
 import javax.swing.*;
 import javax.swing.text.View;
 import java.awt.*;
 
+import use_case.login.services.UserTopTracksAPIHandler;
 
 import view.LoggedInView;
 
@@ -44,9 +46,10 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         JFrame application = new JFrame("Login!");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -73,7 +76,7 @@ public class Main {
         UserDataAccessObject userDataAccessObject;
 
 
-        try{
+        try {
             moodDataAccessObject = new MoodDataAccessObject(new File("./moods.csv"));
             userDataAccessObject = new UserDataAccessObject(new File("./user.csv"));
 
@@ -94,7 +97,10 @@ public class Main {
         CreateMoodView createMoodView = CreateMoodUseCaseFactory.create(viewManagerModel, createMoodViewModel, viewMoodsViewModel, moodDataAccessObject);
         views.add(createMoodView, createMoodView.viewName);
 
-        //LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
+
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
+        views.add(loginView, loginView.viewName);
+
 
         ViewMoodsView viewMoodsView = new ViewMoodsView(viewMoodsViewModel);
         views.add(viewMoodsView, viewMoodsView.viewName);
@@ -112,10 +118,11 @@ public class Main {
         viewManagerModel.setActiveView(analyzePlaylistViewModel.getViewName());
 
 
+        viewManagerModel.setActiveView(loginView.viewName);
+
         viewManagerModel.firePropertyChanged();
 
         application.pack();
         application.setVisible(true);
     }
-
 }

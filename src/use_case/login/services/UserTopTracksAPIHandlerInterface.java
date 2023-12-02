@@ -6,5 +6,5 @@ import java.util.List;
 public interface UserTopTracksAPIHandlerInterface {
 
     List<String> getUserTopTracks(String accessToken) throws IOException, InterruptedException;
-    
+
 }
