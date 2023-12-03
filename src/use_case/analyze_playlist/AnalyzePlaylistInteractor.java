@@ -7,7 +7,6 @@ import use_case.login.services.UserPlaylistItemsAPIHandler;
 
 import javax.json.JsonArray;
 import javax.json.JsonObject;
-import javax.json.JsonReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
