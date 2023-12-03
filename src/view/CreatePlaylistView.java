@@ -30,8 +30,6 @@ public class CreatePlaylistView extends JPanel implements ActionListener, Proper
         directions.setAlignmentX(Component.CENTER_ALIGNMENT);
         noMoodsMessage.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 400);
 
         CreatePlaylistState createPlaylistState = createPlaylistViewModel.getState();
         String[] moodsList = createPlaylistState.getMoodsList();
@@ -45,8 +43,7 @@ public class CreatePlaylistView extends JPanel implements ActionListener, Proper
             currentState.setSelectedMood(selectedItem);
             createPlaylistViewModel.setState(currentState);
         });
-        frame.add(dropdown);
-        frame.setVisible(true);
+
 
         JPanel buttons = new JPanel();
 
