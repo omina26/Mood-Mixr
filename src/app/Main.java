@@ -76,14 +76,14 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        AnalyzePlaylistDataAccessObject analyzePlaylistDataAccessObject;
-
-        try{
-            analyzePlaylistDataAccessObject = new AnalyzePlaylistDataAccessObject(new File("./playlistIDs.csv"));
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        AnalyzePlaylistDataAccessObject analyzePlaylistDataAccessObject;
+//
+//        try{
+//            analyzePlaylistDataAccessObject = new AnalyzePlaylistDataAccessObject(new File("./playlistIDs.csv"));
+//
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
 
         CreateMoodView createMoodView = CreateMoodUseCaseFactory.create(viewManagerModel, createMoodViewModel, viewMoodsViewModel, moodDataAccessObject);
@@ -103,8 +103,8 @@ public class Main {
         views.add(loggedInView, loggedInView.viewName);
 
 
-        AnalyzePlaylistView analyzePlaylistView = AnalyzePlaylistUseCaseFactory.create(viewManagerModel, analyzePlaylistViewModel, analyzePlaylistDataAccessObject);
-        views.add(analyzePlaylistView, analyzePlaylistView.viewName);
+//        AnalyzePlaylistView analyzePlaylistView = AnalyzePlaylistUseCaseFactory.create(viewManagerModel, analyzePlaylistViewModel, analyzePlaylistDataAccessObject);
+//        views.add(analyzePlaylistView, analyzePlaylistView.viewName);
 
         PlaylistCreatedViewModel playlistCreatedViewModel = new PlaylistCreatedViewModel();
         CreatePlaylistView createPlaylistView = CreatePlaylistUseCaseFactory.create(viewManagerModel, createPlaylistViewModel, playlistCreatedViewModel, userDataAccessObject, moodDataAccessObject);
@@ -114,7 +114,6 @@ public class Main {
         //viewManagerModel.setActiveView(createMoodView.viewName);
 
         //viewManagerModel.setActiveView(loginView.viewName);
-//         viewManagerModel.setActiveView(analyzePlaylistViewModel.getViewName());
 
 
         viewManagerModel.setActiveView(loginView.viewName);
