@@ -22,7 +22,6 @@ public class GroupPlaylistViewModel extends ViewModel {
     public void setState(GroupPlaylistState state){this.state = state;}
     @Override
     public void firePropertyChanged() {
-
     }
 
     @Override

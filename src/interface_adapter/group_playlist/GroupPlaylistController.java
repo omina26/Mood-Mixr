@@ -7,7 +7,7 @@ public class GroupPlaylistController {
 
     final GroupPlaylistInputBoundary groupPlaylistUseCaseInteractor;
 
-    public GroupPlaylistController(GroupPlaylistInputBoundary groupPlaylistUseCaseInteractor, User self) {
+    public GroupPlaylistController(GroupPlaylistInputBoundary groupPlaylistUseCaseInteractor) {
         this.groupPlaylistUseCaseInteractor = groupPlaylistUseCaseInteractor;
     }
 

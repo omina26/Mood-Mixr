@@ -60,7 +60,8 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == groupPlaylist){
-                    viewManagerModel.getActiveView();
+                    viewManagerModel.setActiveView("Group Playlist");
+                    viewManagerModel.firePropertyChanged();
                 }
             }
         });

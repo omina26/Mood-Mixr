@@ -107,11 +107,8 @@ public class Main {
         GroupPlaylistView groupPlaylistView = GroupPlaylistUseCaseFactory.create(viewManagerModel,
                 groupPlaylistViewModel,
                 loggedInViewModel,
-                groupPlaylistDataAccessObject,
-                new User("soph", "BQDToz0yKElYcIftCBYe_TPzSvBr7XvC8hY9S3eJ5RaSbJ1Fnki2PY8_MxMZBZYfAamIc" +
-                        "dGG0HiyLU35x_eOg5NAB8mg4LD7b7PDN5-kmqcWKA7csqk6VYH_VIER2lk1lwdTKwTD3DzYpPAUNM3fp0j8XX8hQgNsS" +
-                        "11T-oC9hnqPFQYJoJrlGEBCZ9yEBrgaixgyZqELQ1DT-dC0nofMFbUnaOMANbk"));
-
+                groupPlaylistDataAccessObject);
+        views.add(groupPlaylistView, groupPlaylistView.viewName);
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel);
 
         views.add(loggedInView, loggedInView.viewName);
@@ -128,10 +125,10 @@ public class Main {
 //         viewManagerModel.setActiveView(loginView.viewName);
         //viewManagerModel.setActiveView(createMoodView.viewName);
 
-        //viewManagerModel.setActiveView(loginView.viewName);
-
-
         viewManagerModel.setActiveView(loginView.viewName);
+
+
+//        viewManagerModel.setActiveView(groupPlaylistView.viewName);
 
         viewManagerModel.firePropertyChanged();
 

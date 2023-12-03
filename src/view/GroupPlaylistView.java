@@ -20,6 +20,7 @@ public class GroupPlaylistView extends JPanel implements ActionListener, Propert
     public final GroupPlaylistViewModel groupPlaylistViewModel;
     public LoggedInState loggedInState;
 
+    final JButton getMyPlaylists;
     private User user;
 
 
@@ -29,8 +30,23 @@ public class GroupPlaylistView extends JPanel implements ActionListener, Propert
         this.groupPlaylistViewModel = groupPlaylistViewModel;
         this.loggedInState = loggedInState;
 
+        JPanel buttons = new JPanel();
         JLabel pageName = new JLabel("Group Playlist");
         pageName.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        getMyPlaylists = new JButton("Get My Playlists");
+        buttons.add(getMyPlaylists);
+        getMyPlaylists.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(loggedInState.getUser());
+                groupPlaylistController.getPlaylists(loggedInState.getUser());
+            }
+        });
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        this.add(pageName);
+        this.add(buttons);
 
 
 
