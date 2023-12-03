@@ -20,5 +20,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="javax.json.api" level="project" />
+    <orderEntry type="library" name="glassfish.javax.json" level="project" />
   </component>
 </module>

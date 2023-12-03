@@ -1,24 +1,14 @@
 package use_case.analyze_playlist;
 
-import data_access.UserDataAccessObject;
 import entity.User;
-import interface_adapter.logged_in.LoggedInViewModel;
-import org.apache.commons.logging.Log;
 import use_case.login.LoginDataAccessInterface;
-import use_case.login.LoginOutputBoundary;
-
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.io.IOException;
 
 public class AnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary {
 
     final AnalyzePlaylistDataAccessInterface analyzePlaylistDataAccessObject;
     final AnalyzePlaylistOutputBoundary analyzePlaylistPresenter;
 
-    final LoginDataAccessInterface userDataAccessObject;
+    final LoginDataAccessInterface userDataAccessObject = null;
 
 
     //final String TOKEN_URL = "https://accounts.spotify.com/api/token";
@@ -32,19 +22,18 @@ public class AnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary {
 
 
 
-    public AnalyzePlaylistInteractor(LoginDataAccessInterface userDataAccessObject,
-                                     AnalyzePlaylistDataAccessInterface analyzePlaylistDataAccessObject,
+    public AnalyzePlaylistInteractor(AnalyzePlaylistDataAccessInterface analyzePlaylistDataAccessObject,
                                      AnalyzePlaylistOutputBoundary analyzePlaylistPresenter) {
-        this.userDataAccessObject = userDataAccessObject;
+        //this.userDataAccessObject = userDataAccessObject;
         this.analyzePlaylistDataAccessObject = analyzePlaylistDataAccessObject;
         this.analyzePlaylistPresenter = analyzePlaylistPresenter;
     }
 
     User user = userDataAccessObject.getCurrentUser();
 
-    private String getPlaylistItems() {
-
-    }
+//    private String getPlaylistItems() {
+//
+//    }
 
     @Override
     public void execute(AnalyzePlaylistInputData analyzePlaylistInputData) {

@@ -6,6 +6,9 @@ import use_case.create_mood.MoodDataAccessInterface;
 import java.io.*;
 import java.util.*;
 
+/**
+ * This class represents the Data Access Object that stores the Moods
+ */
 public class MoodDataAccessObject implements MoodDataAccessInterface {
 
     private final File csvFile;
@@ -14,6 +17,12 @@ public class MoodDataAccessObject implements MoodDataAccessInterface {
 
     private final Map<String, Mood> moods = new HashMap<>();
 
+    /**
+     * Constructor for MoodDataAccessObject, which gives a MoodDataAccessObject type and adds the appropriate
+     * headers to the csv file
+     * @param csvFile The file to store the Mood attributes
+     * @throws IOException
+     */
     public MoodDataAccessObject(File csvFile) throws IOException {
         this.csvFile = csvFile;
         headers.put("name", 0);
@@ -52,16 +61,36 @@ public class MoodDataAccessObject implements MoodDataAccessInterface {
         }
     }
 
+    /**
+     * Gets the moods stored locally
+     * @return A Map of the mood name to its corresponding Mood object
+     */
     @Override
     public Map<String, Mood> getMoods() {
         return this.moods;
     }
 
+    /**
+     * Gets the names of all the moods stored
+     * @return The names of the moods
+     */
     @Override
     public Set<String> getMoodNames() {
         return this.moods.keySet();
     }
 
+    /**
+     * Saves a Mood with the attributes entered as parameters
+     * @param name Name of the mood
+     * @param acousticness The acousticness from 0 to 1.0
+     * @param danceability The danceability from 0 to 1.0
+     * @param energy The energy from 0 to 1.0
+     * @param instrumentalness The danceability from 0 to 1.0
+     * @param liveness The liveness from 0 to 1.0
+     * @param speechiness The speechiness from 0 to 1.0
+     * @param valence The valence from 0 to 1.0
+     * @throws IOException
+     */
     @Override
     public void saveMood(String name, double acousticness, double danceability, double energy, double instrumentalness,
                          double liveness, double speechiness, double valence) throws IOException {
@@ -70,6 +99,10 @@ public class MoodDataAccessObject implements MoodDataAccessInterface {
         this.save();
     }
 
+    /**
+     * Saves the locally stored moods in csvFile
+     * @throws IOException
+     */
     @Override
     public void save() throws IOException {
         BufferedWriter writer;
