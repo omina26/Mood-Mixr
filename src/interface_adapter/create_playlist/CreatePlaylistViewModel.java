@@ -7,8 +7,8 @@ public class CreatePlaylistViewModel {
 
     public final String TITLE_LABEL = "Create Playlist View";
 
-    public static final String CREATE_BUTTON_LABEL = "Create";
-    public static final String BACK_BUTTON_LABEL = "Back";
+    public static final String GET_BUTTON_LABEL = "Get";
+    public static final String MAIN_MENU_BUTTON_LABEL = "Main Menu";
     public static final String SELECT_MOOD = "[Select a mood]";
 
     private CreatePlaylistState state = new CreatePlaylistState(SELECT_MOOD);

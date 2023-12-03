@@ -26,7 +26,7 @@ public class CreatePlaylistUseCaseFactory {
                                             MoodDataAccessInterface moodDataAccessObject) {
         CreatePlaylistController createPlaylistController = createPlaylistUseCase(viewManagerModel,
                 createPlaylistViewModel, playlistCreatedViewModel, userDataAccessObject, moodDataAccessObject);
-        return new CreatePlaylistView(createPlaylistViewModel, createPlaylistController);
+        return new CreatePlaylistView(viewManagerModel, createPlaylistViewModel, createPlaylistController);
     }
 
     private static CreatePlaylistController createPlaylistUseCase(ViewManagerModel viewManagerModel,
