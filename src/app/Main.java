@@ -96,7 +96,7 @@ public class Main {
         ViewMoodsView viewMoodsView = new ViewMoodsView(viewMoodsViewModel, viewManagerModel);
         views.add(viewMoodsView, viewMoodsView.viewName);
 
-        LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
+        LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel);
 
         views.add(loggedInView, loggedInView.viewName);
 
