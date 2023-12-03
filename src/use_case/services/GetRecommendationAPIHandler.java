@@ -54,15 +54,13 @@ public class GetRecommendationAPIHandler implements GetRecommendationAPIHandlerI
             System.out.println(response.body());
         }
 
-        StringBuilder recommendationsString = new StringBuilder();
+        StringBuilder recommendationsUris = new StringBuilder();
         assert recommendations != null;
         for (String recommendation: recommendations) {
-            recommendationsString.append(recommendation).append("+");
+            recommendationsUris.append("spotify%3Atrack%3A").append(recommendation);
         }
 
-        recommendationsString = new StringBuilder(recommendationsString.substring(0, recommendationsString.length() - 1));
-
-        return recommendationsString.toString();
+        return recommendationsUris.toString();
     }
 
     private static List<String> extractRecommendationsFromResponse(String jsonResponse) {
