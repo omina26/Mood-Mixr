@@ -49,10 +49,10 @@ public class UserTopTracksAPIHandler implements UserTopTracksAPIHandlerInterface
         StringBuilder uriString = new StringBuilder();
         assert uris != null;
         for (String uri: uris) {
-            uriString.append(uri).append("+");
+            uriString.append(uri).append("%2C");
         }
 
-        uriString = new StringBuilder(uriString.substring(0, uriString.length() - 1));
+        uriString = new StringBuilder(uriString.substring(0, uriString.length() - 3));
 
         return uriString.toString();
     }
