@@ -61,8 +61,8 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
                             AnalyzePlaylistState currentState =
                                     analyzePlaylistViewModel.getState();
 
-                            analyzePlaylistController.execute(
-                                    currentState.getPlaylist());
+//                            analyzePlaylistController.execute(
+//                                    currentState.getPlaylist());
                         }
                     }
                 }
@@ -81,9 +81,9 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getSource() == this.analyzePlaylistViewModel) {
             AnalyzePlaylistState state = (AnalyzePlaylistState) evt.getNewValue();
-            if (state.getSaveError() != null){
-                JOptionPane.showMessageDialog(this, state.getSaveError());
-            }
+//            if (state.getSaveError() != null){
+//                JOptionPane.showMessageDialog(this, state.getSaveError());
+//            }
         }
     }
 
