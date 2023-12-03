@@ -1,30 +1,32 @@
 package use_case.create_playlist;
 
-import data_access.login.UserDataAccessObject;
 import entity.Mood;
 import entity.User;
 import use_case.create_mood.MoodDataAccessInterface;
-import use_case.create_playlist.services.CreatePlaylistAPIHandler;
-import use_case.create_playlist.services.GetRecommendationAPIHandler;
+import use_case.services.*;
 import use_case.login.LoginDataAccessInterface;
 
+import java.util.List;
 import java.util.Set;
 
 public class CreatePlaylistInteractor implements CreatePlaylistInputBoundary{
     final LoginDataAccessInterface userDataAccessObject;
     final MoodDataAccessInterface moodDataAccessObject;
     final CreatePlaylistOutputBoundary createPlaylistPresenter;
-    final GetRecommendationAPIHandler getRecommendationHandler;
-    final CreatePlaylistAPIHandler playlistHandler;
+    final UserTopTracksAPIHandlerInterface topTracksAPIHandler;
+    final GetRecommendationAPIHandlerInterface getRecommendationHandler;
+    final CreatePlaylistAPIHandlerInterface playlistHandler;
 
     public CreatePlaylistInteractor(LoginDataAccessInterface userDataAccessObject,
                                     MoodDataAccessInterface moodDataAccessObject,
                                     CreatePlaylistOutputBoundary createPlaylistPresenter,
-                                    GetRecommendationAPIHandler getRecommendationHandler,
-                                    CreatePlaylistAPIHandler playlistHandler) {
+                                    UserTopTracksAPIHandler topTracksAPIHandler,
+                                    GetRecommendationAPIHandlerInterface getRecommendationHandler,
+                                    CreatePlaylistAPIHandlerInterface playlistHandler) {
         this.userDataAccessObject = userDataAccessObject;
         this.moodDataAccessObject = moodDataAccessObject;
         this.createPlaylistPresenter = createPlaylistPresenter;
+        this.topTracksAPIHandler = topTracksAPIHandler;
         this.getRecommendationHandler = getRecommendationHandler;
         this.playlistHandler = playlistHandler;
     }
@@ -32,8 +34,8 @@ public class CreatePlaylistInteractor implements CreatePlaylistInputBoundary{
     public void execute(CreatePlaylistInputData createPlaylistInputData){
         try {
             User user = userDataAccessObject.getCurrentUser();
-            String token = user.getToken();
-            Set<String> seedTracks = user.getTopTracks();
+            String accessToken = user.getToken();
+            String seedTracks = topTracksAPIHandler.getUserTopTracks(accessToken);
             String selectedMood = createPlaylistInputData.getSelectedMoodName();
             Mood moodDetails = moodDataAccessObject.getMoods().get(selectedMood);
             double acousticness = moodDetails.getAcousticness();
@@ -43,8 +45,8 @@ public class CreatePlaylistInteractor implements CreatePlaylistInputBoundary{
             double liveness = moodDetails.getLiveness();
             double speechiness = moodDetails.getSpeechiness();
             double valence = moodDetails.getValence();
-            Set<String> recommendations = this.getRecommendationHandler.getRecommendation(seedTracks, acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence);
-            this.playlistHandler.getPlaylistInfo(selectedMood + " Playlist", recommendations);
+            String recommendations = this.getRecommendationHandler.getRecommendation(accessToken, seedTracks, acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence);
+            this.playlistHandler.getPlaylistInfo(accessToken, selectedMood + " Playlist", recommendations);
             createPlaylistPresenter.prepareSuccessView();
         } catch (Exception e) {
             createPlaylistPresenter.prepareFailView(e.getMessage());
