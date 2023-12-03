@@ -1,4 +1,6 @@
 package interface_adapter.group_playlist;
 
-public class GroupPlaylistPresenter {
+import use_case.group_playlist.GroupPlaylistOutputBoundary;
+
+public class GroupPlaylistPresenter implements GroupPlaylistOutputBoundary {
 }

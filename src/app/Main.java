@@ -2,7 +2,9 @@ package app;
 
 
 
-import data_access.analyze_playlist.AnalyzePlaylistDataAccessObject;
+import data_access.group_playlist.GroupPlaylistDataAccessObject;
+import entity.GroupPlaylist;
+import entity.User;
 import interface_adapter.ViewManagerModel;
 
 import data_access.login.UserDataAccessObject;
@@ -10,31 +12,24 @@ import data_access.login.UserDataAccessObject;
 
 import data_access.create_mood.MoodDataAccessObject;
 
-import interface_adapter.ViewManagerModel;
 import interface_adapter.analyze_playlist.AnalyzePlaylistViewModel;
-import interface_adapter.analyze_playlist.AnalyzePlaylistState;
 
 import interface_adapter.create_mood.CreateMoodViewModel;
 
-import interface_adapter.create_playlist.CreatePlaylistState;
 import interface_adapter.create_playlist.CreatePlaylistViewModel;
+import interface_adapter.group_playlist.GroupPlaylistController;
+import interface_adapter.group_playlist.GroupPlaylistViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.playlist_created.PlaylistCreatedViewModel;
 import interface_adapter.view_moods.ViewMoodsViewModel;
 
+import use_case.group_playlist.GroupPlaylistInteractor;
 import view.*;
-import use_case.analyze_playlist.AnalyzePlaylistDataAccessInterface;
-import use_case.login.LoginDataAccessInterface;
 
-
-import view.*;
 
 import javax.swing.*;
-import javax.swing.text.View;
 import java.awt.*;
-
-import use_case.login.services.UserTopTracksAPIHandler;
 
 import view.LoggedInView;
 
@@ -43,14 +38,10 @@ import view.CreateMoodView;
 import view.LoginView;
 import view.ViewManager;
 import view.ViewMoodsView;
-import view.AnalyzePlaylistView;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 import java.io.IOException;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -77,8 +68,11 @@ public class Main {
         CreatePlaylistViewModel createPlaylistViewModel = new CreatePlaylistViewModel();
         AnalyzePlaylistViewModel analyzePlaylistViewModel = new AnalyzePlaylistViewModel();
 
+        GroupPlaylistViewModel groupPlaylistViewModel = new GroupPlaylistViewModel();
+
         MoodDataAccessObject moodDataAccessObject;
         UserDataAccessObject userDataAccessObject;
+        GroupPlaylistDataAccessObject groupPlaylistDataAccessObject = new GroupPlaylistDataAccessObject();
 
 
         try {
@@ -110,7 +104,15 @@ public class Main {
         ViewMoodsView viewMoodsView = new ViewMoodsView(viewMoodsViewModel);
         views.add(viewMoodsView, viewMoodsView.viewName);
 
-        LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
+        GroupPlaylistView groupPlaylistView = GroupPlaylistUseCaseFactory.create(viewManagerModel,
+                groupPlaylistViewModel,
+                loggedInViewModel,
+                groupPlaylistDataAccessObject,
+                new User("soph", "BQDToz0yKElYcIftCBYe_TPzSvBr7XvC8hY9S3eJ5RaSbJ1Fnki2PY8_MxMZBZYfAamIc" +
+                        "dGG0HiyLU35x_eOg5NAB8mg4LD7b7PDN5-kmqcWKA7csqk6VYH_VIER2lk1lwdTKwTD3DzYpPAUNM3fp0j8XX8hQgNsS" +
+                        "11T-oC9hnqPFQYJoJrlGEBCZ9yEBrgaixgyZqELQ1DT-dC0nofMFbUnaOMANbk"));
+
+        LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel);
 
         views.add(loggedInView, loggedInView.viewName);
         views.add(loggedInView, loggedInView.viewName);

@@ -24,6 +24,7 @@ public class GroupPlaylistView extends JPanel implements ActionListener, Propert
 
         JLabel pageName = new JLabel("Group Playlist");
         pageName.setAlignmentX(Component.CENTER_ALIGNMENT);
+
     }
 
 

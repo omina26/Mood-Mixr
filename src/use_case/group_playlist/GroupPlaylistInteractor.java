@@ -28,7 +28,7 @@ public class GroupPlaylistInteractor implements GroupPlaylistInputBoundary{
     public ArrayList<Playlist> getPlaylists(User self) {
         ArrayList<Playlist> playlists;
         playlists = groupPlaylistAPIHandler.getPlaylists(self);
-
+        return playlists;
     }
 
 }

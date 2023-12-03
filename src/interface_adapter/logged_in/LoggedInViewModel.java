@@ -1,5 +1,6 @@
 package interface_adapter.logged_in;
 
+import entity.User;
 import interface_adapter.ViewModel;
 
 import java.awt.event.ActionEvent;
@@ -19,7 +20,7 @@ public class LoggedInViewModel extends ViewModel {
     public final String ANALYZE_PLAYLIST_BUTTON_LABEL = "Analyze Playlist";
     public final String GROUP_PLAYLIST_BUTTON_LABEL = "Generate Group Playlist";
 
-    private String loggedInUser;
+    private User loggedInUser;
 
     public LoggedInViewModel(){super("logged in");}
 
@@ -38,6 +39,6 @@ public class LoggedInViewModel extends ViewModel {
 
     public LoggedInState getState(){return state;}
 
-    public String getLoggedInUser(){return loggedInUser;}
+    public User getLoggedInUser(){return loggedInUser;}
 
 }

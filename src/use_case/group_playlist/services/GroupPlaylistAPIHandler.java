@@ -21,10 +21,14 @@ public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface{
         try{
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             System.out.println(httpResponse.body());
-            return new ArrayList<>();
+            return formatAPICallReturn(httpResponse.body());
         }catch(InterruptedException| IOException exception){
-            exception.printStackTrace();
             return new ArrayList<>();
         }
+    }
+
+
+    public ArrayList<Playlist> formatAPICallReturn(String response){
+        return new ArrayList<>();
     }
 }
