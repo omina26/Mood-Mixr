@@ -10,8 +10,24 @@ import use_case.login.services.TracksAudioFeaturesAPIHandler;
 import use_case.login.services.UserPlaylistItemsAPIHandler;
 import view.AnalyzePlaylistView;
 
+/**
+ * Factory class for creating Analyze Playlist use case components.
+ * Responsible for creating and wiring together all the necessary components
+ * for the Analyze Playlist use case.
+ */
+
 public class AnalyzePlaylistUseCaseFactory {
     private AnalyzePlaylistUseCaseFactory() {}
+
+    /**
+     * Creates and returns an instance of AnalyzePlaylistView.
+     *
+     * @param viewManagerModel The ViewManagerModel instance for managing views.
+     * @param analyzePlaylistViewModel The ViewModel for Analyze Playlist feature.
+     * @param analyzePlaylistDataAccessObject The data access object for Analyze Playlist.
+     * @param userDataAccessObject The data access object for user login data.
+     * @return An instance of AnalyzePlaylistView.
+     */
 
     public static AnalyzePlaylistView create (ViewManagerModel viewManagerModel,
                                               AnalyzePlaylistViewModel analyzePlaylistViewModel,
@@ -21,6 +37,16 @@ public class AnalyzePlaylistUseCaseFactory {
                 analyzePlaylistViewModel, analyzePlaylistDataAccessObject, userDataAccessObject);
         return new AnalyzePlaylistView(analyzePlaylistViewModel, analyzePlaylistController);
     }
+
+    /**
+     * Creates and returns an instance of AnalyzePlaylistController.
+     *
+     * @param viewManagerModel The ViewManagerModel instance for managing views.
+     * @param analyzePlaylistViewModel The ViewModel for Analyze Playlist feature.
+     * @param analyzePlaylistDataAccessObject The data access object for Analyze Playlist.
+     * @param userDataAccessObject The data access object for user login data.
+     * @return An instance of AnalyzePlaylistController.
+     */
 
     private static AnalyzePlaylistController analyzePlaylistUseCase(ViewManagerModel viewManagerModel,
                                                                     AnalyzePlaylistViewModel analyzePlaylistViewModel,
