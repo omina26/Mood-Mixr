@@ -1,13 +1,12 @@
 package app;
 
-import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
 import use_case.login.*;
-import use_case.login.services.LoginAPIHandler;
+import use_case.services.LoginAPIHandler;
 import view.LoginView;
 
 import javax.swing.*;

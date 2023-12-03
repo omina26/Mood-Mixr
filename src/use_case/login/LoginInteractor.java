@@ -1,19 +1,7 @@
 package use_case.login;
 
 import entity.User;
-import use_case.login.services.AuthRedirectServerHandler;
-import use_case.login.services.LoginAPIHandler;
-import use_case.login.services.LoginAPIInterface;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
+import use_case.services.LoginAPIInterface;
 
 public class LoginInteractor implements LoginInputBoundary {
 

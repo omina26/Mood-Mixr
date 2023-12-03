@@ -1,18 +1,16 @@
 package app;
 
-import data_access.login.UserDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.create_playlist.CreatePlaylistController;
 import interface_adapter.create_playlist.CreatePlaylistPresenter;
-import interface_adapter.create_playlist.CreatePlaylistState;
 import interface_adapter.create_playlist.CreatePlaylistViewModel;
 import interface_adapter.playlist_created.PlaylistCreatedViewModel;
 import use_case.create_mood.MoodDataAccessInterface;
 import use_case.create_playlist.CreatePlaylistInputBoundary;
 import use_case.create_playlist.CreatePlaylistInteractor;
 import use_case.create_playlist.CreatePlaylistOutputBoundary;
-import use_case.create_playlist.services.CreatePlaylistAPIHandler;
-import use_case.create_playlist.services.GetRecommendationAPIHandler;
+import use_case.services.CreatePlaylistAPIHandler;
+import use_case.services.GetRecommendationAPIHandler;
 import use_case.login.LoginDataAccessInterface;
 import view.CreatePlaylistView;
 
