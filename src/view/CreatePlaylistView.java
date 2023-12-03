@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.ViewManagerModel;
 import interface_adapter.create_playlist.CreatePlaylistController;
 import interface_adapter.create_playlist.CreatePlaylistViewModel;
 import interface_adapter.create_playlist.CreatePlaylistState;
@@ -12,31 +13,31 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class CreatePlaylistView extends JPanel implements ActionListener, PropertyChangeListener {
-    public final String viewName = "Create Mood";
-    private final JFrame frame = new JFrame("Select a mood:");
+    public final String viewName = "Get Playlist";
+    private final ViewManagerModel viewManagerModel;
     private final CreatePlaylistViewModel createPlaylistViewModel;
     private final CreatePlaylistController createPlaylistController;
-    private JButton create;
-    private JButton back;
+    private JButton get;
+    private JButton mainMenu;
 
-    public CreatePlaylistView(CreatePlaylistViewModel createPlaylistViewModel, CreatePlaylistController createPlaylistController) {
+    public CreatePlaylistView(ViewManagerModel viewManagerModel, CreatePlaylistViewModel createPlaylistViewModel, CreatePlaylistController createPlaylistController) {
+        this.viewManagerModel = viewManagerModel;
         this.createPlaylistController = createPlaylistController;
         this.createPlaylistViewModel = createPlaylistViewModel;
 
-        JLabel title = new JLabel("Create a Playlist");
+        JLabel title = new JLabel("Get a Playlist");
         JLabel directions = new JLabel("Select the mood for the playlist:");
         JLabel noMoodsMessage = new JLabel("If you see no options then go back and create a mood.");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         directions.setAlignmentX(Component.CENTER_ALIGNMENT);
         noMoodsMessage.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 400);
 
         CreatePlaylistState createPlaylistState = createPlaylistViewModel.getState();
         String[] moodsList = createPlaylistState.getMoodsList();
-        JComboBox<String> dropdown = new JComboBox<>(moodsList);
+        JComboBox<String> dropdown = new JComboBox<String>(moodsList);
         dropdown.setEditable(true);
+        dropdown.setVisible(true);
 
         dropdown.addActionListener(e -> {
             JComboBox cb = (JComboBox)e.getSource();
@@ -45,29 +46,33 @@ public class CreatePlaylistView extends JPanel implements ActionListener, Proper
             currentState.setSelectedMood(selectedItem);
             createPlaylistViewModel.setState(currentState);
         });
-        frame.add(dropdown);
-        frame.setVisible(true);
+
 
         JPanel buttons = new JPanel();
 
-        back = new JButton(CreatePlaylistViewModel.BACK_BUTTON_LABEL);
-        buttons.add(back);
+        mainMenu = new JButton(CreatePlaylistViewModel.MAIN_MENU_BUTTON_LABEL);
+        buttons.add(mainMenu);
 
-        back.addActionListener(new ActionListener() {
+        mainMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                System.out.println("here");
+                if (e.getSource().equals(mainMenu)) {
+                    System.out.println("here too");
+                    viewManagerModel.setActiveView("logged in");
+                    viewManagerModel.firePropertyChanged();
+                }
             }
         });
 
-        create = new JButton(CreatePlaylistViewModel.CREATE_BUTTON_LABEL);
-        buttons.add(create);
+        get = new JButton(CreatePlaylistViewModel.GET_BUTTON_LABEL);
+        buttons.add(get);
 
-        create.addActionListener(
+        get.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (e.getSource().equals(create)) {
+                        if (e.getSource().equals(get)) {
 
 //                            LoginState currentState = loginViewModel.getState();
 //                            try {

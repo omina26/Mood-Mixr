@@ -53,11 +53,29 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
         getPlaylist = new JButton(loggedInViewModel.GET_PLAYLIST_BUTTON_LABEL);
         buttons.add(getPlaylist);
-        getPlaylist.addActionListener(this);
+        getPlaylist.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if(e.getSource() == getPlaylist){
+                            viewManagerModel.setActiveView("Get Playlist");
+                            viewManagerModel.firePropertyChanged();
+                        }
+                    }
+                });
 
         analyzePlaylist = new JButton(loggedInViewModel.ANALYZE_PLAYLIST_BUTTON_LABEL);
         buttons.add(analyzePlaylist);
-        analyzePlaylist.addActionListener(this);
+        analyzePlaylist.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if(e.getSource() == analyzePlaylist){
+                            viewManagerModel.setActiveView("Analyze Playlist");
+                            viewManagerModel.firePropertyChanged();
+                        }
+                    }
+                });
 
         groupPlaylist = new JButton(loggedInViewModel.GROUP_PLAYLIST_BUTTON_LABEL);
         buttons.add(groupPlaylist);

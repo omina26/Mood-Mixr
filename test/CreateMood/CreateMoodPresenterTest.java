@@ -3,6 +3,7 @@ package CreateMood;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.create_mood.CreateMoodPresenter;
 import interface_adapter.create_mood.CreateMoodViewModel;
+import interface_adapter.create_playlist.CreatePlaylistViewModel;
 import interface_adapter.view_moods.ViewMoodsViewModel;
 import org.junit.Test;
 import use_case.create_mood.CreateMoodOutputData;
@@ -23,10 +24,11 @@ public class CreateMoodPresenterTest {
 
         CreateMoodViewModel mockCreateMoodViewModel = new CreateMoodViewModel();
         ViewMoodsViewModel mockViewMoodsViewModel = new ViewMoodsViewModel();
+        CreatePlaylistViewModel mockCreatePlaylistViewModel = new CreatePlaylistViewModel();
         ViewManagerModel mockViewManagerModel = new ViewManagerModel();
 
         CreateMoodPresenter presenter = new CreateMoodPresenter(mockCreateMoodViewModel, mockViewMoodsViewModel,
-                mockViewManagerModel);
+                mockCreatePlaylistViewModel, mockViewManagerModel);
 
         presenter.prepareMoodListView(data);
 
@@ -38,10 +40,11 @@ public class CreateMoodPresenterTest {
     public void testPrepareFailView(){
         CreateMoodViewModel mockCreateMoodViewModel = new CreateMoodViewModel();
         ViewMoodsViewModel mockViewMoodsViewModel = new ViewMoodsViewModel();
+        CreatePlaylistViewModel mockCreatePlaylistViewModel = new CreatePlaylistViewModel()
         ViewManagerModel mockViewManagerModel = new ViewManagerModel();
 
         CreateMoodPresenter presenter = new CreateMoodPresenter(mockCreateMoodViewModel, mockViewMoodsViewModel,
-                mockViewManagerModel);
+                mockCreatePlaylistViewModel, mockViewManagerModel);
         presenter.prepareFailView("mock error");
         assertEquals(mockCreateMoodViewModel.getState().getSaveError(), "mock error");
     }
