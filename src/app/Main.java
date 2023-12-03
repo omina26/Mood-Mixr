@@ -38,7 +38,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         JFrame application = new JFrame("Mood Player!");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -79,6 +79,13 @@ public class Main {
             throw new RuntimeException(e);
         }
 
+
+        try{
+            analyzePlaylistDataAccessObject = new AnalyzePlaylistDataAccessObject(new File("./playlistIDs.csv"));
+
+       } catch (IOException e) {
+            throw new RuntimeException(e);
+       }
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
