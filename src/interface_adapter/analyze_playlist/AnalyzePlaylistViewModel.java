@@ -1,9 +1,9 @@
-package interface_adapter.analyze_playlist;
-
+package interface_adapter.analyze_playlist.AnalyzePlaylistState;
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+
 
 public class AnalyzePlaylistViewModel extends ViewModel {
     public final String TITLE_LABEL = "Analyze Playlist View";

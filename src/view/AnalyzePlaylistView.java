@@ -1,8 +1,7 @@
 package view;
 
 import interface_adapter.analyze_playlist.AnalyzePlaylistController;
-import interface_adapter.analyze_playlist.AnalyzePlaylistState;
-import interface_adapter.analyze_playlist.AnalyzePlaylistViewModel;
+import interface_adapter.analyze_playlist.*;
 
 import javax.swing.*;
 import java.awt.*;
