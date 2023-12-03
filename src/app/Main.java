@@ -10,13 +10,10 @@ import data_access.login.UserDataAccessObject;
 
 import data_access.create_mood.MoodDataAccessObject;
 
-import interface_adapter.ViewManagerModel;
 import interface_adapter.analyze_playlist.AnalyzePlaylistViewModel;
-import interface_adapter.analyze_playlist.AnalyzePlaylistState;
 
 import interface_adapter.create_mood.CreateMoodViewModel;
 
-import interface_adapter.create_playlist.CreatePlaylistState;
 import interface_adapter.create_playlist.CreatePlaylistViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
@@ -24,17 +21,10 @@ import interface_adapter.playlist_created.PlaylistCreatedViewModel;
 import interface_adapter.view_moods.ViewMoodsViewModel;
 
 import view.*;
-import use_case.analyze_playlist.AnalyzePlaylistDataAccessInterface;
-import use_case.login.LoginDataAccessInterface;
 
-
-import view.*;
 
 import javax.swing.*;
-import javax.swing.text.View;
 import java.awt.*;
-
-import use_case.login.services.UserTopTracksAPIHandler;
 
 import view.LoggedInView;
 
@@ -45,12 +35,9 @@ import view.ViewManager;
 import view.ViewMoodsView;
 import view.AnalyzePlaylistView;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 import java.io.IOException;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
