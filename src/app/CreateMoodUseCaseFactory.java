@@ -5,6 +5,7 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.create_mood.CreateMoodController;
 import interface_adapter.create_mood.CreateMoodPresenter;
 import interface_adapter.create_mood.CreateMoodViewModel;
+import interface_adapter.create_playlist.CreatePlaylistViewModel;
 import interface_adapter.view_moods.ViewMoodsViewModel;
 import use_case.create_mood.CreateMoodInputBoundary;
 import use_case.create_mood.CreateMoodInteractor;
@@ -28,17 +29,17 @@ public class CreateMoodUseCaseFactory {
      * @return
      */
     public static CreateMoodView create(ViewManagerModel viewManagerModel, CreateMoodViewModel createMoodViewModel,
-                                        ViewMoodsViewModel viewMoodsViewModel, MoodDataAccessInterface moodDataAccessObject){
+                                        ViewMoodsViewModel viewMoodsViewModel, CreatePlaylistViewModel createPlaylistViewModel, MoodDataAccessInterface moodDataAccessObject){
 
             CreateMoodController createMoodController = createMoodUseCase(viewManagerModel,
-                    createMoodViewModel, viewMoodsViewModel, moodDataAccessObject);
+                    createMoodViewModel, viewMoodsViewModel, createPlaylistViewModel, moodDataAccessObject);
             return new CreateMoodView(createMoodViewModel, createMoodController);
     }
 
     private static CreateMoodController createMoodUseCase(ViewManagerModel viewManagerModel, CreateMoodViewModel createMoodViewModel,
-                                                          ViewMoodsViewModel viewMoodsViewModel, MoodDataAccessInterface moodDataAccessObject){
+                                                          ViewMoodsViewModel viewMoodsViewModel, CreatePlaylistViewModel createPlaylistViewModel, MoodDataAccessInterface moodDataAccessObject){
         CreateMoodOutputBoundary createMoodOutputBoundary =
-                new CreateMoodPresenter(createMoodViewModel, viewMoodsViewModel, viewManagerModel);
+                new CreateMoodPresenter(createMoodViewModel, viewMoodsViewModel, createPlaylistViewModel, viewManagerModel);
 
         CreateMoodInputBoundary createMoodInputBoundary = new CreateMoodInteractor(moodDataAccessObject, createMoodOutputBoundary);
 

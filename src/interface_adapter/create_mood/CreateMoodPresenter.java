@@ -1,6 +1,8 @@
 package interface_adapter.create_mood;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.create_playlist.CreatePlaylistState;
+import interface_adapter.create_playlist.CreatePlaylistViewModel;
 import interface_adapter.view_moods.ViewMoodsState;
 import interface_adapter.view_moods.ViewMoodsViewModel;
 import use_case.create_mood.CreateMoodOutputBoundary;
@@ -13,6 +15,7 @@ public class CreateMoodPresenter implements CreateMoodOutputBoundary{
 
     private final CreateMoodViewModel createMoodViewModel;
     private final ViewMoodsViewModel viewMoodsViewModel;
+    private final CreatePlaylistViewModel createPlaylistViewModel;
     private ViewManagerModel viewManagerModel;
 
     /**
@@ -22,9 +25,10 @@ public class CreateMoodPresenter implements CreateMoodOutputBoundary{
      * @param viewManagerModel The view manager to handle the views
      */
     public CreateMoodPresenter(CreateMoodViewModel createMoodViewModel, ViewMoodsViewModel viewMoodsViewModel,
-                               ViewManagerModel viewManagerModel) {
+                               CreatePlaylistViewModel createPlaylistViewModel, ViewManagerModel viewManagerModel) {
         this.createMoodViewModel = createMoodViewModel;
         this.viewMoodsViewModel = viewMoodsViewModel;
+        this.createPlaylistViewModel = createPlaylistViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
@@ -38,6 +42,8 @@ public class CreateMoodPresenter implements CreateMoodOutputBoundary{
         System.out.println("in prepare mood list view");
         ViewMoodsState viewMoodsState = viewMoodsViewModel.getState();
         viewMoodsState.setMoodsList(data.getMoodNames());
+        CreatePlaylistState createPlaylistState = createPlaylistViewModel.getState();
+        createPlaylistState.setMoodsList(data.getMoodNames());
         this.viewMoodsViewModel.setState(viewMoodsState);
         this.viewMoodsViewModel.firePropertyChanged();
 
