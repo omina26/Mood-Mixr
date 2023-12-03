@@ -4,12 +4,14 @@ import interface_adapter.create_mood.CreateMoodController;
 import interface_adapter.create_mood.CreateMoodViewModel;
 import org.junit.Test;
 import use_case.create_mood.CreateMoodInputBoundary;
+import use_case.create_mood.CreateMoodInputData;
 import use_case.create_mood.CreateMoodInteractor;
 import view.CreateMoodView;
 import view.LabelTextPanel;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 import static java.lang.Thread.sleep;
@@ -19,8 +21,8 @@ public class CreateMoodViewTest {
 
     @Test
     public void testCreateMoodView(){
-        CreateMoodInputBoundary cmib = null;
-        CreateMoodController controller = new CreateMoodController(cmib);
+        MockInteractor interactor = new MockInteractor();
+        CreateMoodController controller = new CreateMoodController(interactor);
         CreateMoodViewModel viewModel = new CreateMoodViewModel();
 
         JPanel view = new CreateMoodView(viewModel, controller);
@@ -114,5 +116,23 @@ public class CreateMoodViewTest {
         assertEquals(7, valenceSlider.getValue());
         assertEquals(CreateMoodViewModel.SET_VALENCE + " (7)", valenceLabel.getText());
         assertEquals(7, viewModel.getState().getValence());
+
+        JPanel buttonPanel = (JPanel) view.getComponent(9);
+        JButton createButton = (JButton) buttonPanel.getComponent(0);
+        createButton.doClick();
+
+        assertEquals(interactor.execution, "m 1 2 3 4 5 6 7");
     }
+
+}
+
+class MockInteractor implements CreateMoodInputBoundary{
+
+    String execution = "";
+    @Override
+    public void execute(CreateMoodInputData createMoodInputData) {
+        execution = createMoodInputData.toString();
+    }
+
+
 }

@@ -14,10 +14,19 @@ import view.CreateMoodView;
 
 import java.io.IOException;
 
+/**
+ * This class is a Factory for functions that create aspects of the CreateMood use case
+ */
 public class CreateMoodUseCaseFactory {
 
-    private CreateMoodUseCaseFactory() {}
-
+    /**
+     * Create the View for the CreateMood Screen
+     * @param viewManagerModel The view manager model that handles the views
+     * @param createMoodViewModel The view model for the CreateMood View
+     * @param viewMoodsViewModel The view model for the ViewMoods view
+     * @param moodDataAccessObject The data access object that deals with the Moods stored
+     * @return
+     */
     public static CreateMoodView create(ViewManagerModel viewManagerModel, CreateMoodViewModel createMoodViewModel,
                                         ViewMoodsViewModel viewMoodsViewModel, MoodDataAccessInterface moodDataAccessObject){
 

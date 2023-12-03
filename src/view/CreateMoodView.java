@@ -20,6 +20,9 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+/**
+ * The View class for the Create a new mood
+ */
 public class CreateMoodView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "Create Mood";
@@ -31,14 +34,19 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
 
     final JButton create;
 
-    //private final CreateMoodController createMoodController;
+
+    /**
+     * The costructor for the Create Mood View
+     * @param createMoodViewModel The view model for this view
+     * @param createMoodController The controller for this view
+     */
     public CreateMoodView(CreateMoodViewModel createMoodViewModel, CreateMoodController createMoodController){
 
         this.createMoodController = createMoodController;
         this.createMoodViewModel = createMoodViewModel;
         //this.createMoodViewModel.addPropertyChangeListener(this);
 
-        JLabel title = new JLabel("Create Mood Screen");
+        JLabel title = new JLabel(CreateMoodViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         LabelTextPanel moodInfo = new LabelTextPanel(
@@ -56,12 +64,10 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
             }
 
             @Override
-            public void keyPressed(KeyEvent e) {
-            }
+            public void keyPressed(KeyEvent e) {}
 
             @Override
-            public void keyReleased(KeyEvent e) {
-            }
+            public void keyReleased(KeyEvent e) {}
         });
 
         JPanel setAcousticnessPanel = new JPanel();
@@ -228,17 +234,6 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(create)) {
-
-//                            LoginState currentState = loginViewModel.getState();
-//                            try {
-//                                loginController.executeUseCase();
-//                            } catch (IOException ex) {
-//                                throw new RuntimeException(ex);
-//                            } catch (URISyntaxException ex) {
-//                                throw new RuntimeException(ex);
-//                            }
-                            //CreateMoodState currentState = createMoodViewModel.getState();
-                            //createMoodController.execute();
                             CreateMoodState currentState = createMoodViewModel.getState();
                             createMoodController.execute(
                                     currentState.getName(),
@@ -272,11 +267,18 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         this.add(buttons);
     }
 
+    /**
+     * Deals with action events
+     * @param e the event to be processed
+     */
     @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("Click" + e.getActionCommand());
-    }
+    public void actionPerformed(ActionEvent e) {}
 
+    /**
+     * Deals with property change for view
+     * @param evt A PropertyChangeEvent object describing the event source
+     *          and the property that has changed.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getSource() == this.createMoodViewModel){
@@ -287,7 +289,5 @@ public class CreateMoodView extends JPanel implements ActionListener, PropertyCh
         }
     }
 
-    private void setFields(CreateMoodState state) {
-    }
 }
 
