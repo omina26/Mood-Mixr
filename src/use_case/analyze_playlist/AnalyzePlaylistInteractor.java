@@ -11,6 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Interactor for analyzing playlists.
+ */
+
 public class AnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary {
 
     final AnalyzePlaylistDataAccessInterface analyzePlaylistDataAccessObject;
@@ -19,6 +23,15 @@ public class AnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary {
     final UserPlaylistItemsAPIHandler playlistItemsHandler;
     final TracksAudioFeaturesAPIHandler trackHandler;
 
+    /**
+     * Constructor for AnalyzePlaylistInteractor.
+     *
+     * @param userDataAccessObject Data access object for user data.
+     * @param analyzePlaylistDataAccessObject Data access object for analyzing playlists.
+     * @param analyzePlaylistPresenter Presenter for the output of playlist analysis.
+     * @param playlistItemsHandler Handler for retrieving playlist items.
+     * @param trackHandler Handler for retrieving track audio features.
+     */
 
     public AnalyzePlaylistInteractor(LoginDataAccessInterface userDataAccessObject,
                                      AnalyzePlaylistDataAccessInterface analyzePlaylistDataAccessObject,
@@ -33,6 +46,11 @@ public class AnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary {
         this.trackHandler = trackHandler;
     }
 
+    /**
+     * Executes the analysis of a playlist.
+     *
+     * @param analyzePlaylistInputData The input data for analyzing the playlist.
+     */
     public void execute(AnalyzePlaylistInputData analyzePlaylistInputData) {
         try {
             User user = userDataAccessObject.getCurrentUser();
