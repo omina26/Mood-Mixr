@@ -9,11 +9,21 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+/**
+ * This class represents the Data Access Object that stores the playlistIDs.
+ */
 
 public class AnalyzePlaylistDataAccessObject implements AnalyzePlaylistDataAccessInterface {
     private File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, AnalyzedPlaylist> playlistIDs = new HashMap<>();
+
+    /**
+     * Constructs an AnalyzePlaylistDataAccessObject for handling playlist data.
+     *
+     * @param csvFile The file where playlist data is stored.
+     * @throws IOException If there is an error in reading the file.
+     */
 
     public AnalyzePlaylistDataAccessObject(File csvFile) throws IOException {
         this.csvFile = csvFile;
@@ -38,10 +48,25 @@ public class AnalyzePlaylistDataAccessObject implements AnalyzePlaylistDataAcces
         }
     }
 
+    /**
+     * Retrieves a map of playlist IDs associated with their names.
+     *
+     * @return A map where keys are names and values are AnalyzedPlaylist objects.
+     */
+
     @Override
     public Map<String, AnalyzedPlaylist> getPlaylistID() {
         return this.playlistIDs;
     }
+
+    /**
+     * Stores a new playlist ID with its associated name.
+     *
+     * @param name The name associated with the playlist ID.
+     * @param playlistID The playlist ID to be stored.
+     * @return A set of all names stored in the data access object.
+     * @throws IOException If there is an error in writing the file.
+     */
 
     @Override
     public Set<String> savePlaylistID(String name, String playlistID) throws IOException {
@@ -51,6 +76,12 @@ public class AnalyzePlaylistDataAccessObject implements AnalyzePlaylistDataAcces
 
         return this.playlistIDs.keySet();
     }
+
+    /**
+     * Saves the current state of playlist IDs to the CSV file.
+     *
+     * @throws IOException If there is an error in writing the file.
+     */
 
     public void save() throws IOException {
         BufferedWriter writer;
