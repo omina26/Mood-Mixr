@@ -14,7 +14,6 @@ import java.beans.PropertyChangeListener;
 
 public class CreatePlaylistView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "Get Playlist";
-    private final JFrame frame = new JFrame("Select a mood:");
     private final ViewManagerModel viewManagerModel;
     private final CreatePlaylistViewModel createPlaylistViewModel;
     private final CreatePlaylistController createPlaylistController;
@@ -36,8 +35,9 @@ public class CreatePlaylistView extends JPanel implements ActionListener, Proper
 
         CreatePlaylistState createPlaylistState = createPlaylistViewModel.getState();
         String[] moodsList = createPlaylistState.getMoodsList();
-        JComboBox<String> dropdown = new JComboBox<>(moodsList);
+        JComboBox<String> dropdown = new JComboBox<String>(moodsList);
         dropdown.setEditable(true);
+        dropdown.setVisible(true);
 
         dropdown.addActionListener(e -> {
             JComboBox cb = (JComboBox)e.getSource();
