@@ -76,14 +76,14 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-//        AnalyzePlaylistDataAccessObject analyzePlaylistDataAccessObject;
-//
-//        try{
-//            analyzePlaylistDataAccessObject = new AnalyzePlaylistDataAccessObject(new File("./playlistIDs.csv"));
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        AnalyzePlaylistDataAccessObject analyzePlaylistDataAccessObject;
+
+        try{
+            analyzePlaylistDataAccessObject = new AnalyzePlaylistDataAccessObject(new File("./playlistIDs.csv"));
+
+       } catch (IOException e) {
+            throw new RuntimeException(e);
+       }
 
 
 
@@ -96,21 +96,24 @@ public class Main {
         ViewMoodsView viewMoodsView = new ViewMoodsView(viewMoodsViewModel, viewManagerModel);
         views.add(viewMoodsView, viewMoodsView.viewName);
 
-        LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
+        LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel);
 
         views.add(loggedInView, loggedInView.viewName);
 
 
-//        AnalyzePlaylistView analyzePlaylistView = AnalyzePlaylistUseCaseFactory.create(viewManagerModel, analyzePlaylistViewModel, analyzePlaylistDataAccessObject);
-//        views.add(analyzePlaylistView, analyzePlaylistView.viewName);
+        AnalyzePlaylistView analyzePlaylistView = AnalyzePlaylistUseCaseFactory.create(viewManagerModel,
+                analyzePlaylistViewModel, analyzePlaylistDataAccessObject, userDataAccessObject);
+        views.add(analyzePlaylistView, analyzePlaylistView.viewName);
+
 
         PlaylistCreatedViewModel playlistCreatedViewModel = new PlaylistCreatedViewModel();
         CreatePlaylistView createPlaylistView = CreatePlaylistUseCaseFactory.create(viewManagerModel, createPlaylistViewModel, playlistCreatedViewModel, userDataAccessObject, moodDataAccessObject);
         views.add(createPlaylistView, createPlaylistView.viewName);
 
-//         viewManagerModel.setActiveView(loginView.viewName);
+        //viewManagerModel.setActiveView(loginView.viewName);
         //viewManagerModel.setActiveView(createMoodView.viewName);
 
+      // viewManagerModel.setActiveView(analyzePlaylistViewModel.getViewName());
         viewManagerModel.setActiveView(loginView.viewName);
 
         viewManagerModel.firePropertyChanged();

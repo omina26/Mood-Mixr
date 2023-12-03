@@ -11,6 +11,12 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * AnalyzePlaylistView provides a user interface for analyzing Spotify playlists.
+ * Includes input fields for entering a playlist ID and buttons to initiate analysis or go back to the login screen.
+ * Listens to user actions and property changes in the AnalyzePlaylistViewModel.
+ */
+
 public class AnalyzePlaylistView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "Analyze Playlist";
@@ -22,6 +28,13 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
     final JButton back;
 
     private final AnalyzePlaylistController analyzePlaylistController;
+
+    /**
+     * Constructs the AnalyzePlaylistView with necessary model and controller.
+     *
+     * @param analyzePlaylistViewModel The ViewModel associated with this view.
+     * @param analyzePlaylistController The Controller that handles the business logic.
+     */
 
     public AnalyzePlaylistView(AnalyzePlaylistViewModel analyzePlaylistViewModel,
                                AnalyzePlaylistController analyzePlaylistController) {
@@ -55,15 +68,14 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
         analyze = new JButton(AnalyzePlaylistViewModel.ANALYZE_PLAYLIST_BUTTON_LABEL);
         buttons.add(analyze);
 
-        analyze.addActionListener(                // This creates an anonymous subclass of ActionListener and instantiates it.
+        analyze.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(analyze)) {
-                            AnalyzePlaylistState currentState =
-                                    analyzePlaylistViewModel.getState();
-
-                            analyzePlaylistController.execute(
-                                    currentState.getPlaylist());
+                            String playlistID = analyzePlaylistInputField.getText(); // Retrieve playlist ID from input field
+                            AnalyzePlaylistState currentState = analyzePlaylistViewModel.getState();
+                            currentState.setPlaylist(playlistID); // Set the playlist ID in the state
+                            analyzePlaylistController.execute(currentState.getPlaylistID()); // Pass the playlist ID to the controller
                         }
                     }
                 }
@@ -77,7 +89,21 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
         this.add(buttons);
 
     }
+
+    /**
+     * Handles action events triggered by user interactions with the view components.
+     *
+     * @param e The action event.
+     */
+
     public void actionPerformed(ActionEvent e) {System.out.println("Click" + e.getActionCommand());}
+
+    /**
+     * Responds to property change events from the AnalyzePlaylistViewModel.
+     * Updates the view based on changes in the model's state.
+     *
+     * @param evt The property change event.
+     */
 
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getSource() == this.analyzePlaylistViewModel) {
