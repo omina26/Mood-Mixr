@@ -5,6 +5,7 @@ import org.junit.Test;
 import use_case.create_mood.*;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -26,7 +27,7 @@ public class CreateMoodInteractorTest {
 
         interactor.execute(inputData);
         assertEquals(mockDataAccessObject.content, "mock 1.0 1.0 1.0 1.0 1.0 1.0 1.0");
-        assertEquals(mockPresenter.outputData, "[mock] false");
+        assertEquals(mockPresenter.outputData, "[mock 1.0 1.0 1.0 1.0 1.0 1.0 1.0] false");
     }
 
     @Test
@@ -50,7 +51,10 @@ class MockMoodDataAccessObjectSuccess implements MoodDataAccessInterface {
 
     @Override
     public Map<String, Mood> getMoods() {
-        return null;
+        HashMap<String, Mood> moodsMap = new HashMap<>();
+        moodsMap.put("mock", new Mood("mock",1.0, 1.0,
+                1.0, 1.0, 1.0, 1.0, 1.0));
+        return moodsMap;
     }
 
     @Override
@@ -91,9 +95,7 @@ class MockMoodDataAccessObjectThrowsError implements MoodDataAccessInterface {
     }
 
     @Override
-    public void save() throws IOException {
-
-    }
+    public void save() throws IOException {}
 }
 
 class MockPresenter implements CreateMoodOutputBoundary {
