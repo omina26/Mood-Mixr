@@ -26,12 +26,12 @@ public class AnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary {
                                      UserPlaylistItemsAPIHandler playlistItemsHandler,
                                      TracksAudioFeaturesAPIHandler trackHandler) {
         this.userDataAccessObject = userDataAccessObject;
+
         this.analyzePlaylistDataAccessObject = analyzePlaylistDataAccessObject;
         this.analyzePlaylistPresenter = analyzePlaylistPresenter;
         this.playlistItemsHandler = playlistItemsHandler;
         this.trackHandler = trackHandler;
     }
-
 
     public void execute(AnalyzePlaylistInputData analyzePlaylistInputData) {
         try {

@@ -2,6 +2,9 @@ package use_case.login.services;
 
 import entity.User;
 
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -112,47 +115,51 @@ public class LoginAPIHandler implements LoginAPIInterface{
      * @throws InterruptedException
      */
     public User getLoginUserInfo() throws IOException, URISyntaxException, InterruptedException {
+        // Replace "YOUR_ACCESS_TOKEN" with your actual Spotify access token
         String accessToken = getAccessToken();
-        String endpoint = "https://api.spotify.com/v1/me";
-        URL url = new URL(endpoint);
 
-        // Open a connection to the URL
+        // API endpoint URL
+        String apiUrl = "https://api.spotify.com/v1/me";
+
+        // Set up the HTTP connection
+        URL url = new URL(apiUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-        // Set the request method to GET
         connection.setRequestMethod("GET");
-
-        // Set the Authorization header with the access token
         connection.setRequestProperty("Authorization", "Bearer " + accessToken);
 
         // Get the response code
         int responseCode = connection.getResponseCode();
-        BufferedReader in;
-        if (responseCode == 200) {
-            // The request was successful (HTTP status code 200)
+        String username = "";
 
-            // Read the response
-            in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            // Read and parse the JSON response
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            // Parse the JSON response
+            JsonReader jsonReader = Json.createReader(new java.io.StringReader(response.toString()));
+            JsonObject jsonResponse = jsonReader.readObject();
+
+            // Extract the name of the user
+            username = jsonResponse.getString("display_name");
+
+            // Print the user's name
+            System.out.println("User Name: " + username);
+
+        } else {
+            System.out.println("Error: Unable to fetch user data. Response Code: " + responseCode);
         }
-        else {
-            in = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
-        }
-        String inputLine;
-        String[] splitLine;
-        ArrayList<String[]> response = new ArrayList<>();
-        StringBuilder stringRepresentation = new StringBuilder();
-        while ((inputLine = in.readLine()) != null) {
-            stringRepresentation.append(inputLine);
-            splitLine = inputLine.split(";");
-            response.add(splitLine);
-        }
-        in.close();
-        // Print the response (JSON data)
-        System.out.println("Response: " + stringRepresentation);
 
         // Close the connection
         connection.disconnect();
 
-        return new User(stringRepresentation.toString(), accessToken);
+
+        return new User(username, accessToken);
     }
 }

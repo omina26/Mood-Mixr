@@ -94,9 +94,9 @@ public class Main {
         try{
             analyzePlaylistDataAccessObject = new AnalyzePlaylistDataAccessObject(new File("./playlistIDs.csv"));
 
-        } catch (IOException e) {
+       } catch (IOException e) {
             throw new RuntimeException(e);
-        }
+       }
 
 
         CreateMoodView createMoodView = CreateMoodUseCaseFactory.create(viewManagerModel, createMoodViewModel, viewMoodsViewModel, moodDataAccessObject);
@@ -119,6 +119,7 @@ public class Main {
         AnalyzePlaylistView analyzePlaylistView = AnalyzePlaylistUseCaseFactory.create(viewManagerModel,
                 analyzePlaylistViewModel, analyzePlaylistDataAccessObject, userDataAccessObject);
         views.add(analyzePlaylistView, analyzePlaylistView.viewName);
+
 
         PlaylistCreatedViewModel playlistCreatedViewModel = new PlaylistCreatedViewModel();
         CreatePlaylistView createPlaylistView = CreatePlaylistUseCaseFactory.create(viewManagerModel, createPlaylistViewModel, playlistCreatedViewModel, userDataAccessObject, moodDataAccessObject);
