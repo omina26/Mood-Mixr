@@ -12,6 +12,8 @@ import use_case.create_playlist.CreatePlaylistOutputBoundary;
 import use_case.services.CreatePlaylistAPIHandler;
 import use_case.services.GetRecommendationAPIHandler;
 import use_case.login.LoginDataAccessInterface;
+import use_case.services.UserTopTracksAPIHandler;
+import use_case.services.UserTopTracksAPIHandlerInterface;
 import view.CreatePlaylistView;
 
 public class CreatePlaylistUseCaseFactory {
@@ -35,10 +37,11 @@ public class CreatePlaylistUseCaseFactory {
         CreatePlaylistOutputBoundary createPlaylistOutputBoundary =
                 new CreatePlaylistPresenter(createPlaylistViewModel, playlistCreatedViewModel, viewManagerModel);
 
+        UserTopTracksAPIHandler userTopTracksAPIHandler = new UserTopTracksAPIHandler();
         GetRecommendationAPIHandler getRecommendationHandler = new GetRecommendationAPIHandler();
         CreatePlaylistAPIHandler playlistHandler = new CreatePlaylistAPIHandler();
         CreatePlaylistInputBoundary createPlaylistInputBoundary = new CreatePlaylistInteractor(userDataAccessObject,
-                moodDataAccessObject, createPlaylistOutputBoundary, getRecommendationHandler, playlistHandler);
+                moodDataAccessObject, createPlaylistOutputBoundary, userTopTracksAPIHandler, getRecommendationHandler, playlistHandler);
 
         return new CreatePlaylistController(createPlaylistInputBoundary);
     }
