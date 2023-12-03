@@ -3,6 +3,7 @@ package use_case.create_mood;
 import entity.Mood;
 
 import java.io.IOException;
+import java.util.HashSet;
 
 /**
  * Represents the interactor for the Create Mood use case
@@ -40,10 +41,21 @@ public class CreateMoodInteractor implements  CreateMoodInputBoundary{
         try {
             moodDataAccessObject.saveMood(name, acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence);
 
-            CreateMoodOutputData outputData = new CreateMoodOutputData(moodDataAccessObject.getMoodNames(), false);
+            HashSet<String> outputMoodNames = new HashSet<>();
+            for (String moodName : moodDataAccessObject.getMoods().keySet()){
+                Mood m = moodDataAccessObject.getMoods().get(moodName);
+                outputMoodNames.add(moodName + " " + m.getAcousticness() +
+                        " "+ m.getDanceability() +
+                        " "+ m.getEnergy() +
+                        " "+ m.getInstrumentalness() +
+                        " "+ m.getLiveness() +
+                        " "+ m.getSpeechiness() +
+                        " " + m.getValence()
+                );
+            }
+            CreateMoodOutputData outputData = new CreateMoodOutputData(outputMoodNames, false);
             createMoodPresenter.prepareMoodListView(outputData);
         } catch(IOException e) {
-            CreateMoodOutputData outputData = new CreateMoodOutputData(null, true);
             createMoodPresenter.prepareFailView("Could not save mood: "+ e);
         }
     }

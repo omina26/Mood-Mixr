@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.ViewManagerModel;
 import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.logged_in.LoggedInViewModel;
 
@@ -16,14 +17,13 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     JLabel name;
 
-    final JButton logOut;
     final JButton createMood;
     final JButton getPlaylist;
     final JButton analyzePlaylist;
     final JButton groupPlaylist;
 
 
-    public LoggedInView(LoggedInViewModel loggedInViewModel) {
+    public LoggedInView(LoggedInViewModel loggedInViewModel, ViewManagerModel viewManagerModel) {
 
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
@@ -36,13 +36,20 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         name = new JLabel();
 
         JPanel buttons = new JPanel();
-        logOut = new JButton(loggedInViewModel.LOGOUT_BUTTON_LABEL);
-        buttons.add(logOut);
-        logOut.addActionListener(this);
 
         createMood = new JButton(loggedInViewModel.CREATE_MOOD_BUTTON_LABEL);
         buttons.add(createMood);
-
+        createMood.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if(e.getSource() == createMood){
+                            viewManagerModel.setActiveView("Create Mood");
+                            viewManagerModel.firePropertyChanged();
+                        }
+                    }
+                }
+        );
 
         getPlaylist = new JButton(loggedInViewModel.GET_PLAYLIST_BUTTON_LABEL);
         buttons.add(getPlaylist);

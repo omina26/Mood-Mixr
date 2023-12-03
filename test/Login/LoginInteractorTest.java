@@ -6,7 +6,7 @@ import use_case.login.LoginDataAccessInterface;
 import use_case.login.LoginInteractor;
 import use_case.login.LoginOutputBoundary;
 import use_case.login.LoginOutputData;
-import use_case.login.services.LoginAPIInterface;
+import use_case.services.LoginAPIInterface;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
