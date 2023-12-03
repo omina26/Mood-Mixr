@@ -1,6 +1,5 @@
 package view;
 
-import interface_adapter.group_playlist.GroupPlaylistController;
 import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.logged_in.LoggedInViewModel;
 
@@ -24,7 +23,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     final JButton groupPlaylist;
 
 
-    public LoggedInView(LoggedInViewModel loggedInViewModel, GroupPlaylistController groupPlaylistController) {
+    public LoggedInView(LoggedInViewModel loggedInViewModel) {
 
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
