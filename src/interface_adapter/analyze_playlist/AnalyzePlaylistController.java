@@ -9,10 +9,10 @@ public class AnalyzePlaylistController {
         this.analyzePlaylistInteractor = analyzePlaylistInteractor;
     }
 
-    public void execute(String playlist) {
-        AnalyzePlaylistInputData analyzePlaylistInputData = new AnalyzePlaylistInputData(playlist);
+    public void execute(String playlistID) {
+        AnalyzePlaylistInputData data = new AnalyzePlaylistInputData(playlistID);
 
-        analyzePlaylistInteractor.execute(analyzePlaylistInputData);
+        analyzePlaylistInteractor.execute(data);
     }
 
 }

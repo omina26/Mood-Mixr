@@ -68,15 +68,14 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
         analyze = new JButton(AnalyzePlaylistViewModel.ANALYZE_PLAYLIST_BUTTON_LABEL);
         buttons.add(analyze);
 
-        analyze.addActionListener(                // This creates an anonymous subclass of ActionListener and instantiates it.
+        analyze.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(analyze)) {
-                            AnalyzePlaylistState currentState =
-                                    analyzePlaylistViewModel.getState();
-
-                            analyzePlaylistController.execute(
-                                    currentState.getPlaylist());
+                            String playlistID = analyzePlaylistInputField.getText(); // Retrieve playlist ID from input field
+                            AnalyzePlaylistState currentState = analyzePlaylistViewModel.getState();
+                            currentState.setPlaylist(playlistID); // Set the playlist ID in the state
+                            analyzePlaylistController.execute(currentState.getPlaylistID()); // Pass the playlist ID to the controller
                         }
                     }
                 }

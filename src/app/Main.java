@@ -125,11 +125,11 @@ public class Main {
         CreatePlaylistView createPlaylistView = CreatePlaylistUseCaseFactory.create(viewManagerModel, createPlaylistViewModel, playlistCreatedViewModel, userDataAccessObject, moodDataAccessObject);
         views.add(createPlaylistView, createPlaylistView.viewName);
 
-//         viewManagerModel.setActiveView(loginView.viewName);
+        //viewManagerModel.setActiveView(loginView.viewName);
         //viewManagerModel.setActiveView(createMoodView.viewName);
 
-        viewManagerModel.setActiveView(loginView.viewName);
-      //viewManagerModel.setActiveView(analyzePlaylistViewModel.getViewName());
+       //viewManagerModel.setActiveView(loginView.viewName);
+       viewManagerModel.setActiveView(analyzePlaylistViewModel.getViewName());
 
 
        // viewManagerModel.setActiveView(loginView.viewName);

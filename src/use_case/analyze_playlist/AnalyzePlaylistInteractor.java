@@ -38,6 +38,10 @@ public class AnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary {
             User user = userDataAccessObject.getCurrentUser();
             String token = user.getToken();
             String playlistID = analyzePlaylistInputData.getPlaylistID();
+            String name = user.getName();
+
+            analyzePlaylistDataAccessObject.savePlaylistID(name, playlistID);
+
             List<String> playlistItems = this.playlistItemsHandler.getPlaylistItems(token, playlistID);
 
             JsonObject tracksAudioFeatures = this.trackHandler.getTracksAudioFeatures(playlistItems, token);

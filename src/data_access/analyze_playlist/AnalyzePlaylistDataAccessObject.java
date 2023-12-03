@@ -32,7 +32,7 @@ public class AnalyzePlaylistDataAccessObject implements AnalyzePlaylistDataAcces
                 String[] col = row.split(",");
                 String playlistID = String.valueOf(col[headers.get("playlist ID")]);
                 String name = String.valueOf(col[headers.get("name")]);
-                AnalyzedPlaylist analyzedPlaylist = new AnalyzedPlaylist(playlistID);
+                AnalyzedPlaylist analyzedPlaylist = new AnalyzedPlaylist(name, playlistID);
                 playlistIDs.put(name, analyzedPlaylist);
             }
         }
@@ -44,11 +44,14 @@ public class AnalyzePlaylistDataAccessObject implements AnalyzePlaylistDataAcces
     }
 
     @Override
-    public Set<String> savePlaylistID(String playlistID) {
+    public Set<String> savePlaylistID(String name, String playlistID) throws IOException {
+        AnalyzedPlaylist analyzedPlaylist = new AnalyzedPlaylist(name, playlistID);
+        this.playlistIDs.put(analyzedPlaylist.getName(), analyzedPlaylist);
+        this.save();
+
         return this.playlistIDs.keySet();
     }
 
-    @Override
     public void save() throws IOException {
         BufferedWriter writer;
 
@@ -57,7 +60,8 @@ public class AnalyzePlaylistDataAccessObject implements AnalyzePlaylistDataAcces
         writer.newLine();
 
         for (AnalyzedPlaylist analyzedPlaylist : playlistIDs.values()) {
-            String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s",
+            String line = String.format("%s,%s",
+                    analyzedPlaylist.getName(),
                     analyzedPlaylist.getPlaylistID());
             writer.write(line);
             writer.newLine();
