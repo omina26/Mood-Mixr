@@ -17,8 +17,11 @@ import java.beans.PropertyChangeListener;
 import java.util.Arrays;
 import java.util.Set;
 
+/**
+ * The View class for Create Playlist
+ */
 public class CreatePlaylistView extends JPanel implements ActionListener, PropertyChangeListener {
-    public final String viewName = "Get Playlist";
+    public final String viewName = "Create Playlist";
     private final ViewManagerModel viewManagerModel;
     private final CreatePlaylistViewModel createPlaylistViewModel;
     private final JTextField createPlaylistInputField = new JTextField(15);

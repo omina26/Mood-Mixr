@@ -9,18 +9,25 @@ import javax.json.JsonReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.nio.charset.StandardCharsets;
+
 
 
 public class GetRecommendationAPIHandler implements GetRecommendationAPIHandlerInterface {
-    public String getRecommendation(String accessToken, String seedTracks, double acousticness, double danceability, double energy, double instrumentalness, double liveness, double speechiness, double valence) throws IOException, InterruptedException{
+    public List<String> getRecommendation(String accessToken, List<String> seedTracks, double acousticness, double danceability, double energy, double instrumentalness, double liveness, double speechiness, double valence) throws IOException, InterruptedException{
         HttpClient client = HttpClient.newHttpClient();
-        String apiUrl = "https://api.spotify.com/v1/recommendations?seed_tracks=" + seedTracks
+        String trackIdParam = seedTracks.stream()
+                                        .map(trackId -> URLEncoder.encode(trackId, StandardCharsets.UTF_8))
+                                        .collect(Collectors.joining(","));
+        String apiUrl = "https://api.spotify.com/v1/recommendations?limit=10&seed_tracks=" + trackIdParam
                 + "&target_acousticness=" + acousticness
                 + "&target_danceability=" + danceability
                 + "&target_energy=" + energy
@@ -50,17 +57,11 @@ public class GetRecommendationAPIHandler implements GetRecommendationAPIHandlerI
                 System.out.println(uri);
             }
         } else {
-            System.out.println("Error: " + response.statusCode());
+            System.out.println("Error getting recommendations. Error: " + response.statusCode());
             System.out.println(response.body());
         }
 
-        StringBuilder recommendationsUris = new StringBuilder();
-        assert recommendations != null;
-        for (String recommendation: recommendations) {
-            recommendationsUris.append("spotify%3Atrack%3A").append(recommendation);
-        }
-
-        return recommendationsUris.toString();
+        return recommendations;
     }
 
     private static List<String> extractRecommendationsFromResponse(String jsonResponse) {

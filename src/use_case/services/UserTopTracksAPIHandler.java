@@ -16,7 +16,7 @@ import javax.json.JsonReader;
 
 public class UserTopTracksAPIHandler implements UserTopTracksAPIHandlerInterface{
 
-    public String getUserTopTracks(String accessToken) throws IOException, InterruptedException {
+    public List<String> getUserTopTracks(String accessToken) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         String apiUrl = "https://api.spotify.com/v1/me/top/tracks?limit=5";
         // Create an HTTP request with the Authorization header
@@ -37,7 +37,7 @@ public class UserTopTracksAPIHandler implements UserTopTracksAPIHandlerInterface
             uris = extractUrisFromResponse(response.body());
 
             // Print the list of URIs
-            System.out.println("List of URIs:");
+            System.out.println("List of User's Top Track URIs:");
             for (String uri : uris) {
                 System.out.println(uri);
             }
@@ -46,15 +46,7 @@ public class UserTopTracksAPIHandler implements UserTopTracksAPIHandlerInterface
             System.out.println(response.body());
         }
 
-        StringBuilder uriString = new StringBuilder();
-        assert uris != null;
-        for (String uri: uris) {
-            uriString.append(uri).append("%2C");
-        }
-
-        uriString = new StringBuilder(uriString.substring(0, uriString.length() - 3));
-
-        return uriString.toString();
+        return uris;
     }
 
     private static List<String> extractUrisFromResponse(String jsonResponse) {

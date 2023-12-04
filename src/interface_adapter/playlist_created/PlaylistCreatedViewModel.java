@@ -18,6 +18,7 @@ public class PlaylistCreatedViewModel extends ViewModel{
 
     public PlaylistCreatedState getState() {return state;}
 
+    @Override
     public void firePropertyChanged() {support.firePropertyChange("state", null, this.state);}
 
     @Override
