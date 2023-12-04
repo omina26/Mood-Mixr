@@ -5,6 +5,7 @@ import interface_adapter.create_playlist.CreatePlaylistController;
 import interface_adapter.create_playlist.CreatePlaylistPresenter;
 import interface_adapter.create_playlist.CreatePlaylistViewModel;
 import interface_adapter.playlist_created.PlaylistCreatedViewModel;
+import interface_adapter.view_moods.ViewMoodsViewModel;
 import use_case.create_mood.MoodDataAccessInterface;
 import use_case.create_playlist.CreatePlaylistInputBoundary;
 import use_case.create_playlist.CreatePlaylistInteractor;

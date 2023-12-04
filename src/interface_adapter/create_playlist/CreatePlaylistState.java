@@ -21,8 +21,8 @@ public class CreatePlaylistState {
     }
 
     public void setMoodsList(Set<String> moodsList) {this.moodsList = moodsList;}
-    public String[] getMoodsList() {
-        return moodsList.toArray(new String[0]);}
+    public Set<String> getMoodsList() {
+        return this.moodsList;}
     public String getSaveError () {return this.saveError;}
 
     public void setSaveError(String saveError) {

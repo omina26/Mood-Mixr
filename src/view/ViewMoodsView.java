@@ -103,4 +103,3 @@ public class ViewMoodsView extends JPanel implements ActionListener, PropertyCha
         }
     }
 }
-
