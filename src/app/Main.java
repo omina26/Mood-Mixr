@@ -12,6 +12,7 @@ import data_access.create_mood.MoodDataAccessObject;
 
 import interface_adapter.analyze_playlist.AnalyzePlaylistViewModel;
 
+import interface_adapter.analyzed_playlist.AnalyzedPlaylistViewModel;
 import interface_adapter.create_mood.CreateMoodViewModel;
 
 import interface_adapter.create_playlist.CreatePlaylistViewModel;
@@ -62,31 +63,24 @@ public class Main {
         ViewMoodsViewModel viewMoodsViewModel = new ViewMoodsViewModel();
 
         CreatePlaylistViewModel createPlaylistViewModel = new CreatePlaylistViewModel();
+
         AnalyzePlaylistViewModel analyzePlaylistViewModel = new AnalyzePlaylistViewModel();
+        AnalyzedPlaylistViewModel analyzedPlaylistViewModel = new AnalyzedPlaylistViewModel();
+
 
         MoodDataAccessObject moodDataAccessObject;
         UserDataAccessObject userDataAccessObject;
+        AnalyzePlaylistDataAccessObject analyzePlaylistDataAccessObject;
 
 
         try {
             moodDataAccessObject = new MoodDataAccessObject(new File("./moods.csv"));
             userDataAccessObject = new UserDataAccessObject(new File("./user.csv"));
+            analyzePlaylistDataAccessObject = new AnalyzePlaylistDataAccessObject(new File("./playlistIDs.csv"));
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        AnalyzePlaylistDataAccessObject analyzePlaylistDataAccessObject;
-
-        try{
-            analyzePlaylistDataAccessObject = new AnalyzePlaylistDataAccessObject(new File("./playlistIDs.csv"));
-
-       } catch (IOException e) {
-            throw new RuntimeException(e);
-       }
-
-
-
 
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);

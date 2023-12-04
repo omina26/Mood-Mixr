@@ -61,7 +61,7 @@ public class AnalyzedPlaylistView extends JPanel implements ActionListener, Prop
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        System.out.println("analyzed playlist property change");
+        System.out.println("playlist analyzed property change");
         AnalyzedPlaylistState state = (AnalyzedPlaylistState) evt.getNewValue();
         for (String s : state.getPlaylistAudioFeaturesList()) {
             String[] split = s.split(" ");
