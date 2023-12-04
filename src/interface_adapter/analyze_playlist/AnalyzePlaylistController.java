@@ -3,10 +3,6 @@ package interface_adapter.analyze_playlist;
 import use_case.analyze_playlist.AnalyzePlaylistInputBoundary;
 import use_case.analyze_playlist.AnalyzePlaylistInputData;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 /**
  * Controller for handling analyze playlist requests.
  */
