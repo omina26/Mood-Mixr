@@ -47,8 +47,6 @@ public class AnalyzedPlaylistView extends JPanel implements ActionListener, Prop
                     }
 
                 }
-
-
         );
 
         this.add(menu);

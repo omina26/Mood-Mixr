@@ -1,7 +1,6 @@
 package interface_adapter.analyzed_playlist;
 
 import interface_adapter.ViewModel;
-import view.AnalyzedPlaylistView;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

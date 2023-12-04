@@ -92,26 +92,27 @@ public class Main {
         ViewMoodsView viewMoodsView = new ViewMoodsView(viewMoodsViewModel, viewManagerModel);
         views.add(viewMoodsView, viewMoodsView.viewName);
 
-        LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel);
-
-        views.add(loggedInView, loggedInView.viewName);
-
-
-        AnalyzePlaylistView analyzePlaylistView = AnalyzePlaylistUseCaseFactory.create(viewManagerModel,
-                analyzePlaylistViewModel, analyzePlaylistDataAccessObject, userDataAccessObject);
+        AnalyzePlaylistView analyzePlaylistView = AnalyzePlaylistUseCaseFactory.create(viewManagerModel, analyzePlaylistViewModel, analyzedPlaylistViewModel,analyzePlaylistDataAccessObject, userDataAccessObject);
         views.add(analyzePlaylistView, analyzePlaylistView.viewName);
 
+        AnalyzedPlaylistView analyzedPlaylistView = new AnalyzedPlaylistView(analyzedPlaylistViewModel, viewManagerModel);
+        views.add(analyzedPlaylistView,viewMoodsView.viewName);
 
         PlaylistCreatedViewModel playlistCreatedViewModel = new PlaylistCreatedViewModel();
+
+
         CreatePlaylistView createPlaylistView = CreatePlaylistUseCaseFactory.create(viewManagerModel, createPlaylistViewModel, playlistCreatedViewModel, userDataAccessObject, moodDataAccessObject);
         views.add(createPlaylistView, createPlaylistView.viewName);
 
-        //viewManagerModel.setActiveView(loginView.viewName);
+        LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel);
+        views.add(loggedInView, loggedInView.viewName);
+
+
         //viewManagerModel.setActiveView(createMoodView.viewName);
-
         //viewManagerModel.setActiveView(analyzePlaylistViewModel.getViewName());
-        viewManagerModel.setActiveView(loginView.viewName);
+        viewManagerModel.setActiveView(analyzedPlaylistView.viewName);
 
+        //viewManagerModel.setActiveView(loginView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();
