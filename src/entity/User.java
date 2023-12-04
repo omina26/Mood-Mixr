@@ -10,6 +10,7 @@ public class User {
 
     public final String name;
     private String token;
+    private final String userId;
 
     /**
      * Constructor for User.
@@ -18,7 +19,11 @@ public class User {
      * @param token User's token.
      */
 
-    public User(String name, String token){ this.name = name; this.token = token;}
+    public User(String name, String token, String userId){
+        this.name = name;
+        this.token = token;
+        this.userId = userId;
+    }
 
     /**
      * Gets the user's name.
@@ -33,6 +38,13 @@ public class User {
      * @return Token of the user.
      */
     public String getToken(){return this.token;}
+
+    /**
+     * Gets the user's user id.
+     *
+     * @return User id of the user.
+     */
+    public String getUserId(){return this.userId;}
 
     /**
      * Sets the user's token.
