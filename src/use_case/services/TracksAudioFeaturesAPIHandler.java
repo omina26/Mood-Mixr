@@ -18,8 +18,8 @@ import javax.json.JsonReader;
 public class TracksAudioFeaturesAPIHandler {
     public JsonObject getTracksAudioFeatures(List<String> trackIDs, String accessToken) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
-        String trackIdsParam = String.join(",", trackIDs);
-        String apiUrl = "https://api.spotify.com/v1/audio-features?ids=" + URLEncoder.encode(trackIdsParam, StandardCharsets.UTF_8);
+        String trackIDsParam = String.join(",", trackIDs);
+        String apiUrl = "https://api.spotify.com/v1/audio-features?ids=" + URLEncoder.encode(trackIDsParam, StandardCharsets.UTF_8);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(apiUrl))
