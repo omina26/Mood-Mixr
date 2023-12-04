@@ -6,6 +6,8 @@ import interface_adapter.analyzed_playlist.AnalyzedPlaylistViewModel;
 import use_case.analyze_playlist.AnalyzePlaylistOutputBoundary;
 import use_case.analyze_playlist.AnalyzePlaylistOutputData;
 
+import java.util.Map;
+
 /**
  * Presenter for the Analyze Playlist feature.
  */
@@ -38,15 +40,16 @@ public class AnalyzePlaylistPresenter implements AnalyzePlaylistOutputBoundary {
 
     @Override
     public void analyzePlaylistView(AnalyzePlaylistOutputData data) {
-        System.out.println("in analyze playlist view");
+        System.out.println("in analyzed playlist view");
         AnalyzedPlaylistState analyzedPlaylistState = analyzedPlaylistViewModel.getState();
-        analyzedPlaylistState.setPlaylistAudioFeaturesList(data.getPlaylistIDs());
+
+        Map<String, Double> averageFeatures = data.getAverageFeatures();
+        analyzedPlaylistState.setAverageAudioFeatures(averageFeatures);
 
         this.analyzedPlaylistViewModel.setState(analyzedPlaylistState);
         this.analyzedPlaylistViewModel.firePropertyChanged();
 
         this.viewManagerModel.setActiveView(analyzedPlaylistViewModel.getViewName());
-
         this.viewManagerModel.firePropertyChanged();
 
     }
