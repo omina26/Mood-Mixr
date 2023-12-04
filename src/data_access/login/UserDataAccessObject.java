@@ -28,6 +28,7 @@ public class UserDataAccessObject implements LoginDataAccessInterface {
         this.csvFile = csvFile;
         headers.put("name", 0);
         headers.put("access_token", 1);
+        headers.put("user_id", 2);
 
         if (csvFile.length() == 0){
             BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile));
@@ -46,7 +47,8 @@ public class UserDataAccessObject implements LoginDataAccessInterface {
                 String[] col = row.split(",");
                 String name = String.valueOf(col[headers.get("name")]);
                 String accessToken = String.valueOf(col[headers.get("access_token")]);
-                this.loggedInUser = new User(name, accessToken);
+                String userId = String.valueOf((col[headers.get("user_id")]));
+                this.loggedInUser = new User(name, accessToken, userId);
             }
         }
     }

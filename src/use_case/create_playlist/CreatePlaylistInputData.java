@@ -21,5 +21,5 @@ public class CreatePlaylistInputData {
      * Gets the selected mood name
      * @return mood name
      */
-    String getSelectedMoodName() {return this.selectedMoodName;}
+    public String getSelectedMoodName() {return this.selectedMoodName;}
 }
