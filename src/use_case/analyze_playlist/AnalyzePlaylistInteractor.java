@@ -10,6 +10,7 @@ import javax.json.JsonObject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Interactor for analyzing playlists.
@@ -62,8 +63,14 @@ public class AnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary {
 
             List<String> playlistItems = this.playlistItemsHandler.getPlaylistItems(token, playlistID);
 
-            JsonObject tracksAudioFeatures = this.trackHandler.getTracksAudioFeatures(playlistItems, token);
+            // Extract track IDs from the Spotify URIs
+            List<String> trackIDs = playlistItems.stream()
+                    .map(item -> item.split(":")[2])
+                    .collect(Collectors.toList());
+
+            JsonObject tracksAudioFeatures = this.trackHandler.getTracksAudioFeatures(trackIDs, token);
             JsonArray tracksAudioFeaturesArray = tracksAudioFeatures.getJsonArray("audio_features");
+
 
             Map<String, Map<String, Object>> trackFeaturesMap = new HashMap<>();
             for (JsonObject trackFeatures : tracksAudioFeaturesArray.getValuesAs(JsonObject.class)) {
