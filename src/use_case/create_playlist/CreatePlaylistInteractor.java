@@ -8,6 +8,8 @@ import use_case.login.LoginDataAccessInterface;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+
 
 public class CreatePlaylistInteractor implements CreatePlaylistInputBoundary{
     final LoginDataAccessInterface userDataAccessObject;
@@ -47,10 +49,17 @@ public class CreatePlaylistInteractor implements CreatePlaylistInputBoundary{
      */
     public void execute(CreatePlaylistInputData createPlaylistInputData){
         try {
+            // Get current user and their username and access token
             User user = userDataAccessObject.getCurrentUser();
             String username = user.getName();
             String accessToken = user.getToken();
-            String seedTracks = topTracksAPIHandler.getUserTopTracks(accessToken);
+            // Get user's top tracks
+            List<String> seedTracks = topTracksAPIHandler.getUserTopTracks(accessToken);
+            // Extract track ids from handler response
+            List<String> cleanedSeedTracks = seedTracks.stream()
+                                                        .map(id -> id.replace("spotify:track:", ""))
+                                                        .collect(Collectors.toList());
+            // Get user's selected mood and mood details
             String selectedMood = createPlaylistInputData.getSelectedMoodName();
             Mood moodDetails = moodDataAccessObject.getMoods().get(selectedMood);
             double acousticness = moodDetails.getAcousticness();
@@ -60,8 +69,11 @@ public class CreatePlaylistInteractor implements CreatePlaylistInputBoundary{
             double liveness = moodDetails.getLiveness();
             double speechiness = moodDetails.getSpeechiness();
             double valence = moodDetails.getValence();
-            String recommendations = this.getRecommendationHandler.getRecommendation(accessToken, seedTracks, acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence);
+            // Get track recommendations from Spotify
+            List<String> recommendations = this.getRecommendationHandler.getRecommendation(accessToken, cleanedSeedTracks, acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence);
+            // Create playlist and add recommended tracks to it
             this.playlistHandler.createPlaylist(accessToken, username, selectedMood + " Playlist", recommendations);
+            // Playlist successfully created and can be found on user's Spotify
             createPlaylistPresenter.prepareSuccessView();
         } catch (Exception e) {
             createPlaylistPresenter.prepareFailView(e.getMessage());
