@@ -49,9 +49,9 @@ public class CreatePlaylistInteractor implements CreatePlaylistInputBoundary{
      */
     public void execute(CreatePlaylistInputData createPlaylistInputData){
         try {
-            // Get current user and their username and access token
+            // Get current user and their userId and access token
             User user = userDataAccessObject.getCurrentUser();
-            String username = user.getName();
+            String userId = user.getUserId();
             String accessToken = user.getToken();
             // Get user's top tracks
             List<String> seedTracks = topTracksAPIHandler.getUserTopTracks(accessToken);
@@ -72,7 +72,7 @@ public class CreatePlaylistInteractor implements CreatePlaylistInputBoundary{
             // Get track recommendations from Spotify
             List<String> recommendations = this.getRecommendationHandler.getRecommendation(accessToken, cleanedSeedTracks, acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence);
             // Create playlist and add recommended tracks to it
-            this.playlistHandler.createPlaylist(accessToken, username, selectedMood + " Playlist", recommendations);
+            this.playlistHandler.createPlaylist(accessToken, userId, selectedMood + " Playlist", recommendations);
             // Playlist successfully created and can be found on user's Spotify
             createPlaylistPresenter.prepareSuccessView();
         } catch (Exception e) {

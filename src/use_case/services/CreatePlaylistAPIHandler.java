@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 
 public class CreatePlaylistAPIHandler implements CreatePlaylistAPIHandlerInterface {
 
-    public void createPlaylist(String accessToken, String username, String playlistName, List<String> recommendations) throws IOException, InterruptedException {
+    public void createPlaylist(String accessToken, String userId, String playlistName, List<String> recommendations) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
-        String createPlaylistUrl = "https://api.spotify.com/v1/users/" + username + "/playlists";
+        String createPlaylistUrl = "https://api.spotify.com/v1/users/" + userId + "/playlists";
         String createPlaylistJsonData = "{\"name\": \"" + playlistName + "\", \"public\": false}";
         // Create an HTTP request to create a playlist with the Authorization header, Content-Type header, and data
         HttpRequest createPlaylistRequest = HttpRequest.newBuilder()

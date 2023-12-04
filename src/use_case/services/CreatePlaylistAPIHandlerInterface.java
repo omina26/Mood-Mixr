@@ -7,5 +7,5 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 
 public interface CreatePlaylistAPIHandlerInterface {
-    public void createPlaylist(String accessToken, String username, String playlistName, List<String> recommendations) throws IOException, InterruptedException;
+    public void createPlaylist(String accessToken, String userId, String playlistName, List<String> recommendations) throws IOException, InterruptedException;
 }

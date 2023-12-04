@@ -129,6 +129,7 @@ public class LoginAPIHandler implements LoginAPIInterface{
         // Get the response code
         int responseCode = connection.getResponseCode();
         String username = "";
+        String userId = "";
 
         if (responseCode == HttpURLConnection.HTTP_OK) {
             // Read and parse the JSON response
@@ -151,6 +152,12 @@ public class LoginAPIHandler implements LoginAPIInterface{
             // Print the user's name
             System.out.println("User Name: " + username);
 
+            // Extract the user id of the user
+            userId = jsonResponse.getString("id");
+
+            // Print the user's user id
+            System.out.println("User Id: " + userId);
+
         } else {
             System.out.println("Error: Unable to fetch user data. Response Code: " + responseCode);
         }
@@ -159,6 +166,6 @@ public class LoginAPIHandler implements LoginAPIInterface{
         connection.disconnect();
 
 
-        return new User(username, accessToken);
+        return new User(username, accessToken, userId);
     }
 }
