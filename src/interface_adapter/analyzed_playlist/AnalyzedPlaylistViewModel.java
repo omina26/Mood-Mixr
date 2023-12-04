@@ -14,9 +14,7 @@ public class AnalyzedPlaylistViewModel extends ViewModel {
     public AnalyzedPlaylistViewModel() {
         super("view analyzed playlist");
     }
-    public void setState(AnalyzedPlaylistState state){
-        this.state = state;
-    }
+    public void setState(AnalyzedPlaylistState state){this.state = state;}
 
     @Override
     public void firePropertyChanged() {
