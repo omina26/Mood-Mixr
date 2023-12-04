@@ -85,7 +85,7 @@ public class ViewMoodsView extends JPanel implements ActionListener, PropertyCha
         for (String s : state.getMoodsList()) {
             String[] split = s.split(" ");
 
-            JPanel moodPanel = new JPanel(new GridLayout(0, 1) );
+            JPanel moodPanel = new JPanel(new GridLayout(0, 1, 0, 1) );
             moodPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
             JLabel titleLabel = new JLabel(split[0]);
