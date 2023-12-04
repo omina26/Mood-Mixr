@@ -2,8 +2,8 @@ package use_case.analyze_playlist;
 
 import entity.User;
 import use_case.login.LoginDataAccessInterface;
-import use_case.login.services.TracksAudioFeaturesAPIHandler;
-import use_case.login.services.UserPlaylistItemsAPIHandler;
+import use_case.services.TracksAudioFeaturesAPIHandler;
+import use_case.services.UserPlaylistItemsAPIHandler;
 
 import javax.json.JsonArray;
 import javax.json.JsonObject;

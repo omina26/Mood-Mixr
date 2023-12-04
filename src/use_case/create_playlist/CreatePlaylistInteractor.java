@@ -17,10 +17,19 @@ public class CreatePlaylistInteractor implements CreatePlaylistInputBoundary{
     final GetRecommendationAPIHandlerInterface getRecommendationHandler;
     final CreatePlaylistAPIHandlerInterface playlistHandler;
 
+    /**
+     * The constructor for the Create Mood Interactor object
+     * @param userDataAccessObject The Data Access Object that handles stored Users
+     * @param moodDataAccessObject The Data Access Object that handles stored Moods
+     * @param createPlaylistPresenter The Presenter to handle the output
+     * @param topTracksAPIHandler The Handler for retrieving the user's top tracks
+     * @param getRecommendationHandler The Handler for retrieving spotify recommendations
+     * @param playlistHandler The Handler for creating a playlist and adding tracks to it
+     */
     public CreatePlaylistInteractor(LoginDataAccessInterface userDataAccessObject,
                                     MoodDataAccessInterface moodDataAccessObject,
                                     CreatePlaylistOutputBoundary createPlaylistPresenter,
-                                    UserTopTracksAPIHandler topTracksAPIHandler,
+                                    UserTopTracksAPIHandlerInterface topTracksAPIHandler,
                                     GetRecommendationAPIHandlerInterface getRecommendationHandler,
                                     CreatePlaylistAPIHandlerInterface playlistHandler) {
         this.userDataAccessObject = userDataAccessObject;
@@ -31,6 +40,11 @@ public class CreatePlaylistInteractor implements CreatePlaylistInputBoundary{
         this.playlistHandler = playlistHandler;
     }
 
+    /**
+     * Executes the creation of a playlist.
+     *
+     * @param createPlaylistInputData The input data for creating the playlist.
+     */
     public void execute(CreatePlaylistInputData createPlaylistInputData){
         try {
             User user = userDataAccessObject.getCurrentUser();
