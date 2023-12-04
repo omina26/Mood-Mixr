@@ -52,19 +52,23 @@ public class CreatePlaylistAPIHandler implements CreatePlaylistAPIHandlerInterfa
 
     private void addTracksToPlaylist(String accessToken, String playlistId, List<String> recommendations) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
-        String addTracksUrl = "https://api.spotify.com/v1/playlists/" + playlistId + "/tracks";
-        // Create the json body
-        String uriJsonArray = recommendations.stream()
-                .map(uri -> "\"" + uri + "\"")
+//        String addTracksUrl = "https://api.spotify.com/v1/playlists/" + playlistId + "/tracks";
+        String recUris = recommendations.stream()
+                .map(uri -> URLEncoder.encode(uri, StandardCharsets.UTF_8))
                 .collect(Collectors.joining(","));
-        String addTracksJsonBody = "{\"uris\":[" + uriJsonArray + "]}";
+        String addTracksUrl = "https://api.spotify.com/v1/playlists/" + playlistId + "/tracks?uris=" + recUris;
+        // Create the json body
+//        String uriJsonArray = recommendations.stream()
+//                .map(uri -> "\"" + uri + "\"")
+//                .collect(Collectors.joining(","));
+//        String addTracksJsonBody = "{\"uris\":[" + uriJsonArray + "]}";
 
         // Create an HTTP request to add tracks to the playlist with the Authorization header, Content-Type header, and data
         HttpRequest addTracksRequest = HttpRequest.newBuilder()
                 .uri(URI.create(addTracksUrl))
                 .header("Authorization", "Bearer " + accessToken)
                 .headers("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(addTracksJsonBody))
+//                .POST(HttpRequest.BodyPublishers.ofString(addTracksJsonBody))
                 .build();
 
         // Send the HTTP request and get the response
