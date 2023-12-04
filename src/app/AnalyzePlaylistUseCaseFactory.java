@@ -46,7 +46,7 @@ public class AnalyzePlaylistUseCaseFactory {
      *
      * @param viewManagerModel                The ViewManagerModel instance for managing views.
      * @param analyzePlaylistViewModel        The ViewModel for Analyze Playlist feature.
-     * @param analyzedPlaylistViewModel
+     * @param analyzedPlaylistViewModel       The ViewModel for Analyzed Playlist feature.
      * @param analyzePlaylistDataAccessObject The data access object for Analyze Playlist.
      * @param userDataAccessObject            The data access object for user login data.
      * @return An instance of AnalyzePlaylistController.
