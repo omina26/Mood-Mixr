@@ -39,7 +39,7 @@ public class AnalyzePlaylistPresenter implements AnalyzePlaylistOutputBoundary {
      */
 
     @Override
-    public void analyzePlaylistView(AnalyzePlaylistOutputData data) {
+    public void prepareAnalyzedPlaylistView(AnalyzePlaylistOutputData data) {
         System.out.println("in analyzed playlist view");
         AnalyzedPlaylistState analyzedPlaylistState = analyzedPlaylistViewModel.getState();
 
@@ -61,14 +61,6 @@ public class AnalyzePlaylistPresenter implements AnalyzePlaylistOutputBoundary {
      */
     @Override
     public void prepareFailView(String error) {
-
-    }
-
-    /**
-     * Prepares the view for displaying a success message.
-     */
-    @Override
-    public void prepareSuccessView() {
 
     }
 }
