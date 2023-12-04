@@ -4,6 +4,7 @@ import app.CreateMoodUseCaseFactory;
 import entity.Mood;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.create_mood.CreateMoodViewModel;
+import interface_adapter.create_playlist.CreatePlaylistViewModel;
 import interface_adapter.view_moods.ViewMoodsViewModel;
 import org.junit.Test;
 import use_case.create_mood.MoodDataAccessInterface;
@@ -22,9 +23,10 @@ public class CreateMoodUseCaseFactoryTest {
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         CreateMoodViewModel createMoodViewModel = new CreateMoodViewModel();
         ViewMoodsViewModel viewMoodsViewModel = new ViewMoodsViewModel();
+        CreatePlaylistViewModel createPlaylistViewModel = new CreatePlaylistViewModel();
         MockMoodDataAccessObject moodDataAccessObject = new MockMoodDataAccessObject();
 
-        CreateMoodView actual = CreateMoodUseCaseFactory.create(viewManagerModel, createMoodViewModel, viewMoodsViewModel, moodDataAccessObject);
+        CreateMoodView actual = CreateMoodUseCaseFactory.create(viewManagerModel, createMoodViewModel, viewMoodsViewModel, createPlaylistViewModel, moodDataAccessObject);
 
         assertEquals("Create Mood", actual.viewName);
     }

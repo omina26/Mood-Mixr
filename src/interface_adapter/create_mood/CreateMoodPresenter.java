@@ -46,6 +46,8 @@ public class CreateMoodPresenter implements CreateMoodOutputBoundary{
         createPlaylistState.setMoodsList(data.getMoodNames());
         this.viewMoodsViewModel.setState(viewMoodsState);
         this.viewMoodsViewModel.firePropertyChanged();
+        this.createPlaylistViewModel.setState(createPlaylistState);
+        this.createPlaylistViewModel.firePropertyChanged();
 
         this.viewManagerModel.setActiveView(viewMoodsViewModel.getViewName());
 

@@ -4,25 +4,25 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.create_playlist.CreatePlaylistController;
 import interface_adapter.create_playlist.CreatePlaylistViewModel;
 import interface_adapter.create_playlist.CreatePlaylistState;
+import interface_adapter.view_moods.ViewMoodsState;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Arrays;
+import java.util.Set;
 
 public class CreatePlaylistView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "Get Playlist";
     private final ViewManagerModel viewManagerModel;
     private final CreatePlaylistViewModel createPlaylistViewModel;
-    private final CreatePlaylistController createPlaylistController;
-    private JButton get;
-    private JButton mainMenu;
 
     public CreatePlaylistView(ViewManagerModel viewManagerModel, CreatePlaylistViewModel createPlaylistViewModel, CreatePlaylistController createPlaylistController) {
         this.viewManagerModel = viewManagerModel;
-        this.createPlaylistController = createPlaylistController;
         this.createPlaylistViewModel = createPlaylistViewModel;
 
         JLabel title = new JLabel("Get a Playlist");
@@ -33,24 +33,18 @@ public class CreatePlaylistView extends JPanel implements ActionListener, Proper
         noMoodsMessage.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
-        CreatePlaylistState createPlaylistState = createPlaylistViewModel.getState();
-        String[] moodsList = createPlaylistState.getMoodsList();
-        JComboBox<String> dropdown = new JComboBox<String>(moodsList);
-        dropdown.setEditable(true);
-        dropdown.setVisible(true);
-
-        dropdown.addActionListener(e -> {
-            JComboBox cb = (JComboBox)e.getSource();
-            String selectedItem = (String)cb.getSelectedItem();
-            CreatePlaylistState currentState = createPlaylistViewModel.getState();
-            currentState.setSelectedMood(selectedItem);
-            createPlaylistViewModel.setState(currentState);
-        });
+//        CreatePlaylistState createPlaylistState = createPlaylistViewModel.getState();
+//        Set<String> moodsList = createPlaylistState.getMoodsList();
+//        String moods = "";
+//        for (String mood: moodsList) {
+//            moods = moods + mood + ",";
+//        }
+//        JLabel moodOptions = new JLabel(moods);
 
 
         JPanel buttons = new JPanel();
 
-        mainMenu = new JButton(CreatePlaylistViewModel.MAIN_MENU_BUTTON_LABEL);
+        JButton mainMenu = new JButton(CreatePlaylistViewModel.MAIN_MENU_BUTTON_LABEL);
         buttons.add(mainMenu);
 
         mainMenu.addActionListener(new ActionListener() {
@@ -65,7 +59,7 @@ public class CreatePlaylistView extends JPanel implements ActionListener, Proper
             }
         });
 
-        get = new JButton(CreatePlaylistViewModel.GET_BUTTON_LABEL);
+        JButton get = new JButton(CreatePlaylistViewModel.GET_BUTTON_LABEL);
         buttons.add(get);
 
         get.addActionListener(
@@ -92,7 +86,6 @@ public class CreatePlaylistView extends JPanel implements ActionListener, Proper
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(title);
         this.add(directions);
-        this.add(dropdown);
         this.add(noMoodsMessage);
         this.add(buttons);
     }
@@ -100,12 +93,20 @@ public class CreatePlaylistView extends JPanel implements ActionListener, Proper
     public void actionPerformed(ActionEvent e) {System.out.println("Click" + e.getActionCommand());}
 
     public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getSource() == this.createPlaylistViewModel) {
-            CreatePlaylistState state = (CreatePlaylistState) evt.getNewValue();
-            if (state.getSaveError() != null){
-                JOptionPane.showMessageDialog(this, state.getSaveError());
-            }
+//        if (evt.getSource() == this.createPlaylistViewModel) {
+//            CreatePlaylistState state = (CreatePlaylistState) evt.getNewValue();
+//            if (state.getSaveError() != null){
+//                JOptionPane.showMessageDialog(this, state.getSaveError());
+//            }
+        System.out.println("create playlist property change");
+        CreatePlaylistState state = (CreatePlaylistState) evt.getNewValue();
+        String moods = "";
+        for (String s : state.getMoodsList()) {
+            String[] split = s.split(" ");
+            JLabel moodname = new JLabel(split[0]);
+            this.add(moodname);
         }
+
     }
 
 }

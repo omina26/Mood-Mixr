@@ -40,7 +40,7 @@ public class CreateMoodPresenterTest {
     public void testPrepareFailView(){
         CreateMoodViewModel mockCreateMoodViewModel = new CreateMoodViewModel();
         ViewMoodsViewModel mockViewMoodsViewModel = new ViewMoodsViewModel();
-        CreatePlaylistViewModel mockCreatePlaylistViewModel = new CreatePlaylistViewModel()
+        CreatePlaylistViewModel mockCreatePlaylistViewModel = new CreatePlaylistViewModel();
         ViewManagerModel mockViewManagerModel = new ViewManagerModel();
 
         CreateMoodPresenter presenter = new CreateMoodPresenter(mockCreateMoodViewModel, mockViewMoodsViewModel,
