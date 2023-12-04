@@ -12,6 +12,7 @@ import data_access.create_mood.MoodDataAccessObject;
 
 import interface_adapter.analyze_playlist.AnalyzePlaylistViewModel;
 
+import interface_adapter.analyzed_playlist.AnalyzedPlaylistViewModel;
 import interface_adapter.create_mood.CreateMoodViewModel;
 
 import interface_adapter.create_playlist.CreatePlaylistViewModel;
@@ -62,31 +63,24 @@ public class Main {
         ViewMoodsViewModel viewMoodsViewModel = new ViewMoodsViewModel();
 
         CreatePlaylistViewModel createPlaylistViewModel = new CreatePlaylistViewModel();
+
         AnalyzePlaylistViewModel analyzePlaylistViewModel = new AnalyzePlaylistViewModel();
+        AnalyzedPlaylistViewModel analyzedPlaylistViewModel = new AnalyzedPlaylistViewModel();
+
 
         MoodDataAccessObject moodDataAccessObject;
         UserDataAccessObject userDataAccessObject;
+        AnalyzePlaylistDataAccessObject analyzePlaylistDataAccessObject;
 
 
         try {
             moodDataAccessObject = new MoodDataAccessObject(new File("./moods.csv"));
             userDataAccessObject = new UserDataAccessObject(new File("./user.csv"));
+            analyzePlaylistDataAccessObject = new AnalyzePlaylistDataAccessObject(new File("./playlistIDs.csv"));
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        AnalyzePlaylistDataAccessObject analyzePlaylistDataAccessObject;
-
-        try{
-            analyzePlaylistDataAccessObject = new AnalyzePlaylistDataAccessObject(new File("./playlistIDs.csv"));
-
-       } catch (IOException e) {
-            throw new RuntimeException(e);
-       }
-
-
-
 
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
@@ -98,30 +92,29 @@ public class Main {
         ViewMoodsView viewMoodsView = new ViewMoodsView(viewMoodsViewModel, viewManagerModel);
         views.add(viewMoodsView, viewMoodsView.viewName);
 
-        LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel);
-
-        views.add(loggedInView, loggedInView.viewName);
-
-
-        AnalyzePlaylistView analyzePlaylistView = AnalyzePlaylistUseCaseFactory.create(viewManagerModel,
-                analyzePlaylistViewModel, analyzePlaylistDataAccessObject, userDataAccessObject);
+        AnalyzePlaylistView analyzePlaylistView = AnalyzePlaylistUseCaseFactory.create(viewManagerModel, analyzePlaylistViewModel, analyzedPlaylistViewModel,analyzePlaylistDataAccessObject, userDataAccessObject);
         views.add(analyzePlaylistView, analyzePlaylistView.viewName);
 
+        AnalyzedPlaylistView analyzedPlaylistView = new AnalyzedPlaylistView(analyzedPlaylistViewModel, viewManagerModel);
+        views.add(analyzedPlaylistView,viewMoodsView.viewName);
 
         PlaylistCreatedViewModel playlistCreatedViewModel = new PlaylistCreatedViewModel();
+
 
         CreatePlaylistView createPlaylistView = CreatePlaylistUseCaseFactory.create(viewManagerModel, createPlaylistViewModel, playlistCreatedViewModel, userDataAccessObject, moodDataAccessObject);
         views.add(createPlaylistView, createPlaylistView.viewName);
 
+        LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel);
+        views.add(loggedInView, loggedInView.viewName);
+
         PlaylistCreatedView playlistCreatedView = new PlaylistCreatedView(playlistCreatedViewModel, viewManagerModel);
         views.add(playlistCreatedView, playlistCreatedView.viewName);
 
-        //viewManagerModel.setActiveView(loginView.viewName);
         //viewManagerModel.setActiveView(createMoodView.viewName);
+        //viewManagerModel.setActiveView(analyzePlaylistViewModel.getViewName());
+        //viewManagerModel.setActiveView(analyzedPlaylistView.viewName);
 
         viewManagerModel.setActiveView(loginView.viewName);
-        //viewManagerModel.setActiveView(loginView.viewName);
-
         viewManagerModel.firePropertyChanged();
 
         application.pack();
