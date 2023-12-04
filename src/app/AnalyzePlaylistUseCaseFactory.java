@@ -35,7 +35,7 @@ public class AnalyzePlaylistUseCaseFactory {
                                               LoginDataAccessInterface userDataAccessObject){
         AnalyzePlaylistController analyzePlaylistController = analyzePlaylistUseCase(viewManagerModel,
                 analyzePlaylistViewModel, analyzePlaylistDataAccessObject, userDataAccessObject);
-        return new AnalyzePlaylistView(analyzePlaylistViewModel, analyzePlaylistController);
+        return new AnalyzePlaylistView(viewManagerModel, analyzePlaylistViewModel, analyzePlaylistController);
     }
 
     /**
