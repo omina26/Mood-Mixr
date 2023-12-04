@@ -47,11 +47,6 @@ public class AnalyzedPlaylistView extends JPanel implements ActionListener, Prop
         JButton menu = new JButton("Main menu");
         menu.addActionListener(
                 new ActionListener() {
-                    /**
-                     * Handles action events triggered in the view.
-                     *
-                     * @param e The action event.
-                     */
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         System.out.println("here");

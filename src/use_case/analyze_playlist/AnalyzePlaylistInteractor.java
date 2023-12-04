@@ -112,7 +112,7 @@ public class AnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary {
 
             //analyzePlaylistPresenter.prepareSuccessView();
             Set<String> trackIDsSet = new HashSet<>(trackIDs);
-            AnalyzePlaylistOutputData outputData = new AnalyzePlaylistOutputData(trackIDsSet, false);
+            AnalyzePlaylistOutputData outputData = new AnalyzePlaylistOutputData(trackIDsSet, averageFeatures, false);
             analyzePlaylistPresenter.analyzePlaylistView(outputData);
 
         } catch (Exception e) {
