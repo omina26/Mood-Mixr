@@ -7,9 +7,7 @@ import use_case.services.UserPlaylistItemsAPIHandler;
 
 import javax.json.JsonArray;
 import javax.json.JsonObject;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -112,7 +110,10 @@ public class AnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary {
 
 // Now 'averageFeatures' contains the average value of each audio feature across all tracks
 
-            analyzePlaylistPresenter.prepareSuccessView();
+            //analyzePlaylistPresenter.prepareSuccessView();
+            Set<String> trackIDsSet = new HashSet<>(trackIDs);
+            AnalyzePlaylistOutputData outputData = new AnalyzePlaylistOutputData(trackIDsSet, false);
+            analyzePlaylistPresenter.analyzePlaylistView(outputData);
 
         } catch (Exception e) {
             analyzePlaylistPresenter.prepareFailView(e.getMessage());

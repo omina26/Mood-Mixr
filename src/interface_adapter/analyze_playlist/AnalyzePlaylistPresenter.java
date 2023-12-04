@@ -3,11 +3,8 @@ package interface_adapter.analyze_playlist;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.analyzed_playlist.AnalyzedPlaylistState;
 import interface_adapter.analyzed_playlist.AnalyzedPlaylistViewModel;
-import interface_adapter.create_playlist.CreatePlaylistState;
-import interface_adapter.view_moods.ViewMoodsState;
 import use_case.analyze_playlist.AnalyzePlaylistOutputBoundary;
 import use_case.analyze_playlist.AnalyzePlaylistOutputData;
-import view.AnalyzedPlaylistView;
 
 /**
  * Presenter for the Analyze Playlist feature.

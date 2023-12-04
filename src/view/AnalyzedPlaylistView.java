@@ -1,11 +1,8 @@
 package view;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.analyze_playlist.AnalyzePlaylistController;
-import interface_adapter.analyze_playlist.AnalyzePlaylistViewModel;
 import interface_adapter.analyzed_playlist.AnalyzedPlaylistState;
 import interface_adapter.analyzed_playlist.AnalyzedPlaylistViewModel;
-import interface_adapter.view_moods.ViewMoodsState;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
