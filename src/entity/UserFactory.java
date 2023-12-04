@@ -13,5 +13,5 @@ public class UserFactory {
      * @param token The token of the user.
      * @return A new User object.
      */
-    public User create(String name, String token){return new User(name, token);}
+    public User create(String name, String token, String userId){return new User(name, token, userId);}
 }

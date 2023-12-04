@@ -107,12 +107,14 @@ public class Main {
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel);
         views.add(loggedInView, loggedInView.viewName);
 
+        PlaylistCreatedView playlistCreatedView = new PlaylistCreatedView(playlistCreatedViewModel, viewManagerModel);
+        views.add(playlistCreatedView, playlistCreatedView.viewName);
 
         //viewManagerModel.setActiveView(createMoodView.viewName);
         //viewManagerModel.setActiveView(analyzePlaylistViewModel.getViewName());
-        viewManagerModel.setActiveView(analyzedPlaylistView.viewName);
+        //viewManagerModel.setActiveView(analyzedPlaylistView.viewName);
 
-        //viewManagerModel.setActiveView(loginView.viewName);
+        viewManagerModel.setActiveView(loginView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();

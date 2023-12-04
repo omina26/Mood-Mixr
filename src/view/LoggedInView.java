@@ -18,7 +18,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     JLabel name;
 
     final JButton createMood;
-    final JButton getPlaylist;
+    final JButton createPlaylist;
     final JButton analyzePlaylist;
     final JButton groupPlaylist;
 
@@ -51,14 +51,14 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
                 }
         );
 
-        getPlaylist = new JButton(loggedInViewModel.GET_PLAYLIST_BUTTON_LABEL);
-        buttons.add(getPlaylist);
-        getPlaylist.addActionListener(
+        createPlaylist = new JButton(loggedInViewModel.CREATE_PLAYLIST_BUTTON_LABEL);
+        buttons.add(createPlaylist);
+        createPlaylist.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(e.getSource() == getPlaylist){
-                            viewManagerModel.setActiveView("Get Playlist");
+                        if(e.getSource() == createPlaylist){
+                            viewManagerModel.setActiveView("Create Playlist");
                             viewManagerModel.firePropertyChanged();
                         }
                     }

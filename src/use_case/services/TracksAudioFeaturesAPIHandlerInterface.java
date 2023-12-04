@@ -1,4 +1,4 @@
-package use_case.login.services;
+package use_case.services;
 
 import javax.json.JsonObject;
 import java.io.IOException;

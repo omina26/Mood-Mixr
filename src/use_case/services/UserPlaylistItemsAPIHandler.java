@@ -13,7 +13,7 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserPlaylistItemsAPIHandler implements use_case.login.services.UserPlaylistItemsAPIHandlerInterface {
+public class UserPlaylistItemsAPIHandler implements use_case.services.UserPlaylistItemsAPIHandlerInterface {
     public List<String> getPlaylistItems(String accessToken, String playlistID) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         String apiUrl = "https://api.spotify.com/v1/playlists/" + playlistID + "/tracks";
