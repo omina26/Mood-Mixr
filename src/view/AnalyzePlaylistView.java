@@ -123,7 +123,5 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
             }
         }
     }
-
-
 }
 
