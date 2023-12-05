@@ -1,19 +1,14 @@
 package AnalyzePlaylist;
 
 import data_access.analyze_playlist.AnalyzePlaylistDataAccessObject;
-import data_access.create_mood.MoodDataAccessObject;
 import entity.AnalyzedPlaylist;
-import entity.Mood;
 import org.junit.Test;
 
 import java.io.*;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class AnalyzePlaylistDataAccessObjectTest {
     @Test

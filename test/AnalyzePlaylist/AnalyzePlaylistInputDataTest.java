@@ -1,6 +1,5 @@
 package AnalyzePlaylist;
 
-import entity.AnalyzedPlaylist;
 import org.junit.Test;
 import use_case.analyze_playlist.AnalyzePlaylistInputData;
 
