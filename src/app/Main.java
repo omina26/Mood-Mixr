@@ -89,7 +89,7 @@ public class Main {
         ViewMoodsView viewMoodsView = new ViewMoodsView(viewMoodsViewModel, viewManagerModel);
         views.add(viewMoodsView, viewMoodsView.viewName);
 
-        AnalyzePlaylistView analyzePlaylistView = AnalyzePlaylistUseCaseFactory.create(viewManagerModel, analyzePlaylistViewModel, analyzedPlaylistViewModel,analyzePlaylistDataAccessObject, userDataAccessObject);
+        AnalyzePlaylistView analyzePlaylistView = AnalyzePlaylistUseCaseFactory.create(viewManagerModel, analyzePlaylistViewModel, analyzedPlaylistViewModel,analyzePlaylistDataAccessObject, userDataAccessObject, createMoodViewModel);
         views.add(analyzePlaylistView, analyzePlaylistView.viewName);
 
         AnalyzedPlaylistView analyzedPlaylistView = new AnalyzedPlaylistView(analyzedPlaylistViewModel, viewManagerModel);

@@ -1,12 +1,15 @@
 package use_case.analyze_playlist;
 
+import data_access.create_mood.MoodDataAccessObject;
 import entity.User;
+import interface_adapter.create_mood.CreateMoodState;
 import use_case.login.LoginDataAccessInterface;
 import use_case.services.TracksAudioFeaturesAPIHandler;
 import use_case.services.UserPlaylistItemsAPIHandler;
 
 import javax.json.JsonArray;
 import javax.json.JsonObject;
+import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -55,9 +58,9 @@ public class AnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary {
             User user = userDataAccessObject.getCurrentUser();
             String token = user.getToken();
             String playlistID = analyzePlaylistInputData.getPlaylistID();
-            String name = user.getName();
+            String userName = user.getName();
 
-            analyzePlaylistDataAccessObject.savePlaylistID(name, playlistID);
+            analyzePlaylistDataAccessObject.savePlaylistID(userName, playlistID);
 
             List<String> playlistItems = this.playlistItemsHandler.getPlaylistItems(token, playlistID);
 
@@ -115,6 +118,32 @@ public class AnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary {
             AnalyzePlaylistOutputData outputData = new AnalyzePlaylistOutputData(trackIDsSet, averageFeatures, false);
             analyzePlaylistPresenter.prepareAnalyzedPlaylistView(outputData);
 
+            // Normalize the values to the expected range for CreateMoodState
+            int acousticness1 = (int) Math.round(averageFeatures.get("acousticness") * 100);
+            int danceability1 = (int) Math.round(averageFeatures.get("danceability") * 100);
+            int energy1 = (int) Math.round(averageFeatures.get("energy") * 100);
+            int instrumentalness1 = (int) Math.round(averageFeatures.get("instrumentalness") * 100);
+            int liveness1 = (int) Math.round(averageFeatures.get("liveness") * 100);
+            int speechiness1 = (int) Math.round(averageFeatures.get("speechiness") * 100);
+            int valence1 = (int) Math.round(averageFeatures.get("valence") * 100);
+
+            // Create a new mood with these features
+            String moodName = "Analyzed Playlist Mood"; // You might want to give a meaningful name
+            CreateMoodState mood = new CreateMoodState(moodName, acousticness1, danceability1, energy1, instrumentalness1, liveness1, speechiness1, valence1);
+
+            // Extract values from moodState
+            String name = mood.getName();
+            double acousticness = mood.getAcousticness(); // Assuming these are percentages and need conversion to 0-1 range
+            double danceability = mood.getDanceability();
+            double energy = mood.getEnergy();
+            double instrumentalness = mood.getInstrumentalness();
+            double liveness = mood.getLiveness();
+            double speechiness = mood.getSpeechiness();
+            double valence = mood.getValence();
+
+            // Save the mood using MoodDataAccessObject
+            MoodDataAccessObject moodDAO = new MoodDataAccessObject(new File("./moods.csv"));
+            moodDAO.saveMood(name, acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence);
         } catch (Exception e) {
             analyzePlaylistPresenter.prepareFailView(e.getMessage());
         }
