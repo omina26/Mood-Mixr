@@ -84,25 +84,25 @@ public class LoginAPIHandler implements LoginAPIInterface{
 
     private static String getJSONDataAccessToken(String responseString) {
 
-            // Locate the "access_token" field
-            int accessTokenIndex = responseString.indexOf("\"access_token\"");
+        // Locate the "access_token" field
+        int accessTokenIndex = responseString.indexOf("\"access_token\"");
 
-            if (accessTokenIndex != -1) {
-                // Find the opening quote of the access token value
-                int valueStart = responseString.indexOf("\"", accessTokenIndex + 15); // 15 is the length of "access_token" plus the ":"
+        if (accessTokenIndex != -1) {
+            // Find the opening quote of the access token value
+            int valueStart = responseString.indexOf("\"", accessTokenIndex + 15); // 15 is the length of "access_token" plus the ":"
 
-                if (valueStart != -1) {
-                    // Find the closing quote of the access token value
-                    int valueEnd = responseString.indexOf("\"", valueStart + 1);
+            if (valueStart != -1) {
+                // Find the closing quote of the access token value
+                int valueEnd = responseString.indexOf("\"", valueStart + 1);
 
-                    if (valueEnd != -1) {
-                        // Extract the access token
-                        String accessToken = responseString.substring(valueStart + 1, valueEnd);
-                        return accessToken;
-                    }
+                if (valueEnd != -1) {
+                    // Extract the access token
+                    String accessToken = responseString.substring(valueStart + 1, valueEnd);
+                    return accessToken;
                 }
-
             }
+
+        }
 
         return null;
     }

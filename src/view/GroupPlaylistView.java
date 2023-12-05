@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 public class GroupPlaylistView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -40,7 +41,11 @@ public class GroupPlaylistView extends JPanel implements ActionListener, Propert
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println(loggedInState.getUser());
-                groupPlaylistController.getPlaylists(loggedInState.getUser());
+                try {
+                    groupPlaylistController.getPlaylists(loggedInState.getUser());
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

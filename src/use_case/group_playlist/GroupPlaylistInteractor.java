@@ -4,6 +4,7 @@ import entity.Playlist;
 import entity.User;
 import use_case.group_playlist.services.GroupPlaylistAPIInterface;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GroupPlaylistInteractor implements GroupPlaylistInputBoundary{
@@ -25,10 +26,14 @@ public class GroupPlaylistInteractor implements GroupPlaylistInputBoundary{
     }
 
     @Override
-    public ArrayList<Playlist> getPlaylists(User self) {
-        ArrayList<Playlist> playlists;
-        playlists = groupPlaylistAPIHandler.getPlaylists(self);
-        return playlists;
+    public ArrayList<Playlist> getPlaylists(User self){
+        ArrayList<String> playlists;
+        try {
+            playlists = groupPlaylistAPIHandler.getPlaylists(self);
+        } catch (IOException e){
+            System.out.println("Error!");
+        }
+        return null;
     }
 
 }

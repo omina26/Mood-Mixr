@@ -43,8 +43,8 @@ public class UserTopTracksAPIHandler implements UserTopTracksAPIHandlerInterface
             }
         } else {
             System.out.println("Error: " + response.statusCode());
-            System.out.println(response.body());
         }
+        System.out.println(uris);
         return uris;
     }
 

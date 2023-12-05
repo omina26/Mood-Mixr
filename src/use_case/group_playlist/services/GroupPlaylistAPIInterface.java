@@ -1,10 +1,11 @@
 package use_case.group_playlist.services;
 
-import entity.Playlist;
 import entity.User;
 
+import java.io.IOException;
+import java.net.ProtocolException;
 import java.util.ArrayList;
 
 public interface GroupPlaylistAPIInterface {
-    ArrayList<Playlist> getPlaylists(User self);
+    ArrayList<String> getPlaylists(User self) throws IOException;
 }
