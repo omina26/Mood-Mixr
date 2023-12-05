@@ -8,14 +8,13 @@ import use_case.analyze_playlist.AnalyzePlaylistInputData;
  */
 
 public class AnalyzePlaylistController {
-
+    final AnalyzePlaylistInputBoundary analyzePlaylistInteractor;
     /**
      * Constructs an AnalyzePlaylistController with a given AnalyzePlaylistInputBoundary.
      *
      * @param analyzePlaylistInteractor The interactor that provides business logic for
      *                                  analyzing playlists.
      */
-    final AnalyzePlaylistInputBoundary analyzePlaylistInteractor;
 
     public AnalyzePlaylistController(AnalyzePlaylistInputBoundary analyzePlaylistInteractor) {
         this.analyzePlaylistInteractor = analyzePlaylistInteractor;
