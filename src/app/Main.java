@@ -93,7 +93,7 @@ public class Main {
         views.add(analyzePlaylistView, analyzePlaylistView.viewName);
 
         AnalyzedPlaylistView analyzedPlaylistView = new AnalyzedPlaylistView(analyzedPlaylistViewModel, viewManagerModel);
-        views.add(analyzedPlaylistView,viewMoodsView.viewName);
+        views.add(analyzedPlaylistView,analyzedPlaylistView.viewName);
 
         PlaylistCreatedViewModel playlistCreatedViewModel = new PlaylistCreatedViewModel();
 
