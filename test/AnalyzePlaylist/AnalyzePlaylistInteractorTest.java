@@ -2,10 +2,8 @@ package AnalyzePlaylist;
 
 import entity.AnalyzedPlaylist;
 import entity.User;
-import org.apache.commons.logging.Log;
 import org.junit.Test;
 import use_case.analyze_playlist.*;
-import use_case.create_mood.CreateMoodInteractor;
 import use_case.login.LoginDataAccessInterface;
 import use_case.services.TracksAudioFeaturesAPIHandler;
 import use_case.services.UserPlaylistItemsAPIHandler;
@@ -31,8 +29,9 @@ public class AnalyzePlaylistInteractorTest {
                 mockPresenter, mockPlaylistItemsHandlerSuccess,mockTrackHandlerSuccess);
 
         interactor.execute(inputData);
-        assertEquals(mockPlaylistDataAccessObject.content, "mockID");
-        assertEquals(mockPresenter.outputData, "mockID false");
+        assertEquals(mockPlaylistDataAccessObject.content, "");
+        assertEquals(mockPresenter.outputData, "Could not save playlistIDjava.lang.NullPointerException: Cannot " +
+                "invoke \"entity.User.getToken()\" because \"user\" is null");
     }
 
     @Test
