@@ -54,4 +54,11 @@ public class AnalyzePlaylistViewModel extends ViewModel {
     public AnalyzePlaylistState getState(){
         return state;
     }
+    /**
+     * Gets the property change support being used
+     * @return the property change support being used
+     */
+    public PropertyChangeSupport getSupport(){
+        return this.support;
+    }
 }
