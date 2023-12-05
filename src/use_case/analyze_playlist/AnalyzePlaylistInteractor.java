@@ -128,18 +128,18 @@ public class AnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary {
             int valence1 = (int) Math.round(averageFeatures.get("valence") * 100);
 
             // Create a new mood with these features
-            String moodName = "Analyzed Playlist Mood"; // You might want to give a meaningful name
+            String moodName = "AnalyzedPlaylistMood"; // You might want to give a meaningful name
             CreateMoodState mood = new CreateMoodState(moodName, acousticness1, danceability1, energy1, instrumentalness1, liveness1, speechiness1, valence1);
 
             // Extract values from moodState
             String name = mood.getName();
-            double acousticness = mood.getAcousticness(); // Assuming these are percentages and need conversion to 0-1 range
-            double danceability = mood.getDanceability();
-            double energy = mood.getEnergy();
-            double instrumentalness = mood.getInstrumentalness();
-            double liveness = mood.getLiveness();
-            double speechiness = mood.getSpeechiness();
-            double valence = mood.getValence();
+            double acousticness = mood.getAcousticness()/100.0;
+            double danceability = mood.getDanceability()/100.0;
+            double energy = mood.getEnergy()/100.0;
+            double instrumentalness = mood.getInstrumentalness()/100.0;
+            double liveness = mood.getLiveness()/100.0;
+            double speechiness = mood.getSpeechiness()/100.0;
+            double valence = mood.getValence()/100.0;
 
             // Save the mood using MoodDataAccessObject
             MoodDataAccessObject moodDAO = new MoodDataAccessObject(new File("./moods.csv"));
