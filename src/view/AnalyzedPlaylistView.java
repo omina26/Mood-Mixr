@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Map;
 
 /**
  * AnalyzedPlaylistView is a JPanel that displays the analyzed audio features of a playlist.
@@ -22,7 +23,7 @@ public class AnalyzedPlaylistView extends JPanel implements ActionListener, Prop
     /**
      * Name of the view, used for identifying this panel in the view manager.
      */
-    public final String viewName = "view analyzed playlist";
+    public final String viewName = "analyzed playlist";
 
     private final AnalyzedPlaylistViewModel analyzedPlaylistViewModel;
     private final ViewManagerModel viewManagerModel;
@@ -37,12 +38,14 @@ public class AnalyzedPlaylistView extends JPanel implements ActionListener, Prop
                                 ViewManagerModel viewManagerModel) {
         this.analyzedPlaylistViewModel = analyzedPlaylistViewModel;
         this.viewManagerModel = viewManagerModel;
-        this.analyzedPlaylistViewModel.addPropertyChangeListener(this);
+        analyzedPlaylistViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(analyzedPlaylistViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        JLabel successStatement = new JLabel("Playlist was successfully analyzed. Here are the average audio features.");
 
         JButton menu = new JButton("Main menu");
         menu.addActionListener(
@@ -59,7 +62,7 @@ public class AnalyzedPlaylistView extends JPanel implements ActionListener, Prop
 
                 }
         );
-
+        this.add(successStatement);
         this.add(menu);
     }
 
@@ -82,24 +85,18 @@ public class AnalyzedPlaylistView extends JPanel implements ActionListener, Prop
     public void propertyChange(PropertyChangeEvent evt) {
         System.out.println("playlist analyzed property change");
         AnalyzedPlaylistState state = (AnalyzedPlaylistState) evt.getNewValue();
-        for (String s : state.getPlaylistAudioFeaturesList()) {
-            String[] split = s.split(" ");
+        Map<String, Double> averageFeatures = state.getAverageAudioFeatures();
 
-            JPanel moodPanel = new JPanel(new GridLayout(0, 1));
-            moodPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        for (Map.Entry<String, Double> entry : averageFeatures.entrySet()) {
+            JPanel featurePanel = new JPanel(new GridLayout(0, 1));
+            featurePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-            JLabel titleLabel = new JLabel(split[0]);
-            titleLabel.setFont(new Font("Calibri", Font.BOLD, 20));
-            moodPanel.add(titleLabel);
-            moodPanel.add(new JLabel("average acousticness: " + split[1]));
-            moodPanel.add(new JLabel("average danceability: " + split[2]));
-            moodPanel.add(new JLabel("average energy: " + split[3]));
-            moodPanel.add(new JLabel("average instrumentalness: " + split[4]));
-            moodPanel.add(new JLabel("average liveness: " + split[5]));
-            moodPanel.add(new JLabel("average speechiness: " + split[6]));
-            moodPanel.add(new JLabel("average valence: " + split[7]));
-            moodPanel.add(Box.createVerticalStrut(20));
-            this.add(moodPanel);
+            JLabel featureLabel = new JLabel("Average " + entry.getKey() + ": " + entry.getValue());
+            featureLabel.setFont(new Font("Calibri", Font.BOLD, 20));
+            featurePanel.add(featureLabel);
+            featurePanel.add(Box.createVerticalStrut(20));
+
+            this.add(featurePanel);
         }
     }
 }
