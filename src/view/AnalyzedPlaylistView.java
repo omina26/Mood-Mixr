@@ -23,7 +23,7 @@ public class AnalyzedPlaylistView extends JPanel implements ActionListener, Prop
     /**
      * Name of the view, used for identifying this panel in the view manager.
      */
-    public final String viewName = "view analyzed playlist";
+    public final String viewName = "analyzed playlist";
 
     private final AnalyzedPlaylistViewModel analyzedPlaylistViewModel;
     private final ViewManagerModel viewManagerModel;
@@ -38,12 +38,14 @@ public class AnalyzedPlaylistView extends JPanel implements ActionListener, Prop
                                 ViewManagerModel viewManagerModel) {
         this.analyzedPlaylistViewModel = analyzedPlaylistViewModel;
         this.viewManagerModel = viewManagerModel;
-        this.analyzedPlaylistViewModel.addPropertyChangeListener(this);
+        analyzedPlaylistViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(analyzedPlaylistViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        JLabel successStatement = new JLabel("Playlist was successfully analyzed. Here are the average audio features.");
 
         JButton menu = new JButton("Main menu");
         menu.addActionListener(
@@ -60,7 +62,7 @@ public class AnalyzedPlaylistView extends JPanel implements ActionListener, Prop
 
                 }
         );
-
+        this.add(successStatement);
         this.add(menu);
     }
 
