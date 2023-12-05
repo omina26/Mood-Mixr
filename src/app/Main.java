@@ -22,6 +22,7 @@ import interface_adapter.group_playlist.GroupPlaylistViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.playlist_created.PlaylistCreatedViewModel;
+import interface_adapter.select_user_playlist.SelectUserPlaylistsViewModel;
 import interface_adapter.view_moods.ViewMoodsViewModel;
 
 import use_case.group_playlist.GroupPlaylistInteractor;
@@ -104,14 +105,19 @@ public class Main {
         ViewMoodsView viewMoodsView = new ViewMoodsView(viewMoodsViewModel);
         views.add(viewMoodsView, viewMoodsView.viewName);
 
+        SelectUserPlaylistsViewModel selectUserPlaylistsViewModel = new SelectUserPlaylistsViewModel();
+
         GroupPlaylistView groupPlaylistView = GroupPlaylistUseCaseFactory.create(viewManagerModel,
                 groupPlaylistViewModel,
                 loggedInViewModel,
-                groupPlaylistDataAccessObject);
+                groupPlaylistDataAccessObject,
+                selectUserPlaylistsViewModel);
         views.add(groupPlaylistView, groupPlaylistView.viewName);
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel);
 
-        views.add(loggedInView, loggedInView.viewName);
+        SelectUserPlaylistView selectUserPlaylistView = new SelectUserPlaylistView(selectUserPlaylistsViewModel, groupPlaylistView.groupPlaylistController,
+                viewManagerModel);
+        views.add(selectUserPlaylistView, selectUserPlaylistView.viewName);
         views.add(loggedInView, loggedInView.viewName);
 
 

@@ -9,12 +9,10 @@ import java.beans.PropertyChangeSupport;
 
 public class GroupPlaylistViewModel extends ViewModel {
 
+    public String viewName;
     public final String TITLE_LABEL = "Group Playlist View";
-
     public static final String  CHECK_BOX_LABEL = "Select Playlists to group";
-
     private GroupPlaylistState state = new GroupPlaylistState();
-
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public GroupPlaylistViewModel(){super("Group Playlist");}

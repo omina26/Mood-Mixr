@@ -1,15 +1,11 @@
 package use_case.group_playlist;
 
-import entity.Playlist;
-import entity.User;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 public interface GroupPlaylistInputBoundary {
-    public void execute();
+    public void execute(GroupPlaylistInputData groupPlaylistInputData);
 
-    public ArrayList<Playlist> getPlaylists(GroupPlaylistInputData inputData) throws IOException;
+    public void getPlaylists(GroupPlaylistInputData inputData) throws IOException;
 
 
 }

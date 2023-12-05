@@ -4,8 +4,8 @@ import entity.User;
 import use_case.group_playlist.GroupPlaylistInputBoundary;
 import use_case.group_playlist.GroupPlaylistInputData;
 
-import javax.swing.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GroupPlaylistController {
 
@@ -16,7 +16,10 @@ public class GroupPlaylistController {
     }
 
 
-    public void executeUseCase() {
+    public void executeUseCase(ArrayList<String> selectedPlaylists, boolean userPlaylistsOnly) {
+        GroupPlaylistInputData groupPlaylistInputData = new GroupPlaylistInputData(selectedPlaylists,
+                userPlaylistsOnly);
+        groupPlaylistUseCaseInteractor.execute(groupPlaylistInputData);
     }
 
     public void getPlaylists(User user, Boolean self_only) {

@@ -1,7 +1,5 @@
 package use_case.group_playlist;
 
-import entity.Playlist;
-import entity.User;
 import use_case.group_playlist.services.GroupPlaylistAPIInterface;
 
 import java.io.IOException;
@@ -21,21 +19,20 @@ public class GroupPlaylistInteractor implements GroupPlaylistInputBoundary{
     }
 
     @Override
-    public void execute() {
+    public void execute(GroupPlaylistInputData groupPlaylistInputData) {
 
     }
 
     @Override
-    public ArrayList<Playlist> getPlaylists(GroupPlaylistInputData groupPlaylistInputData){
+    public void getPlaylists(GroupPlaylistInputData groupPlaylistInputData){
         ArrayList<String> playlists;
         try {
             playlists = groupPlaylistAPIHandler.getPlaylists(groupPlaylistInputData.user);
             GroupPlaylistOutputData groupPlaylistOutputData = new GroupPlaylistOutputData(playlists);
-
+            groupPresenter.getCurrentUserPlaylistsSuccessView(groupPlaylistOutputData);
         } catch (IOException e){
             System.out.println("Error!");
         }
-        return null;
     }
 
 }
