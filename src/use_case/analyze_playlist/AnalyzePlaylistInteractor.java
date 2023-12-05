@@ -145,7 +145,7 @@ public class AnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary {
             MoodDataAccessObject moodDAO = new MoodDataAccessObject(new File("./moods.csv"));
             moodDAO.saveMood(name, acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence);
         } catch (Exception e) {
-            analyzePlaylistPresenter.prepareFailView(e.getMessage());
+            analyzePlaylistPresenter.prepareFailView("Could not save playlistID" + e);
         }
     }
 }

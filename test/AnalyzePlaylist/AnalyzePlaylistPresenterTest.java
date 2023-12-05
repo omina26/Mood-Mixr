@@ -10,8 +10,6 @@ import use_case.analyze_playlist.AnalyzePlaylistOutputData;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -24,13 +22,14 @@ public class AnalyzePlaylistPresenterTest {
         averageFeatures.put("string", 1.0);
         AnalyzePlaylistOutputData data = new AnalyzePlaylistOutputData(playlistIDs, averageFeatures, false);
 
-        AnalyzePlaylistViewModel analyzePlaylistViewModel = new AnalyzePlaylistViewModel();
         AnalyzedPlaylistViewModel mockAnalyzedPlaylistViewModel = new AnalyzedPlaylistViewModel();
         AnalyzePlaylistViewModel mockAnalyzePlaylistViewModel = new AnalyzePlaylistViewModel();
         ViewManagerModel mockViewManagerModel = new ViewManagerModel();
+        CreateMoodViewModel mockCreateMoodViewModel = new CreateMoodViewModel();
 
-        AnalyzePlaylistPresenter presenter = new AnalyzePlaylistPresenter(analyzePlaylistViewModel, mockAnalyzedPlaylistViewModel, mockViewManagerModel,
-                new CreateMoodViewModel());
+        AnalyzePlaylistPresenter presenter = new AnalyzePlaylistPresenter(mockAnalyzePlaylistViewModel, mockAnalyzedPlaylistViewModel,
+                mockViewManagerModel,mockCreateMoodViewModel);
+
 
         presenter.prepareAnalyzedPlaylistView(data);
 
