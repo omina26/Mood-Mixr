@@ -95,7 +95,6 @@ public class AnalyzedPlaylistView extends JPanel implements ActionListener, Prop
             featurePanel.add(Box.createVerticalStrut(20));
 
             this.add(featurePanel);
-
         }
     }
 }
