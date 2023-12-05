@@ -31,6 +31,19 @@ public class AnalyzePlaylistUseCaseFactoryTest {
     }
 }
 
+class MockLoginDataAccess implements LoginDataAccessInterface{
+
+    @Override
+    public void loginUser(User user) throws IOException {
+
+    }
+
+    @Override
+    public User getCurrentUser() {
+        return null;
+    }
+}
+
 class MockAnalyzePlaylistDataAccessObject implements AnalyzePlaylistDataAccessInterface{
 
     @Override

@@ -4,6 +4,7 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.analyze_playlist.AnalyzePlaylistPresenter;
 import interface_adapter.analyze_playlist.AnalyzePlaylistViewModel;
 import interface_adapter.analyzed_playlist.AnalyzedPlaylistViewModel;
+import interface_adapter.create_mood.CreateMoodViewModel;
 import org.junit.Test;
 import use_case.analyze_playlist.AnalyzePlaylistOutputData;
 
@@ -28,8 +29,8 @@ public class AnalyzePlaylistPresenterTest {
         AnalyzePlaylistViewModel mockAnalyzePlaylistViewModel = new AnalyzePlaylistViewModel();
         ViewManagerModel mockViewManagerModel = new ViewManagerModel();
 
-        AnalyzePlaylistPresenter presenter = new AnalyzePlaylistPresenter(mockAnalyzePlaylistViewModel, mockAnalyzedPlaylistViewModel,
-                mockViewManagerModel);
+        AnalyzePlaylistPresenter presenter = new AnalyzePlaylistPresenter(analyzePlaylistViewModel, mockAnalyzedPlaylistViewModel, mockViewManagerModel,
+                new CreateMoodViewModel());
 
         presenter.prepareAnalyzedPlaylistView(data);
 
