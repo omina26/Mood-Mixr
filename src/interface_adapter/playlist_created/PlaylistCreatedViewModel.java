@@ -26,5 +26,4 @@ public class PlaylistCreatedViewModel extends ViewModel{
         support.addPropertyChangeListener(listener);
     }
 
-    public String getViewName() {return TITLE_LABEL;}
 }
