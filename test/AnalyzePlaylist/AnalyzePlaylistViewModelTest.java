@@ -1,8 +1,6 @@
 package AnalyzePlaylist;
 
 import interface_adapter.analyze_playlist.AnalyzePlaylistViewModel;
-import interface_adapter.analyzed_playlist.AnalyzedPlaylistViewModel;
-import interface_adapter.create_mood.CreateMoodViewModel;
 import org.junit.Test;
 
 import java.beans.PropertyChangeEvent;
