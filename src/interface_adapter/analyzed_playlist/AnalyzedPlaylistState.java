@@ -30,7 +30,10 @@ public class AnalyzedPlaylistState {
     }
 
     public void setAverageAudioFeatures(Map<String, Double> averageAudioFeatures) {
-        this.averageAudioFeatures = averageAudioFeatures;
+        this.averageAudioFeatures.clear();
+        for (Map.Entry<String, Double> entry : averageAudioFeatures.entrySet()) {
+            this.averageAudioFeatures.put(entry.getKey(), entry.getValue() * 100);
+        }
     }
 }
 

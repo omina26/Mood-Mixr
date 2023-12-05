@@ -5,6 +5,7 @@ import interface_adapter.analyze_playlist.AnalyzePlaylistController;
 import interface_adapter.analyze_playlist.AnalyzePlaylistPresenter;
 import interface_adapter.analyze_playlist.AnalyzePlaylistViewModel;
 import interface_adapter.analyzed_playlist.AnalyzedPlaylistViewModel;
+import interface_adapter.create_mood.CreateMoodViewModel;
 import use_case.analyze_playlist.*;
 import use_case.login.LoginDataAccessInterface;
 import use_case.services.TracksAudioFeaturesAPIHandler;
@@ -35,9 +36,13 @@ public class AnalyzePlaylistUseCaseFactory {
                                               AnalyzePlaylistViewModel analyzePlaylistViewModel,
                                               AnalyzedPlaylistViewModel analyzedPlaylistViewModel,
                                               AnalyzePlaylistDataAccessInterface analyzePlaylistDataAccessObject,
-                                              LoginDataAccessInterface userDataAccessObject){
+                                              LoginDataAccessInterface userDataAccessObject,
+                                              CreateMoodViewModel createMoodViewModel){
+
         AnalyzePlaylistController analyzePlaylistController = analyzePlaylistUseCase(viewManagerModel,
-                analyzePlaylistViewModel, analyzedPlaylistViewModel, analyzePlaylistDataAccessObject, userDataAccessObject);
+                analyzePlaylistViewModel, analyzedPlaylistViewModel, analyzePlaylistDataAccessObject,
+                userDataAccessObject, createMoodViewModel);
+
         return new AnalyzePlaylistView(viewManagerModel, analyzePlaylistViewModel, analyzePlaylistController);
     }
 
@@ -60,10 +65,11 @@ public class AnalyzePlaylistUseCaseFactory {
                                                                     AnalyzePlaylistViewModel analyzePlaylistViewModel,
                                                                     AnalyzedPlaylistViewModel analyzedPlaylistViewModel,
                                                                     AnalyzePlaylistDataAccessInterface analyzePlaylistDataAccessObject,
-                                                                    LoginDataAccessInterface userDataAccessObject) {
+                                                                    LoginDataAccessInterface userDataAccessObject,
+                                                                    CreateMoodViewModel createMoodViewModel) {
 
         AnalyzePlaylistOutputBoundary analyzePlaylistOutputBoundary =
-                new AnalyzePlaylistPresenter(analyzePlaylistViewModel, analyzedPlaylistViewModel, viewManagerModel);
+                new AnalyzePlaylistPresenter(analyzePlaylistViewModel, analyzedPlaylistViewModel, viewManagerModel, createMoodViewModel);
 
         UserPlaylistItemsAPIHandler playlistItemsHandler = new UserPlaylistItemsAPIHandler();
         TracksAudioFeaturesAPIHandler trackHandler = new TracksAudioFeaturesAPIHandler();
