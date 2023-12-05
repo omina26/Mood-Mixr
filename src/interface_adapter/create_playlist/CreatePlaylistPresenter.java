@@ -50,6 +50,7 @@ public class CreatePlaylistPresenter implements CreatePlaylistOutputBoundary{
     public void prepareFailView(String error) {
         CreatePlaylistState createPlaylistState = createPlaylistViewModel.getState();
         createPlaylistState.setSaveError(error);
+        System.out.println(error);
         createPlaylistViewModel.firePropertyChanged();
     }
 }

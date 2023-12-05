@@ -68,7 +68,7 @@ public class UserDataAccessObject implements LoginDataAccessInterface {
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
 
-            String line = String.format("%s,%s", user.getName(), user.getToken());
+            String line = String.format("%s,%s,%s", user.getName(), user.getToken(), user.getUserId());
             writer.write(line);
             writer.newLine();
 

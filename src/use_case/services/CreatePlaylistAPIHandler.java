@@ -34,7 +34,7 @@ public class CreatePlaylistAPIHandler implements CreatePlaylistAPIHandlerInterfa
         String playlistId = null;
 
         // Check if the request was successful (status code 200)
-        if (response.statusCode() == 200) {
+        if (response.statusCode() == 201) {
             System.out.println(response.body());
             // Parse the response JSON to extract the list of URIs
             playlistId = extractPlaylistIdFromResponse(response.body());
@@ -52,30 +52,30 @@ public class CreatePlaylistAPIHandler implements CreatePlaylistAPIHandlerInterfa
 
     private void addTracksToPlaylist(String accessToken, String playlistId, List<String> recommendations) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
-//        String addTracksUrl = "https://api.spotify.com/v1/playlists/" + playlistId + "/tracks";
-        String recUris = recommendations.stream()
-                .map(uri -> URLEncoder.encode(uri, StandardCharsets.UTF_8))
-                .collect(Collectors.joining(","));
-        String addTracksUrl = "https://api.spotify.com/v1/playlists/" + playlistId + "/tracks?uris=" + recUris;
-        // Create the json body
-//        String uriJsonArray = recommendations.stream()
-//                .map(uri -> "\"" + uri + "\"")
+        String addTracksUrl = "https://api.spotify.com/v1/playlists/" + playlistId + "/tracks";
+//        String recUris = recommendations.stream()
+//                .map(uri -> URLEncoder.encode(uri, StandardCharsets.UTF_8))
 //                .collect(Collectors.joining(","));
-//        String addTracksJsonBody = "{\"uris\":[" + uriJsonArray + "]}";
+//        String addTracksUrl = "https://api.spotify.com/v1/playlists/" + playlistId + "/tracks?uris=" + recUris;
+        // Create the json body
+        String uriJsonArray = recommendations.stream()
+                .map(uri -> "\"" + uri + "\"")
+                .collect(Collectors.joining(","));
+        String addTracksJsonBody = "{\"uris\":[" + uriJsonArray + "]}";
 
         // Create an HTTP request to add tracks to the playlist with the Authorization header, Content-Type header, and data
         HttpRequest addTracksRequest = HttpRequest.newBuilder()
                 .uri(URI.create(addTracksUrl))
                 .header("Authorization", "Bearer " + accessToken)
                 .headers("Content-Type", "application/json")
-//                .POST(HttpRequest.BodyPublishers.ofString(addTracksJsonBody))
+                .POST(HttpRequest.BodyPublishers.ofString(addTracksJsonBody))
                 .build();
 
         // Send the HTTP request and get the response
         HttpResponse<String> response = client.send(addTracksRequest, HttpResponse.BodyHandlers.ofString());
 
         // Check if the request was successful (status code 200)
-        if (response.statusCode() == 200) {
+        if (response.statusCode() == 201) {
             System.out.println(response.body());
 
             // Print the success statement
@@ -91,9 +91,10 @@ public class CreatePlaylistAPIHandler implements CreatePlaylistAPIHandlerInterfa
         String playlistId = null;
 
         try (JsonReader jsonReader = Json.createReader(new StringReader(jsonResponse))) {
-            JsonObject root = jsonReader.readObject();
-            JsonObject id = root.getJsonObject("id");
-            playlistId = id.toString();
+            JsonObject jsonObject = jsonReader.readObject();
+            jsonReader.close();
+
+            playlistId = jsonObject.getString("id");
 
         } catch (Exception e) {
             e.printStackTrace();
