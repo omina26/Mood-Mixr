@@ -41,8 +41,8 @@ public class AnalyzePlaylistPresenter implements AnalyzePlaylistOutputBoundary {
         System.out.println("in analyzed playlist view");
         AnalyzedPlaylistState analyzedPlaylistState = analyzedPlaylistViewModel.getState();
 
-        //Map<String, Double> averageFeatures = data.getAverageFeatures();
-        //analyzedPlaylistState.setAverageAudioFeatures(averageFeatures);
+        Map<String, Double> averageFeatures = data.getAverageFeatures();
+        analyzedPlaylistState.setAverageAudioFeatures(averageFeatures);
 
         this.analyzedPlaylistViewModel.setState(analyzedPlaylistState);
         this.analyzedPlaylistViewModel.firePropertyChanged();
