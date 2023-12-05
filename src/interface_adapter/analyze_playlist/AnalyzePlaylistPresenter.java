@@ -33,11 +33,9 @@ public class AnalyzePlaylistPresenter implements AnalyzePlaylistOutputBoundary {
     }
 
     /**
-     * Updates the view with analyzed playlist data.
-     *
+     * Prepares a view with analyzed playlist data.
      * @param data Analyzed playlist output data.
      */
-
     @Override
     public void prepareAnalyzedPlaylistView(AnalyzePlaylistOutputData data) {
         System.out.println("in analyzed playlist view");
