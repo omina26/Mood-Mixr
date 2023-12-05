@@ -20,7 +20,13 @@ public class GroupPlaylistInteractor implements GroupPlaylistInputBoundary{
 
     @Override
     public void execute(GroupPlaylistInputData groupPlaylistInputData) {
+        if (groupPlaylistInputData.self_only){
+            Boolean success = groupPlaylistAPIHandler.combinePlaylists(groupPlaylistInputData.playlistsToCombine,
+                    groupPlaylistInputData.user);
 
+        } else{
+            // pass for now
+        }
     }
 
     @Override
@@ -28,7 +34,9 @@ public class GroupPlaylistInteractor implements GroupPlaylistInputBoundary{
         ArrayList<String> playlists;
         try {
             playlists = groupPlaylistAPIHandler.getPlaylists(groupPlaylistInputData.user);
-            GroupPlaylistOutputData groupPlaylistOutputData = new GroupPlaylistOutputData(playlists);
+            GroupPlaylistOutputData groupPlaylistOutputData = new GroupPlaylistOutputData(playlists,
+                    groupPlaylistInputData.user,
+                    groupPlaylistInputData.self_only, groupPlaylistInputData.nonUserPlaylistID);
             groupPresenter.getCurrentUserPlaylistsSuccessView(groupPlaylistOutputData);
         } catch (IOException e){
             System.out.println("Error!");

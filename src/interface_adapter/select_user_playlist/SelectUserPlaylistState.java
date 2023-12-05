@@ -1,10 +1,14 @@
 package interface_adapter.select_user_playlist;
 
 import java.util.ArrayList;
+import entity.User;
 
 public class SelectUserPlaylistState {
 
     ArrayList<String> allPlaylists;
+    private User user;
+    private Boolean userPlaylistsOnly;
+    private String nonUserPlaylistID = "";
     SelectUserPlaylistState(){
     }
 
@@ -15,4 +19,17 @@ public class SelectUserPlaylistState {
     public void setAllPlaylists(ArrayList<String> allPlaylists){
         this.allPlaylists = allPlaylists;
     }
+
+    public void setUserPlaylistsOnly(Boolean userPlaylistsOnly) {
+        this.userPlaylistsOnly = userPlaylistsOnly;
+    }
+    public Boolean getUserPlaylistsOnly(){return this.userPlaylistsOnly;}
+
+    public String getNonUserPlaylistID(){return this.nonUserPlaylistID;}
+
+    public void setNonUserPlaylistID(String playlistID){this.nonUserPlaylistID = playlistID;}
+
+    public void setUser(User user){this.user = user;}
+
+    public User getUser() {return user;}
 }

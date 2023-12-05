@@ -2,6 +2,7 @@ package view;
 
 import interface_adapter.ViewManagerModel;
 import interface_adapter.group_playlist.GroupPlaylistController;
+import interface_adapter.group_playlist.GroupPlaylistState;
 import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.select_user_playlist.SelectUserPlaylistState;
@@ -54,8 +55,11 @@ public class SelectUserPlaylistView extends JPanel implements ActionListener, Pr
         GET_GROUP_PLAYLIST.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(selectedPlaylists);
-                groupPlaylistController.executeUseCase(selectedPlaylists, true);
+                SelectUserPlaylistState selectUserPlaylistState = selectUserPlaylistsViewModel.getState();
+                groupPlaylistController.executeUseCase(selectedPlaylists,
+                        selectUserPlaylistState.getUserPlaylistsOnly(),
+                        selectUserPlaylistState.getUser(),
+                        selectUserPlaylistState.getNonUserPlaylistID());
             }
         });
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

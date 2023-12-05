@@ -27,7 +27,6 @@ public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface{
     public ArrayList<String> getPlaylists(User self) {
 
         String url = "https://api.spotify.com/v1/me/playlists";
-        System.out.println(self.getToken());
         String accessToken = self.getToken();
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
@@ -49,26 +48,75 @@ public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface{
             // You'll need to parse the JSON response to get playlist details
             // This is a placeholder for where you would add your JSON parsing logic
             System.out.println(response.body());
-            ArrayList<String> uris = new ArrayList<>();
+            ArrayList<String> href = new ArrayList<>();
 
             try (JsonReader jsonReader = Json.createReader(new StringReader(response.body()))) {
                 JsonObject root = jsonReader.readObject();
                 JsonArray items = root.getJsonArray("items");
 
                 for (JsonObject item : items.getValuesAs(JsonObject.class)) {
-                    String uri = item.getString("uri");
-                    uris.add(uri);
+                    String uri = item.getString("href");
+                    href.add(uri);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return uris;
+            return href;
         } else {
             // Handle non-200 status codes appropriately
             System.out.println("Error: " + response.statusCode() + " - " + response.body());
             return new ArrayList<>();
         }
     }
+
+    @Override
+    public boolean combinePlaylists(ArrayList<String> playlistsToCombine, User user) {
+        String url;
+        ArrayList<String> songs = new ArrayList<String>();
+        String accessToken = user.getToken();
+        for (String playlistLink : playlistsToCombine) {
+            url = playlistLink + "/tracks";
+            HttpClient httpClient = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .header("Authorization", "Bearer " + accessToken)
+                    .GET()
+                    .build();
+            HttpResponse<String> response = null;
+            try {
+                response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            if (response.statusCode() == 200) {
+                // Parse the response body to extract playlist information
+                // You'll need to parse the JSON response to get playlist details
+                // This is a placeholder for where you would add your JSON parsing logic
+                System.out.println(response.body());
+                try (JsonReader jsonReader = Json.createReader(new StringReader(response.body()))) {
+                    JsonObject root = jsonReader.readObject();
+                    JsonArray items = root.getJsonArray("href");
+                    System.out.println(items);
+                    for (JsonObject item : items.getValuesAs(JsonObject.class)) {
+                        String href = item.getString("href");
+                        songs.add(href);
+                    }
+                    System.out.println(songs);
+                } catch (Exception e) {
+                    return false;
+                }
+            } else {
+                // Handle non-200 status codes appropriately
+                System.out.println("Error: " + response.statusCode() + " - " + response.body());
+                return false;
+            }
+        }
+        return true;
+    }
+
     private ArrayList<String> parsePlaylists(String responseBody) {
         // Implement JSON parsing here. The details will depend on the JSON library you choose to use.
         // For example, you might use org.json or com.google.gson to parse the JSON and extract playlist information.

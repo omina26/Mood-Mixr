@@ -93,7 +93,7 @@ public class GroupPlaylistView extends JPanel implements ActionListener, Propert
         getMyPlaylists.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                groupPlaylistController.getPlaylists(loggedInState.getUser(), user_playlists);
+                groupPlaylistController.getPlaylists(loggedInState.getUser(), user_playlists, playlist_id.getText());
 
             }
         });

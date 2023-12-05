@@ -8,4 +8,6 @@ import java.util.ArrayList;
 
 public interface GroupPlaylistAPIInterface {
     ArrayList<String> getPlaylists(User self) throws IOException;
+
+    boolean combinePlaylists(ArrayList<String> playlistsToCombine, User user);
 }

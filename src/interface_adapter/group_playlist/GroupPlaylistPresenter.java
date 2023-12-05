@@ -27,6 +27,9 @@ public class GroupPlaylistPresenter implements GroupPlaylistOutputBoundary {
 
         SelectUserPlaylistState selectUserPlaylistState = selectUserPlaylistsViewModel.getState();
         selectUserPlaylistState.setAllPlaylists(groupPlaylistOutputData.playlists);
+        selectUserPlaylistState.setUserPlaylistsOnly(groupPlaylistOutputData.isUserPlaylistsOnly);
+        selectUserPlaylistState.setNonUserPlaylistID(groupPlaylistOutputData.nonUserPlaylistID);
+        selectUserPlaylistState.setUser(groupPlaylistOutputData.user);
 
         this.selectUserPlaylistsViewModel.setState(selectUserPlaylistState);
         selectUserPlaylistsViewModel.firePropertyChanged();

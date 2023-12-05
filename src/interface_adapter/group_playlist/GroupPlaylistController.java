@@ -16,15 +16,16 @@ public class GroupPlaylistController {
     }
 
 
-    public void executeUseCase(ArrayList<String> selectedPlaylists, boolean userPlaylistsOnly) {
+    public void executeUseCase(ArrayList<String> selectedPlaylists, boolean userPlaylistsOnly, User user,
+                               String nonUserPlaylistID) {
         GroupPlaylistInputData groupPlaylistInputData = new GroupPlaylistInputData(selectedPlaylists,
-                userPlaylistsOnly);
+                userPlaylistsOnly, user, nonUserPlaylistID);
         groupPlaylistUseCaseInteractor.execute(groupPlaylistInputData);
     }
 
-    public void getPlaylists(User user, Boolean self_only) {
+    public void getPlaylists(User user, Boolean self_only, String playlistID) {
         try {
-            GroupPlaylistInputData groupPlaylistInputData = new GroupPlaylistInputData(user, self_only);
+            GroupPlaylistInputData groupPlaylistInputData = new GroupPlaylistInputData(user, self_only, playlistID);
             groupPlaylistUseCaseInteractor.getPlaylists(groupPlaylistInputData);
         } catch (IOException e) {
             throw new RuntimeException(e);
