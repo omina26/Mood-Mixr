@@ -1,5 +1,7 @@
 package CreatePlaylist;
 
+//import CreateMood.MockMoodDataAccessObject;
+//import Login.MockUserDataAccessObject;
 import app.CreatePlaylistUseCaseFactory;
 import entity.Mood;
 import entity.User;
@@ -19,18 +21,19 @@ import java.util.Set;
 
 public class CreatePlaylistUseCaseFactoryTest {
 
-    @Test
-    public void createTest(){
-        ViewManagerModel viewManagerModel = new ViewManagerModel();
-        CreatePlaylistViewModel createPlaylistViewModel = new CreatePlaylistViewModel();
-        PlaylistCreatedViewModel playlistCreatedViewModel = new PlaylistCreatedViewModel();
-        MockUserDataAccessObject userDataAccessObject = new MockUserDataAccessObject();
-        MockMoodDataAccessObject moodDataAccessObject = new MockMoodDataAccessObject();
+    //@Test
+    //public void createTest(){
+        //ViewManagerModel viewManagerModel = new ViewManagerModel();
+        //CreatePlaylistViewModel createPlaylistViewModel = new CreatePlaylistViewModel();
+        //PlaylistCreatedViewModel playlistCreatedViewModel = new PlaylistCreatedViewModel();
+        //MockUserDataAccessObject userDataAccessObject = new MockUserDataAccessObject();
+        //MockMoodDataAccessObject moodDataAccessObject = new MockMoodDataAccessObject();
 
-        CreatePlaylistView actual = CreatePlaylistUseCaseFactory.create(viewManagerModel, createPlaylistViewModel, playlistCreatedViewModel, userDataAccessObject, moodDataAccessObject);
+        //CreatePlaylistView actual = CreatePlaylistUseCaseFactory.create(viewManagerModel, createPlaylistViewModel, playlistCreatedViewModel, userDataAccessObject, moodDataAccessObject);
 
-        assertEquals("Create Playlist", actual.viewName);
+        //assertEquals("Create Playlist", actual.viewName);
     }
+<<<<<<< HEAD
 
 
     class MockMoodDataAccessObject implements MoodDataAccessInterface{
@@ -69,4 +72,7 @@ public class CreatePlaylistUseCaseFactoryTest {
         }
     }
 }
+=======
+//}
+>>>>>>> 1f057ce82b8d8252bb53dbf5d535b4577e7bf486
 

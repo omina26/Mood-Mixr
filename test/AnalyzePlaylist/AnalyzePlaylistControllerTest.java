@@ -13,17 +13,18 @@ public class AnalyzePlaylistControllerTest {
         MockAnalyzePlaylistInteractor mockInteractor = new MockAnalyzePlaylistInteractor();
 
         AnalyzePlaylistController controller = new AnalyzePlaylistController(mockInteractor);
-        controller.execute("2hM0cOdtEX2XtILTAkyq8A");
+        controller.execute("mock");
 
-        assertEquals(mockInteractor.data,"2hM0cOdtEX2XtILTAkyq8A");
+
+        assertEquals(mockInteractor.data, "mock");
     }
+}
 
-    class MockAnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary{
-        String data;
+class MockAnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary{
+    String data;
 
-        @Override
-        public void execute(AnalyzePlaylistInputData analyzePlaylistInputData) {
-            this.data = analyzePlaylistInputData.toString();
-        }
+    @Override
+    public void execute(AnalyzePlaylistInputData analyzePlaylistInputData) {
+        this.data = analyzePlaylistInputData.getPlaylistID();
     }
 }
