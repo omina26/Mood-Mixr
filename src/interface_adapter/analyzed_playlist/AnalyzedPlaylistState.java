@@ -17,14 +17,6 @@ public class AnalyzedPlaylistState {
         this.averageAudioFeatures = new HashMap<>(copy.averageAudioFeatures);
     }
 
-    public Set<String> getPlaylistAudioFeaturesList(){
-        return playlistAudioFeaturesList;
-    }
-
-    public void setPlaylistAudioFeaturesList(Set <String> playlistAudioFeaturesList) {
-        this.playlistAudioFeaturesList = playlistAudioFeaturesList;
-    }
-
     public Map<String, Double> getAverageAudioFeatures() {
         return averageAudioFeatures;
     }
