@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public interface GroupPlaylistInputBoundary {
     public void execute();
 
-    public ArrayList<Playlist> getPlaylists(User self) throws IOException;
+    public ArrayList<Playlist> getPlaylists(GroupPlaylistInputData inputData) throws IOException;
 
 
 }

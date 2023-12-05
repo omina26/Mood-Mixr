@@ -2,7 +2,9 @@ package interface_adapter.group_playlist;
 
 import entity.User;
 import use_case.group_playlist.GroupPlaylistInputBoundary;
+import use_case.group_playlist.GroupPlaylistInputData;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class GroupPlaylistController {
@@ -14,11 +16,16 @@ public class GroupPlaylistController {
     }
 
 
-    public void executeUseCase(){
+    public void executeUseCase() {
     }
 
-    public void getPlaylists(User user) throws IOException {
-        groupPlaylistUseCaseInteractor.getPlaylists(user);
-    };
+    public void getPlaylists(User user, Boolean self_only) {
+        try {
+            GroupPlaylistInputData groupPlaylistInputData = new GroupPlaylistInputData(user, self_only);
+            groupPlaylistUseCaseInteractor.getPlaylists(groupPlaylistInputData);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
+    }
 }

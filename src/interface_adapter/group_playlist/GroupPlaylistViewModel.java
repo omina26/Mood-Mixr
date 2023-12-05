@@ -11,7 +11,7 @@ public class GroupPlaylistViewModel extends ViewModel {
 
     public final String TITLE_LABEL = "Group Playlist View";
 
-    public static final String  CHECK_BOX_LABEL = "Select songs to group";
+    public static final String  CHECK_BOX_LABEL = "Select Playlists to group";
 
     private GroupPlaylistState state = new GroupPlaylistState();
 
@@ -20,8 +20,12 @@ public class GroupPlaylistViewModel extends ViewModel {
     public GroupPlaylistViewModel(){super("Group Playlist");}
 
     public void setState(GroupPlaylistState state){this.state = state;}
+    public GroupPlaylistState getState() {
+        return this.state;
+    }
     @Override
     public void firePropertyChanged() {
+
     }
 
     @Override

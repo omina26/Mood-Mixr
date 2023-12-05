@@ -26,10 +26,12 @@ public class GroupPlaylistInteractor implements GroupPlaylistInputBoundary{
     }
 
     @Override
-    public ArrayList<Playlist> getPlaylists(User self){
+    public ArrayList<Playlist> getPlaylists(GroupPlaylistInputData groupPlaylistInputData){
         ArrayList<String> playlists;
         try {
-            playlists = groupPlaylistAPIHandler.getPlaylists(self);
+            playlists = groupPlaylistAPIHandler.getPlaylists(groupPlaylistInputData.user);
+            GroupPlaylistOutputData groupPlaylistOutputData = new GroupPlaylistOutputData(playlists);
+
         } catch (IOException e){
             System.out.println("Error!");
         }

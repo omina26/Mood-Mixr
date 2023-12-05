@@ -39,7 +39,8 @@ public class GroupPlaylistUseCaseFactory {
             GroupPlaylistViewModel groupPlaylistViewModel,
             GroupPlaylistDataAccessInterface groupDataAccessObject)
             throws IOException{
-        GroupPlaylistOutputBoundary groupPlaylistOutputBoundary = new GroupPlaylistPresenter();
+        GroupPlaylistOutputBoundary groupPlaylistOutputBoundary = new GroupPlaylistPresenter(viewManagerModel,
+                groupPlaylistViewModel);
         GroupPlaylistAPIHandler groupPlaylistAPIHandler = new GroupPlaylistAPIHandler();
         GroupPlaylistInteractor groupPlaylistInteractor = new GroupPlaylistInteractor(groupDataAccessObject,
                 groupPlaylistOutputBoundary, groupPlaylistAPIHandler);
