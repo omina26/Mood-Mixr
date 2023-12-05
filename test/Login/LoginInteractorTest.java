@@ -56,7 +56,7 @@ class MockApiHandlerSuccess implements LoginAPIInterface{
 
     @Override
     public User getLoginUserInfo() throws IOException, URISyntaxException, InterruptedException {
-        return new User("mock", "63275");
+        return new User("mock", "63275", "mockid");
     }
 }
 
