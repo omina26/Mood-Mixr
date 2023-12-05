@@ -48,17 +48,20 @@ public class UserDataAccessObjectTest {
 
         User mockUser = new User("mock", "1234", "1234");
 
+
         userDataAccessObject.loginUser(mockUser);
 
        User actual = userDataAccessObject.getCurrentUser();
 
        assertEquals(mockUser.name, actual.name);
        assertEquals(mockUser.getToken(), actual.getToken());
+       assertEquals(mockUser.getUserId(), actual.getUserId());
 
         BufferedReader reader = new BufferedReader(new FileReader(tempFile));
         String header = reader.readLine();
         assertEquals(header, "name,access_token,user_id");
         String nextLine = reader.readLine();
         assertEquals(nextLine, "mock,1234,1234");
+
     }
 }

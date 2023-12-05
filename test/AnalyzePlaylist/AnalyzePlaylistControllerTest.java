@@ -15,7 +15,7 @@ public class AnalyzePlaylistControllerTest {
         AnalyzePlaylistController controller = new AnalyzePlaylistController(mockInteractor);
         controller.execute("2hM0cOdtEX2XtILTAkyq8A");
 
-        assertEquals(mockInteractor.data,"");
+        assertEquals(mockInteractor.data,"2hM0cOdtEX2XtILTAkyq8A");
     }
 
     class MockAnalyzePlaylistInteractor implements AnalyzePlaylistInputBoundary{

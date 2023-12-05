@@ -1,8 +1,10 @@
 package view;
 
+import interface_adapter.ViewManagerModel;
 import interface_adapter.analyze_playlist.AnalyzePlaylistController;
 import interface_adapter.analyze_playlist.AnalyzePlaylistState;
 import interface_adapter.analyze_playlist.AnalyzePlaylistViewModel;
+import interface_adapter.create_playlist.CreatePlaylistViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,19 +27,22 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
     private final JTextField analyzePlaylistInputField = new JTextField(15);
 
     final JButton analyze;
-    final JButton back;
+    final JButton mainMenu;
 
     private final AnalyzePlaylistController analyzePlaylistController;
+    private final ViewManagerModel viewManagerModel;
 
     /**
      * Constructs the AnalyzePlaylistView with necessary model and controller.
-     *
+     * @param viewManagerModel The ViewManagerModel for the application.
      * @param analyzePlaylistViewModel The ViewModel associated with this view.
      * @param analyzePlaylistController The Controller that handles the business logic.
      */
 
-    public AnalyzePlaylistView(AnalyzePlaylistViewModel analyzePlaylistViewModel,
+    public AnalyzePlaylistView(ViewManagerModel viewManagerModel,
+                               AnalyzePlaylistViewModel analyzePlaylistViewModel,
                                AnalyzePlaylistController analyzePlaylistController) {
+        this.viewManagerModel = viewManagerModel;
         this.analyzePlaylistController = analyzePlaylistController;
         this.analyzePlaylistViewModel = analyzePlaylistViewModel;
 
@@ -54,13 +59,18 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
 
         JPanel buttons = new JPanel();
 
-        back = new JButton(AnalyzePlaylistViewModel.BACK_BUTTON_LABEL);
-        buttons.add(back);
+        mainMenu = new JButton(CreatePlaylistViewModel.MAIN_MENU_BUTTON_LABEL);
+        buttons.add(mainMenu);
 
-        back.addActionListener(new ActionListener() {
+        mainMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                System.out.println("here");
+                if (e.getSource().equals(mainMenu)) {
+                    System.out.println("here too");
+                    viewManagerModel.setActiveView("logged in");
+                    viewManagerModel.firePropertyChanged();
+                }
             }
         });
 
@@ -70,12 +80,16 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
 
         analyze.addActionListener(
                 new ActionListener() {
+                    @Override
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(analyze)) {
                             String playlistID = analyzePlaylistInputField.getText(); // Retrieve playlist ID from input field
                             AnalyzePlaylistState currentState = analyzePlaylistViewModel.getState();
                             currentState.setPlaylist(playlistID); // Set the playlist ID in the state
                             analyzePlaylistController.execute(currentState.getPlaylistID()); // Pass the playlist ID to the controller
+
+                            viewManagerModel.setActiveView("playlist analyzed");
+                            viewManagerModel.firePropertyChanged();
                         }
                     }
                 }
