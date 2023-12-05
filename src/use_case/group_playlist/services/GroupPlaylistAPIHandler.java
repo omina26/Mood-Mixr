@@ -100,10 +100,6 @@ public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface{
                     JsonObject root = jsonReader.readObject();
                     JsonArray items = root.getJsonArray("href");
                     System.out.println(items);
-                    for (JsonObject item : items.getValuesAs(JsonObject.class)) {
-                        String href = item.getString("href");
-                        songs.add(href);
-                    }
                     System.out.println(songs);
                 } catch (Exception e) {
                     return false;
