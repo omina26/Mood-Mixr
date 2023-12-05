@@ -64,4 +64,6 @@ public class AnalyzePlaylistOutputData {
     public Double getAverageValence() {
         return averageFeatures.get("valence");
     }
+
+    public boolean getUseCaseFailed() {return this.useCaseFailed;}
 }
