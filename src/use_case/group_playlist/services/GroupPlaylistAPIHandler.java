@@ -47,7 +47,6 @@ public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface{
             // Parse the response body to extract playlist information
             // You'll need to parse the JSON response to get playlist details
             // This is a placeholder for where you would add your JSON parsing logic
-            System.out.println(response.body());
             ArrayList<String> href = new ArrayList<>();
 
             try (JsonReader jsonReader = Json.createReader(new StringReader(response.body()))) {
@@ -95,11 +94,16 @@ public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface{
                 // Parse the response body to extract playlist information
                 // You'll need to parse the JSON response to get playlist details
                 // This is a placeholder for where you would add your JSON parsing logic
-                System.out.println(response.body());
                 try (JsonReader jsonReader = Json.createReader(new StringReader(response.body()))) {
                     JsonObject root = jsonReader.readObject();
-                    JsonArray items = root.getJsonArray("href");
-                    System.out.println(items);
+                    JsonArray items = root.getJsonArray("items");
+                    System.out.println("here");
+
+                    for (JsonObject item : items.getValuesAs(JsonObject.class)) {
+                        String uri = item.getString("id");
+                        System.out.println(uri);
+                        songs.add(uri);
+                    }
                     System.out.println(songs);
                 } catch (Exception e) {
                     return false;
@@ -111,13 +115,6 @@ public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface{
             }
         }
         return true;
-    }
-
-    private ArrayList<String> parsePlaylists(String responseBody) {
-        // Implement JSON parsing here. The details will depend on the JSON library you choose to use.
-        // For example, you might use org.json or com.google.gson to parse the JSON and extract playlist information.
-        // This is a placeholder for JSON parsing logic.
-        return new ArrayList<>();
     }
 
 
