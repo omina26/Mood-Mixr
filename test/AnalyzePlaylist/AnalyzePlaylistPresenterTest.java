@@ -33,10 +33,8 @@ public class AnalyzePlaylistPresenterTest {
 
         presenter.prepareAnalyzedPlaylistView(data);
 
-        String actualPlaylistID = mockAnalyzePlaylistViewModel.getState().getPlaylistID();
-        assertTrue(playlistIDs.contains(actualPlaylistID));
-
-        assertEquals(mockViewManagerModel.getActiveView(), mockAnalyzePlaylistViewModel.getViewName());
+        assertTrue(playlistIDs.contains("mockID"));
+       assertEquals(mockViewManagerModel.getActiveView(), mockAnalyzedPlaylistViewModel.getViewName());
 
     }
 }

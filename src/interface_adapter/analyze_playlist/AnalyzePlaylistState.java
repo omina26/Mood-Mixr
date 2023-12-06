@@ -22,7 +22,7 @@ public class AnalyzePlaylistState {
      *
      * @param copy The AnalyzePlaylistState object to copy.
      */
-    public AnalyzePlaylistState(AnalyzePlaylistState copy) {playlist = copy.playlist;}
+   // public AnalyzePlaylistState(AnalyzePlaylistState copy) {playlist = copy.playlist;}
 
     /**
      * Constructor for AnalyzePlaylistState with a default playlist.
