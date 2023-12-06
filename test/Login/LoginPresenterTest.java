@@ -1,5 +1,6 @@
 package Login;
 
+
 import interface_adapter.ViewManagerModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginPresenter;
@@ -26,4 +27,5 @@ public class LoginPresenterTest {
         assertEquals(mockLoggedInViewModel.getState().getName(), mock);
         assertEquals(mockViewManagerModel.getActiveView(), mockLoggedInViewModel.getViewName());
     }
+
 }

@@ -7,24 +7,25 @@ import use_case.login.LoginInputBoundary;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LoginControllerTest {
+
     @Test
-    public void testExecute() throws IOException, URISyntaxException {
-        MockLoginInteractor mockInteractor = new MockLoginInteractor();
-
-        LoginController controller = new LoginController(mockInteractor);
+    public void testExecuteUseCase() throws IOException, URISyntaxException {
+        MockLoginUsecasInteractor interactor = new MockLoginUsecasInteractor();
+        LoginController controller = new LoginController(interactor);
         controller.executeUseCase();
-
-        assertEquals(mockInteractor.data, mockInteractor.data);
+        assertTrue(interactor.executed);
     }
 }
 
-class MockLoginInteractor implements LoginInputBoundary{
-    String data;
+class MockLoginUsecasInteractor implements LoginInputBoundary {
+    boolean executed = false;
+
     @Override
     public void execute() {
-        this.data = data;
+        executed = true;
     }
 }
+
