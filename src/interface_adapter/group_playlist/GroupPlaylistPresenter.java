@@ -8,8 +8,6 @@ import interface_adapter.select_user_playlist.SelectUserPlaylistsViewModel;
 import use_case.group_playlist.GroupPlaylistOutputBoundary;
 import use_case.group_playlist.GroupPlaylistOutputData;
 
-import java.util.ArrayList;
-
 public class GroupPlaylistPresenter implements GroupPlaylistOutputBoundary {
 
     ViewManagerModel viewManagerModel;
@@ -48,7 +46,7 @@ public class GroupPlaylistPresenter implements GroupPlaylistOutputBoundary {
     public void prepareSuccessView(GroupPlaylistOutputData groupPlaylistOutputData, String successMessage) {
         GroupPlaylistCreatedState groupPlaylistCreatedState = groupPlaylistCreatedViewModel.getState();
         groupPlaylistCreatedState.setUser(groupPlaylistOutputData.user);
-        groupPlaylistCreatedState.setMessage(groupPlaylistCreatedState.getMessage());
+        groupPlaylistCreatedState.setMessage(successMessage);
 
         this.groupPlaylistCreatedViewModel.setState(groupPlaylistCreatedState);
         groupPlaylistCreatedViewModel.firePropertyChanged();
@@ -63,7 +61,7 @@ public class GroupPlaylistPresenter implements GroupPlaylistOutputBoundary {
     public void prepareFailView(GroupPlaylistOutputData groupPlaylistOutputData, String failMessage) {
         GroupPlaylistCreatedState groupPlaylistCreatedState = groupPlaylistCreatedViewModel.getState();
         groupPlaylistCreatedState.setUser(groupPlaylistOutputData.user);
-        groupPlaylistCreatedState.setMessage(groupPlaylistCreatedState.getMessage());
+        groupPlaylistCreatedState.setMessage(failMessage);
 
         this.groupPlaylistCreatedViewModel.setState(groupPlaylistCreatedState);
         groupPlaylistCreatedViewModel.firePropertyChanged();
@@ -71,13 +69,6 @@ public class GroupPlaylistPresenter implements GroupPlaylistOutputBoundary {
         System.out.println("here");
         viewManagerModel.setActiveView(groupPlaylistCreatedViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
-    }
-
-    public void getCurrentUserPlaylistsFailView(String errorMessage){
-        SelectUserPlaylistState selectUserPlaylistState = selectUserPlaylistsViewModel.getState();
-        ArrayList<String> failedMessage = new ArrayList<String>();
-        failedMessage.add(errorMessage);
-        selectUserPlaylistState.setAllPlaylists(failedMessage);
     }
 
 

@@ -1,5 +1,6 @@
 package Login;
 
+import entity.User;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginPresenter;
@@ -12,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class LoginPresenterTest {
     @Test  
     public void testPrepareLoginView() {
-        String mock = "mock";
+        User mock = new User("mock", "mock", "mock");
         LoginOutputData data = new LoginOutputData(mock, false);
 
         LoginViewModel mockLoginMoodViewModel = new LoginViewModel();
@@ -23,7 +24,7 @@ public class LoginPresenterTest {
 
         presenter.prepareSuccessView(data);
 
-        assertEquals(mockLoggedInViewModel.getState().getName(), mock);
+        assertEquals(mockLoggedInViewModel.getState().getName(), "mock");
         assertEquals(mockViewManagerModel.getActiveView(), mockLoggedInViewModel.getViewName());
     }
 }

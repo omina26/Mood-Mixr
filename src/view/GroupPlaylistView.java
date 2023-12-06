@@ -4,7 +4,6 @@ import entity.User;
 import interface_adapter.group_playlist.GroupPlaylistController;
 import interface_adapter.group_playlist.GroupPlaylistViewModel;
 import interface_adapter.logged_in.LoggedInState;
-import org.apache.commons.logging.Log;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -16,7 +15,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
 
 public class GroupPlaylistView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -26,8 +24,8 @@ public class GroupPlaylistView extends JPanel implements ActionListener, Propert
     public LoggedInState loggedInState;
     private final JButton getMyPlaylists;
     private User user;
-    private final String other_playlist_id;
-    private Boolean user_playlists;
+    public final String other_playlist_id;
+    public Boolean user_playlists;
 
 
     public GroupPlaylistView(GroupPlaylistController groupPlaylistController, GroupPlaylistViewModel groupPlaylistViewModel, LoggedInState loggedInState) {

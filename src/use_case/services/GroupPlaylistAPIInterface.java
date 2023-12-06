@@ -1,4 +1,4 @@
-package use_case.group_playlist.services;
+package use_case.services;
 
 import entity.User;
 

@@ -5,10 +5,10 @@ import entity.User;
 import java.util.ArrayList;
 
 public class GroupPlaylistInputData {
-    User user = null;
+    public User user = null;
     boolean self_only = false;
-    ArrayList<String> playlistsToCombine = new ArrayList<String>();
-    String nonUserPlaylistID = "";
+    public ArrayList<String> playlistsToCombine = new ArrayList<String>();
+    public String nonUserPlaylistID = "";
     public GroupPlaylistInputData(User user, Boolean selfOnly, String playlistID) {
         this.user = user;
         self_only = selfOnly;
