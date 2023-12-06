@@ -1,40 +1,22 @@
 package app;
+
 import data_access.analyze_playlist.AnalyzePlaylistDataAccessObject;
-import interface_adapter.ViewManagerModel;
-
-import data_access.login.UserDataAccessObject;
-
-
 import data_access.create_mood.MoodDataAccessObject;
-
+import data_access.login.UserDataAccessObject;
+import interface_adapter.ViewManagerModel;
 import interface_adapter.analyze_playlist.AnalyzePlaylistViewModel;
-
 import interface_adapter.analyzed_playlist.AnalyzedPlaylistViewModel;
 import interface_adapter.create_mood.CreateMoodViewModel;
-
 import interface_adapter.create_playlist.CreatePlaylistViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.playlist_created.PlaylistCreatedViewModel;
 import interface_adapter.view_moods.ViewMoodsViewModel;
-
 import view.*;
-
 
 import javax.swing.*;
 import java.awt.*;
-
-import view.LoggedInView;
-
-
-import view.CreateMoodView;
-import view.LoginView;
-import view.ViewManager;
-import view.ViewMoodsView;
-import view.AnalyzePlaylistView;
-
 import java.io.File;
-
 import java.io.IOException;
 
 public class Main {
