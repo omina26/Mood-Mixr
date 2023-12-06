@@ -13,6 +13,10 @@ import view.LabelTextPanel;
 import javax.swing.*;
 
 import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeEvent;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import static java.lang.Thread.sleep;
 import static org.junit.Assert.*;
@@ -27,7 +31,8 @@ public class CreatePlaylistViewTest {
         CreatePlaylistController controller = new CreatePlaylistController(interactor);
         CreatePlaylistViewModel viewModel = new CreatePlaylistViewModel();
 
-        JPanel view = new CreatePlaylistView(viewManagerModel, viewModel, controller);
+
+        CreatePlaylistView view = new CreatePlaylistView(viewManagerModel, viewModel, controller);
 //        JFrame jf = new JFrame();
 //
 //        jf.setContentPane(view);
@@ -70,7 +75,21 @@ public class CreatePlaylistViewTest {
 
  //       assertNotNull(view);
 
+        CreatePlaylistState mockState = new CreatePlaylistState("m");
+        Set<String> moods = new HashSet<>();
+        moods.add("Happy");
+        moods.add("Sad");
+        moods.add("Energetic");
+        mockState.setMoodsList(moods);
 
+        PropertyChangeEvent mockEvent = new PropertyChangeEvent(this, "stateChange", null, mockState);
+        view.propertyChange(mockEvent);
+        JPanel moodPanel = (JPanel) view.getComponent(5);
+
+        assertEquals(3, moodPanel.getComponentCount());
+        assertEquals("Happy", ((JLabel) moodPanel.getComponent(0)).getText());
+        assertEquals("Sad", ((JLabel) moodPanel.getComponent(2)).getText());
+        assertEquals("Energetic", ((JLabel) moodPanel.getComponent(1)).getText());
     }
 }
 
@@ -79,4 +98,27 @@ class MockInteractor implements CreatePlaylistInputBoundary{
     @Override
     public void execute(CreatePlaylistInputData createPlaylistInputData) {
         execution = createPlaylistInputData.getSelectedMoodName();}
+}
+
+class MockState extends CreatePlaylistState {
+    Set<String> moodsList = null;
+
+    /**
+     * A constructor for the CreatePlaylistState object which sets selectedMood to the input
+     *
+     * @param moodName The selected mood
+     */
+    public MockState(String moodName) {
+        super(moodName);
+    }
+
+    @Override
+    public void setMoodsList(Set<String> moodsList) {
+        this.moodsList = moodsList;
+    }
+
+    @Override
+    public Set<String> getMoodsList() {
+        return moodsList;
+    }
 }
