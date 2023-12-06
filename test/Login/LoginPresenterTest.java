@@ -10,7 +10,7 @@ import use_case.login.LoginOutputData;
 import static org.junit.Assert.assertEquals;
 
 public class LoginPresenterTest {
-    @Test
+    @Test  
     public void testPrepareLoginView() {
         String mock = "mock";
         LoginOutputData data = new LoginOutputData(mock, false);
