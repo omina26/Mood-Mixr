@@ -10,7 +10,10 @@ public class CreatePlaylistStateTest {
     public void TestCreatePlaylistStateWithCopy(){
         CreatePlaylistState copy = new CreatePlaylistState("mock");
         CreatePlaylistState main = new CreatePlaylistState("mock");
-
         assertEquals(main.getSelectedMood(), copy.getSelectedMood());
+
+        CreatePlaylistState main2 = new CreatePlaylistState("mock2");
+        copy.setSelectedMood("mock2");
+        assertEquals(main2.getSelectedMood(), copy.getSelectedMood());
     }
 }
