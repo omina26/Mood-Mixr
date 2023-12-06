@@ -147,17 +147,16 @@ public class CreatePlaylistView extends JPanel implements ActionListener, Proper
 //        }
         System.out.println("create playlist property change");
         CreatePlaylistState state = (CreatePlaylistState) evt.getNewValue();
-        String moods = "";
+        JPanel moodPanel = new JPanel(new GridLayout(0, 1, 0, 1) );
+        moodPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         for (String s : state.getMoodsList()) {
             String[] split = s.split(" ");
-            JPanel moodPanel = new JPanel(new GridLayout(0, 1, 0, 1) );
-            moodPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
             JLabel moodname = new JLabel(split[0]);
             moodPanel.add(moodname);
-            moodPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-            this.add(moodPanel);
-        }
 
+        }
+        moodPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(moodPanel);
     }
 
 }
