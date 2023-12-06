@@ -122,7 +122,7 @@ public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface{
 
     public String createPlaylist(User user){
 
-        String url = "https://api.spotify.com/v1/users/"+user.getUserId()+"/playlists";
+        String url = "https://api.spotify.com/v1/users/"+user.getId()+"/playlists";
         System.out.println(url);
         String accessToken = user.getToken();
         HttpClient httpClient = HttpClient.newHttpClient();
