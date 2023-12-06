@@ -37,6 +37,5 @@ public class AnalyzePlaylistOutputData {
     public Map<String, Double> getAverageFeatures(){
         return this.averageFeatures;
     }
-
-    public boolean getUseCaseFailed() {return this.useCaseFailed;}
 }
+
