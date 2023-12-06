@@ -31,5 +31,4 @@ public class AnalyzedPlaylistViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    //public AnalyzedPlaylistState getState(){return state;}
 }
