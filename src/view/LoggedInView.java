@@ -1,7 +1,6 @@
 package view;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.group_playlist.GroupPlaylistViewModel;
 import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.logged_in.LoggedInViewModel;
 
@@ -18,9 +17,8 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     JLabel name;
 
-    final JButton logOut;
     final JButton createMood;
-    final JButton getPlaylist;
+    final JButton createPlaylist;
     final JButton analyzePlaylist;
     final JButton groupPlaylist;
 
@@ -38,33 +36,50 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         name = new JLabel();
 
         JPanel buttons = new JPanel();
-        logOut = new JButton(loggedInViewModel.LOGOUT_BUTTON_LABEL);
-        buttons.add(logOut);
-        logOut.addActionListener(this);
 
         createMood = new JButton(loggedInViewModel.CREATE_MOOD_BUTTON_LABEL);
         buttons.add(createMood);
+        createMood.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if(e.getSource() == createMood){
+                            viewManagerModel.setActiveView("Create Mood");
+                            viewManagerModel.firePropertyChanged();
+                        }
+                    }
+                }
+        );
 
-
-        getPlaylist = new JButton(loggedInViewModel.GET_PLAYLIST_BUTTON_LABEL);
-        buttons.add(getPlaylist);
-        getPlaylist.addActionListener(this);
+        createPlaylist = new JButton(loggedInViewModel.CREATE_PLAYLIST_BUTTON_LABEL);
+        buttons.add(createPlaylist);
+        createPlaylist.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if(e.getSource() == createPlaylist){
+                            viewManagerModel.setActiveView("Create Playlist");
+                            viewManagerModel.firePropertyChanged();
+                        }
+                    }
+                });
 
         analyzePlaylist = new JButton(loggedInViewModel.ANALYZE_PLAYLIST_BUTTON_LABEL);
         buttons.add(analyzePlaylist);
-        analyzePlaylist.addActionListener(this);
+        analyzePlaylist.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if(e.getSource() == analyzePlaylist){
+                            viewManagerModel.setActiveView("Analyze Playlist");
+                            viewManagerModel.firePropertyChanged();
+                        }
+                    }
+                });
 
         groupPlaylist = new JButton(loggedInViewModel.GROUP_PLAYLIST_BUTTON_LABEL);
         buttons.add(groupPlaylist);
-        groupPlaylist.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == groupPlaylist){
-                    viewManagerModel.setActiveView("Group Playlist");
-                    viewManagerModel.firePropertyChanged();
-                }
-            }
-        });
+        groupPlaylist.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

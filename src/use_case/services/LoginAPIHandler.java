@@ -1,4 +1,4 @@
-package use_case.login.services;
+package use_case.services;
 
 import entity.User;
 
@@ -10,7 +10,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -84,25 +83,25 @@ public class LoginAPIHandler implements LoginAPIInterface{
 
     private static String getJSONDataAccessToken(String responseString) {
 
-        // Locate the "access_token" field
-        int accessTokenIndex = responseString.indexOf("\"access_token\"");
+            // Locate the "access_token" field
+            int accessTokenIndex = responseString.indexOf("\"access_token\"");
 
-        if (accessTokenIndex != -1) {
-            // Find the opening quote of the access token value
-            int valueStart = responseString.indexOf("\"", accessTokenIndex + 15); // 15 is the length of "access_token" plus the ":"
+            if (accessTokenIndex != -1) {
+                // Find the opening quote of the access token value
+                int valueStart = responseString.indexOf("\"", accessTokenIndex + 15); // 15 is the length of "access_token" plus the ":"
 
-            if (valueStart != -1) {
-                // Find the closing quote of the access token value
-                int valueEnd = responseString.indexOf("\"", valueStart + 1);
+                if (valueStart != -1) {
+                    // Find the closing quote of the access token value
+                    int valueEnd = responseString.indexOf("\"", valueStart + 1);
 
-                if (valueEnd != -1) {
-                    // Extract the access token
-                    String accessToken = responseString.substring(valueStart + 1, valueEnd);
-                    return accessToken;
+                    if (valueEnd != -1) {
+                        // Extract the access token
+                        String accessToken = responseString.substring(valueStart + 1, valueEnd);
+                        return accessToken;
+                    }
                 }
-            }
 
-        }
+            }
 
         return null;
     }
@@ -130,7 +129,8 @@ public class LoginAPIHandler implements LoginAPIInterface{
         // Get the response code
         int responseCode = connection.getResponseCode();
         String username = "";
-        String id = "";
+        String userId = "";
+
         if (responseCode == HttpURLConnection.HTTP_OK) {
             // Read and parse the JSON response
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -141,14 +141,22 @@ public class LoginAPIHandler implements LoginAPIInterface{
                 response.append(inputLine);
             }
             in.close();
+
             // Parse the JSON response
             JsonReader jsonReader = Json.createReader(new java.io.StringReader(response.toString()));
             JsonObject jsonResponse = jsonReader.readObject();
 
-            // Get the name of the user
+            // Extract the name of the user
             username = jsonResponse.getString("display_name");
-            // Get the id of the user
-            id = jsonResponse.getString("id");
+
+            // Print the user's name
+            System.out.println("User Name: " + username);
+
+            // Extract the user id of the user
+            userId = jsonResponse.getString("id");
+
+            // Print the user's user id
+            System.out.println("User Id: " + userId);
 
         } else {
             System.out.println("Error: Unable to fetch user data. Response Code: " + responseCode);
@@ -158,6 +166,6 @@ public class LoginAPIHandler implements LoginAPIInterface{
         connection.disconnect();
 
 
-        return new User(username, accessToken, id);
+        return new User(username, accessToken, userId);
     }
 }

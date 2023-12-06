@@ -30,4 +30,7 @@ public class LoginViewModel extends ViewModel {
     }
 
     public LoginState getState(){return state;}
+
+    public PropertyChangeSupport getSupport() {return this.support;
+    }
 }

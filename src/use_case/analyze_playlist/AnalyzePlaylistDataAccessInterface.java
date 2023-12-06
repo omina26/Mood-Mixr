@@ -10,8 +10,7 @@ public interface AnalyzePlaylistDataAccessInterface {
 
     public Map<String, AnalyzedPlaylist> getPlaylistID();
 
-
-    public Set<String> savePlaylistID(String playlistID);
-
     public void save() throws IOException;
+
+    Set<String> savePlaylistID(String name, String playlistID) throws IOException;
 }

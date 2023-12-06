@@ -1,4 +1,4 @@
-package use_case.login.services;
+package use_case.services;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -48,7 +48,7 @@ public class AuthRedirectServerHandler {
         System.out.println("Server started on port " + PORT);
 
         String state = generateRandomString();
-        String scope = "user-read-private user-read-email playlist-read-private playlist-modify-public playlist-modify-private user-top-read";
+        String scope = "user-read-private user-read-email user-top-read playlist-read-private playlist-modify-public playlist-modify-private";
 
         String redirectUrl = "response_type=code" +
                 "&client_id=" + URLEncoder.encode(clientID, "UTF-8") +

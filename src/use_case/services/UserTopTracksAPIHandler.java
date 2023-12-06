@@ -1,4 +1,4 @@
-package use_case.login.services;
+package use_case.services;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -37,14 +37,15 @@ public class UserTopTracksAPIHandler implements UserTopTracksAPIHandlerInterface
             uris = extractUrisFromResponse(response.body());
 
             // Print the list of URIs
-            System.out.println("List of URIs:");
+            System.out.println("List of User's Top Track URIs:");
             for (String uri : uris) {
                 System.out.println(uri);
             }
         } else {
             System.out.println("Error: " + response.statusCode());
+            System.out.println(response.body());
         }
-        System.out.println(uris);
+
         return uris;
     }
 

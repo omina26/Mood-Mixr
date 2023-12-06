@@ -14,10 +14,11 @@ public class PlaylistCreatedViewModel extends ViewModel{
 
     public PlaylistCreatedViewModel(){super("playlist created");}
 
-    public void setState(PlaylistCreatedState playlistCreatedState) {this.state = state;}
+    public void setState(PlaylistCreatedState state) {this.state = state;}
 
     public PlaylistCreatedState getState() {return state;}
 
+    @Override
     public void firePropertyChanged() {support.firePropertyChange("state", null, this.state);}
 
     @Override
@@ -25,5 +26,4 @@ public class PlaylistCreatedViewModel extends ViewModel{
         support.addPropertyChangeListener(listener);
     }
 
-    public String getViewName() {return TITLE_LABEL;}
 }

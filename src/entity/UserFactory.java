@@ -1,5 +1,17 @@
 package entity;
 
+/**
+ * Factory class for creating User objects.
+ */
+
 public class UserFactory {
-    public User create(String name, String token, String id){return new User(name, token, id);}
+
+    /**
+     * Creates a new User object.
+     *
+     * @param name The name of the user.
+     * @param token The token of the user.
+     * @return A new User object.
+     */
+    public User create(String name, String token, String userId){return new User(name, token, userId);}
 }
