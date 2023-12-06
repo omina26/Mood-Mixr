@@ -1,47 +1,25 @@
 package app;
 
 
-
-import data_access.group_playlist.GroupPlaylistDataAccessObject;
-import entity.GroupPlaylist;
-import entity.User;
-import interface_adapter.ViewManagerModel;
-
-import data_access.login.UserDataAccessObject;
-
-
 import data_access.create_mood.MoodDataAccessObject;
-
+import data_access.group_playlist.GroupPlaylistDataAccessObject;
+import data_access.login.UserDataAccessObject;
+import interface_adapter.ViewManagerModel;
 import interface_adapter.analyze_playlist.AnalyzePlaylistViewModel;
-
 import interface_adapter.create_mood.CreateMoodViewModel;
-
 import interface_adapter.create_playlist.CreatePlaylistViewModel;
-import interface_adapter.group_playlist.GroupPlaylistController;
 import interface_adapter.group_playlist.GroupPlaylistViewModel;
+import interface_adapter.group_playlist_created.GroupPlaylistCreatedViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.playlist_created.PlaylistCreatedViewModel;
 import interface_adapter.select_user_playlist.SelectUserPlaylistsViewModel;
 import interface_adapter.view_moods.ViewMoodsViewModel;
-
-import use_case.group_playlist.GroupPlaylistInteractor;
 import view.*;
-
 
 import javax.swing.*;
 import java.awt.*;
-
-import view.LoggedInView;
-
-
-import view.CreateMoodView;
-import view.LoginView;
-import view.ViewManager;
-import view.ViewMoodsView;
-
 import java.io.File;
-
 import java.io.IOException;
 
 public class Main {
@@ -106,18 +84,24 @@ public class Main {
         views.add(viewMoodsView, viewMoodsView.viewName);
 
         SelectUserPlaylistsViewModel selectUserPlaylistsViewModel = new SelectUserPlaylistsViewModel();
+        GroupPlaylistCreatedViewModel groupPlaylistCreatedViewModel = new GroupPlaylistCreatedViewModel();
 
         GroupPlaylistView groupPlaylistView = GroupPlaylistUseCaseFactory.create(viewManagerModel,
                 groupPlaylistViewModel,
                 loggedInViewModel,
                 groupPlaylistDataAccessObject,
-                selectUserPlaylistsViewModel);
+                selectUserPlaylistsViewModel,
+                groupPlaylistCreatedViewModel);
         views.add(groupPlaylistView, groupPlaylistView.viewName);
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel, viewManagerModel);
 
         SelectUserPlaylistView selectUserPlaylistView = new SelectUserPlaylistView(selectUserPlaylistsViewModel, groupPlaylistView.groupPlaylistController,
                 viewManagerModel);
         views.add(selectUserPlaylistView, selectUserPlaylistView.viewName);
+
+        GroupPlaylistCreatedView groupPlaylistCreatedView = new GroupPlaylistCreatedView(
+                groupPlaylistCreatedViewModel, viewManagerModel);
+        views.add(groupPlaylistCreatedView, groupPlaylistCreatedView.viewName);
         views.add(loggedInView, loggedInView.viewName);
 
 

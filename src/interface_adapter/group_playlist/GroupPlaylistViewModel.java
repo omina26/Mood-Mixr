@@ -1,8 +1,6 @@
 package interface_adapter.group_playlist;
 
-import entity.GroupPlaylist;
 import interface_adapter.ViewModel;
-import interface_adapter.login.LoginState;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -23,11 +21,11 @@ public class GroupPlaylistViewModel extends ViewModel {
     }
     @Override
     public void firePropertyChanged() {
-
+        support.firePropertyChange("state", null, this.state);
     }
 
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
-
+        support.addPropertyChangeListener(listener);
     }
 }

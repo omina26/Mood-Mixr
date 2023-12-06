@@ -37,7 +37,7 @@ public class GroupPlaylistInteractor implements GroupPlaylistInputBoundary{
             }
         }
         GroupPlaylistOutputData groupPlaylistOutputData = new GroupPlaylistOutputData(success, "name");
-        if(!success){
+        if(success){
             groupPresenter.prepareSuccessView(groupPlaylistOutputData, "Successfully created playlist!");
         } else{
             groupPresenter.prepareFailView(groupPlaylistOutputData, "Could not properly create group playlist :(");

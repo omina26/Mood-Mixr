@@ -1,10 +1,10 @@
 package app;
 
-import entity.User;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.group_playlist.GroupPlaylistController;
 import interface_adapter.group_playlist.GroupPlaylistPresenter;
 import interface_adapter.group_playlist.GroupPlaylistViewModel;
+import interface_adapter.group_playlist_created.GroupPlaylistCreatedViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.select_user_playlist.SelectUserPlaylistsViewModel;
 import use_case.group_playlist.GroupPlaylistDataAccessInterface;
@@ -24,11 +24,13 @@ public class GroupPlaylistUseCaseFactory {
             GroupPlaylistViewModel groupPlaylistViewModel,
             LoggedInViewModel loggedInViewModel,
             GroupPlaylistDataAccessInterface groupDataAccessObject,
-            SelectUserPlaylistsViewModel selectUserPlaylistsViewModel
+            SelectUserPlaylistsViewModel selectUserPlaylistsViewModel,
+            GroupPlaylistCreatedViewModel groupPlaylistCreatedViewModel
     ){
         try {
             GroupPlaylistController groupPlaylistController = createGroupPlaylistUseCase(viewManagerModel, loggedInViewModel,
-                    groupPlaylistViewModel, groupDataAccessObject, selectUserPlaylistsViewModel);
+                    groupPlaylistViewModel, groupDataAccessObject, selectUserPlaylistsViewModel,
+                    groupPlaylistCreatedViewModel);
             return new GroupPlaylistView(groupPlaylistController, groupPlaylistViewModel, loggedInViewModel.getState());
         } catch (IOException e){
             JOptionPane.showMessageDialog(null, "Could not Access User Data");
@@ -40,10 +42,11 @@ public class GroupPlaylistUseCaseFactory {
             LoggedInViewModel loggedInViewModel,
             GroupPlaylistViewModel groupPlaylistViewModel,
             GroupPlaylistDataAccessInterface groupDataAccessObject,
-            SelectUserPlaylistsViewModel selectUserPlaylistsViewModel)
+            SelectUserPlaylistsViewModel selectUserPlaylistsViewModel,
+            GroupPlaylistCreatedViewModel groupPlaylistCreatedViewModel)
             throws IOException{
         GroupPlaylistOutputBoundary groupPlaylistOutputBoundary = new GroupPlaylistPresenter(viewManagerModel,
-                groupPlaylistViewModel, selectUserPlaylistsViewModel);
+                groupPlaylistViewModel, selectUserPlaylistsViewModel, groupPlaylistCreatedViewModel);
         GroupPlaylistAPIHandler groupPlaylistAPIHandler = new GroupPlaylistAPIHandler();
         GroupPlaylistInteractor groupPlaylistInteractor = new GroupPlaylistInteractor(groupDataAccessObject,
                 groupPlaylistOutputBoundary, groupPlaylistAPIHandler);
