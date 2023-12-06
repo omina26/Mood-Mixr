@@ -39,10 +39,22 @@ public class GroupPlaylistPresenter implements GroupPlaylistOutputBoundary {
         this.viewManagerModel.firePropertyChanged();
     }
 
+    @Override
+    public void prepareSuccessView(GroupPlaylistOutputData groupPlaylistOutputData, String successMessage) {
+
+    }
+
+    @Override
+    public void prepareFailView(GroupPlaylistOutputData groupPlaylistOutputData, String failMessage) {
+
+    }
+
     public void getCurrentUserPlaylistsFailView(String errorMessage){
         SelectUserPlaylistState selectUserPlaylistState = selectUserPlaylistsViewModel.getState();
         ArrayList<String> failedMessage = new ArrayList<String>();
         failedMessage.add(errorMessage);
         selectUserPlaylistState.setAllPlaylists(failedMessage);
     }
+
+
 }

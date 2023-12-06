@@ -20,12 +20,27 @@ public class GroupPlaylistInteractor implements GroupPlaylistInputBoundary{
 
     @Override
     public void execute(GroupPlaylistInputData groupPlaylistInputData) {
+        Boolean success;
         if (groupPlaylistInputData.self_only){
-            Boolean success = groupPlaylistAPIHandler.combinePlaylists(groupPlaylistInputData.playlistsToCombine,
+            success = groupPlaylistAPIHandler.combinePlaylists(groupPlaylistInputData.playlistsToCombine,
                     groupPlaylistInputData.user);
 
         } else{
-            // pass for now
+            if(groupPlaylistAPIHandler.isValidPlaylist(groupPlaylistInputData.nonUserPlaylistID,
+                    groupPlaylistInputData.user)){
+                ArrayList<String> playlists = groupPlaylistInputData.playlistsToCombine;
+                playlists.add("spotify:playlist:" + groupPlaylistInputData.nonUserPlaylistID);
+                success = groupPlaylistAPIHandler.combinePlaylists(playlists, groupPlaylistInputData.user);
+            }
+            else{
+                success = false;
+            }
+        }
+        GroupPlaylistOutputData groupPlaylistOutputData = new GroupPlaylistOutputData(success, "name");
+        if(!success){
+            groupPresenter.prepareSuccessView(groupPlaylistOutputData, "Successfully created playlist!");
+        } else{
+            groupPresenter.prepareFailView(groupPlaylistOutputData, "Could not properly create group playlist :(");
         }
     }
 

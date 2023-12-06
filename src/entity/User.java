@@ -2,21 +2,24 @@ package entity;
 
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 public class User {
 
     public final String name;
+    public Object getID;
     private String token;
 
-    public User(String name, String token){ this.name = name; this.token = token;}
+    public final String id;
+    public User(String name, String token, String id){ this.name = name; this.token = token; this.id = id;}
 
     public String getName(){return this.name;}
 
     public String getToken(){return this.token;}
 
     public void setToken(String token){this.token = token;}
+
+    public String getId(){return this.id;}
 
     public Set<String> getTopTracks(){return new Set<String>() {
         @Override
@@ -85,4 +88,5 @@ public class User {
         }
     };
     };
+
 }

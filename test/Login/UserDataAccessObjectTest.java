@@ -46,7 +46,7 @@ public class UserDataAccessObjectTest {
 
         UserDataAccessObject userDataAccessObject = new UserDataAccessObject(tempFile);
 
-        User mockUser = new User("mock", "1234");
+        User mockUser = new User("mock", "1234", id);
 
         userDataAccessObject.loginUser(mockUser);
 

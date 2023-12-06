@@ -1,26 +1,20 @@
 package use_case.group_playlist.services;
 
-import entity.Playlist;
+import com.google.gson.Gson;
 import entity.User;
 
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.IOException;
 import java.io.StringReader;
-import java.net.HttpURLConnection;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.util.ArrayList;
-
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
+import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
-import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface{
     @Override
@@ -54,7 +48,7 @@ public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface{
                 JsonArray items = root.getJsonArray("items");
 
                 for (JsonObject item : items.getValuesAs(JsonObject.class)) {
-                    String uri = item.getString("href");
+                    String uri = item.getString("uri");
                     href.add(uri);
                 }
             } catch (Exception e) {
@@ -69,12 +63,116 @@ public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface{
     }
 
     @Override
-    public boolean combinePlaylists(ArrayList<String> playlistsToCombine, User user) {
+    public Boolean combinePlaylists(ArrayList<String> playlists, User user) {
+        ArrayList<String> songs = getTracks(playlists, user);
+        String playlistID = createPlaylist(user);
+        Gson gson = new Gson();
+        String songUris = gson.toJson(songs);
+        String url = "https://api.spotify.com/v1/playlists/" + playlistID + "/tracks";
+        String json = "{\"uris\": "+ songUris +", \"position\": 0}";
+
+        String accessToken = user.getToken();
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Authorization", "Bearer " + accessToken)
+                .header("Content-Type", "application/json")
+                .POST(BodyPublishers.ofString(json))
+                .build();
+
+        HttpResponse<String> response = null;
+        try {
+            response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(response.body());
+        if (response.statusCode() == 201) {
+            System.out.println("True");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public Boolean isValidPlaylist(String playlistID, User user) {
+        String accessToken = user.getToken();
+
+        String url = "https://api.spotify.com/v1/playlists/" + playlistID + "/tracks";
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Authorization", "Bearer " + accessToken)
+                .GET()
+                .build();
+        HttpResponse<String> response = null;
+        try {
+            response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        return response.statusCode() == 200;
+    }
+
+    public String createPlaylist(User user){
+
+        String url = "https://api.spotify.com/v1/users/"+user.getId()+"/playlists";
+        System.out.println(url);
+        String accessToken = user.getToken();
+        HttpClient httpClient = HttpClient.newHttpClient();
+        String json = "{\"name\": \"Playlist!!!\", \"description\": \"created group playlist\", \"public\": true}";
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Authorization", "Bearer " + accessToken)
+                .header("Content-Type", "application/json")
+                .POST(BodyPublishers.ofString(json)) // Use the POST method and pass the JSON as a String
+                .build();
+
+        HttpResponse<String> response = null;
+        try {
+            response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (response.statusCode() == 201) {
+            // Parse the response body to extract playlist information
+            // You'll need to parse the JSON response to get playlist details
+            // This is a placeholder for where you would add your JSON parsing logic
+            String playlistID = "";
+            try (JsonReader jsonReader = Json.createReader(new StringReader(response.body()))){
+                JsonObject values = jsonReader.readObject();
+                playlistID = values.getString("id");
+
+                return playlistID;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "";
+
+            }
+        } else {
+            System.out.println(response.statusCode());
+            System.out.println(response.body());
+            return "";
+        }
+    }
+
+
+    @Override
+    public ArrayList<String> getTracks(ArrayList<String> playlistsToCombine, User user) {
         String url;
-        ArrayList<String> songs = new ArrayList<String>();
+        ArrayList<String> songIDs = new ArrayList<String>();
         String accessToken = user.getToken();
         for (String playlistLink : playlistsToCombine) {
-            url = playlistLink + "/tracks";
+            url = "https://api.spotify.com/v1/playlists/" + playlistLink.substring(17) + "/tracks";
             HttpClient httpClient = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(url))
@@ -97,28 +195,23 @@ public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface{
                 try (JsonReader jsonReader = Json.createReader(new StringReader(response.body()))) {
                     JsonObject root = jsonReader.readObject();
                     JsonArray items = root.getJsonArray("items");
-                    System.out.println("here");
 
                     for (JsonObject item : items.getValuesAs(JsonObject.class)) {
-                        String uri = item.getString("id");
-                        System.out.println(uri);
-                        songs.add(uri);
+                        JsonObject song = item.getJsonObject("track");
+                        String uri = song.getString("uri");
+                        songIDs.add(uri);
                     }
-                    System.out.println(songs);
+
                 } catch (Exception e) {
-                    return false;
+                    return new ArrayList<>();
                 }
             } else {
-                // Handle non-200 status codes appropriately
-                System.out.println("Error: " + response.statusCode() + " - " + response.body());
-                return false;
+                return new ArrayList<>();
             }
         }
-        return true;
+        return songIDs;
     }
 
 
-    public ArrayList<Playlist> formatAPICallReturn(String response){
-        return new ArrayList<>();
-    }
+
 }

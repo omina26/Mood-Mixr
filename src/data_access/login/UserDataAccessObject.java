@@ -1,12 +1,9 @@
 package data_access.login;
 
 import java.io.*;
-import java.net.*;
-import java.time.LocalTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import entity.Mood;
 import entity.User;
 import use_case.login.LoginDataAccessInterface;
 
@@ -28,6 +25,7 @@ public class UserDataAccessObject implements LoginDataAccessInterface {
         this.csvFile = csvFile;
         headers.put("name", 0);
         headers.put("access_token", 1);
+        headers.put("id", 1);
 
         if (csvFile.length() == 0){
             BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile));
@@ -46,7 +44,8 @@ public class UserDataAccessObject implements LoginDataAccessInterface {
                 String[] col = row.split(",");
                 String name = String.valueOf(col[headers.get("name")]);
                 String accessToken = String.valueOf(col[headers.get("access_token")]);
-                this.loggedInUser = new User(name, accessToken);
+                String id = String.valueOf(col[headers.get("id")]);
+                this.loggedInUser = new User(name, accessToken, id);
             }
         }
     }
@@ -66,7 +65,7 @@ public class UserDataAccessObject implements LoginDataAccessInterface {
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
 
-            String line = String.format("%s,%s", user.getName(), user.getToken());
+            String line = String.format("%s,%s,%s,", user.getName(), user.getToken(), user.getID);
             writer.write(line);
             writer.newLine();
 

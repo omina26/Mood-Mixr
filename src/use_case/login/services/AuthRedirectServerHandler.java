@@ -48,7 +48,7 @@ public class AuthRedirectServerHandler {
         System.out.println("Server started on port " + PORT);
 
         String state = generateRandomString();
-        String scope = "user-read-private user-read-email user-top-read playlist-read-private playlist-modify-public playlist-modify-private";
+        String scope = "user-read-private user-read-email playlist-read-private playlist-modify-public playlist-modify-private user-top-read";
 
         String redirectUrl = "response_type=code" +
                 "&client_id=" + URLEncoder.encode(clientID, "UTF-8") +
