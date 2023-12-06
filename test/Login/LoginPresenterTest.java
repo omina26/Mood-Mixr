@@ -13,8 +13,10 @@ import static org.junit.Assert.assertEquals;
 public class LoginPresenterTest {
     @Test  
     public void testPrepareLoginView() {
-        User mock = new User("mock", "mock", "mock");
-        LoginOutputData data = new LoginOutputData(mock, false);
+        String mock = "mock";
+
+        User user = new User("mockName","1234", "mockID");
+        LoginOutputData data = new LoginOutputData(user, false);
 
         LoginViewModel mockLoginMoodViewModel = new LoginViewModel();
         LoggedInViewModel mockLoggedInViewModel = new LoggedInViewModel();
@@ -24,7 +26,7 @@ public class LoginPresenterTest {
 
         presenter.prepareSuccessView(data);
 
-        assertEquals(mockLoggedInViewModel.getState().getName(), "mock");
+        assertEquals(mockLoggedInViewModel.getState().getName(), "mockName");
         assertEquals(mockViewManagerModel.getActiveView(), mockLoggedInViewModel.getViewName());
     }
 }
