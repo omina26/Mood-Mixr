@@ -31,6 +31,7 @@ public class GroupPlaylistUseCaseFactory {
             GroupPlaylistController groupPlaylistController = createGroupPlaylistUseCase(viewManagerModel, loggedInViewModel,
                     groupPlaylistViewModel, groupDataAccessObject, selectUserPlaylistsViewModel,
                     groupPlaylistCreatedViewModel);
+
             return new GroupPlaylistView(groupPlaylistController, groupPlaylistViewModel, loggedInViewModel.getState());
         } catch (IOException e){
             JOptionPane.showMessageDialog(null, "Could not Access User Data");
