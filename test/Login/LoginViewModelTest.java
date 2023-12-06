@@ -1,6 +1,5 @@
-package AnalyzePlaylist;
-
-import interface_adapter.analyze_playlist.AnalyzePlaylistViewModel;
+package Login;
+import interface_adapter.login.LoginViewModel;
 import org.junit.Test;
 
 import java.beans.PropertyChangeEvent;
@@ -8,10 +7,10 @@ import java.beans.PropertyChangeListener;
 
 import static org.junit.Assert.assertEquals;
 
-public class AnalyzePlaylistViewModelTest {
+public class LoginViewModelTest {
     @Test
     public void testAddPropertyChangeListener(){
-        AnalyzePlaylistViewModel viewModel = new AnalyzePlaylistViewModel();
+        LoginViewModel viewModel = new LoginViewModel();
         PropertyChangeListener listener = new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {

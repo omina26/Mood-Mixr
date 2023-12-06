@@ -21,7 +21,7 @@ public class AnalyzePlaylistInputData {
      *
      * @return The ID of the playlist.
      */
-    String getPlaylistID() {return playlistID;}
+    public String getPlaylistID() {return playlistID;}
 
     /**
      * Returns a string representation of the playlist ID.

@@ -80,12 +80,16 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
 
         analyze.addActionListener(
                 new ActionListener() {
+                    @Override
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(analyze)) {
                             String playlistID = analyzePlaylistInputField.getText(); // Retrieve playlist ID from input field
                             AnalyzePlaylistState currentState = analyzePlaylistViewModel.getState();
                             currentState.setPlaylist(playlistID); // Set the playlist ID in the state
                             analyzePlaylistController.execute(currentState.getPlaylistID()); // Pass the playlist ID to the controller
+
+                            viewManagerModel.setActiveView("playlist analyzed");
+                            viewManagerModel.firePropertyChanged();
                         }
                     }
                 }
@@ -123,5 +127,7 @@ public class AnalyzePlaylistView extends JPanel implements ActionListener, Prope
             }
         }
     }
+
+
 }
 

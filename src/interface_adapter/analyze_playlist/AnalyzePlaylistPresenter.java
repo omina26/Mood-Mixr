@@ -3,8 +3,11 @@ package interface_adapter.analyze_playlist;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.analyzed_playlist.AnalyzedPlaylistState;
 import interface_adapter.analyzed_playlist.AnalyzedPlaylistViewModel;
+import interface_adapter.create_mood.CreateMoodViewModel;
 import use_case.analyze_playlist.AnalyzePlaylistOutputBoundary;
 import use_case.analyze_playlist.AnalyzePlaylistOutputData;
+
+import java.util.Map;
 
 /**
  * Presenter for the Analyze Playlist feature.
@@ -14,6 +17,8 @@ public class AnalyzePlaylistPresenter implements AnalyzePlaylistOutputBoundary {
     private final AnalyzePlaylistViewModel analyzePlaylistViewModel;
     private final AnalyzedPlaylistViewModel analyzedPlaylistViewModel;
     private final ViewManagerModel viewManagerModel;
+    private final CreateMoodViewModel createMoodViewModel;
+
 
     /**
      * Constructor for AnalyzePlaylistPresenter.
@@ -24,29 +29,30 @@ public class AnalyzePlaylistPresenter implements AnalyzePlaylistOutputBoundary {
 
     public AnalyzePlaylistPresenter(AnalyzePlaylistViewModel analyzePlaylistViewModel,
                                     AnalyzedPlaylistViewModel analyzedPlaylistViewModel,
-                                    ViewManagerModel viewManagerModel) {
+                                    ViewManagerModel viewManagerModel,
+                                    CreateMoodViewModel createMoodViewModel) {
         this.analyzePlaylistViewModel = analyzePlaylistViewModel;
         this.analyzedPlaylistViewModel = analyzedPlaylistViewModel;
         this.viewManagerModel = viewManagerModel;
+        this.createMoodViewModel = createMoodViewModel;
     }
 
     /**
-     * Updates the view with analyzed playlist data.
-     *
+     * Prepares a view with analyzed playlist data.
      * @param data Analyzed playlist output data.
      */
-
     @Override
-    public void analyzePlaylistView(AnalyzePlaylistOutputData data) {
-        System.out.println("in analyze playlist view");
+    public void prepareAnalyzedPlaylistView(AnalyzePlaylistOutputData data) {
+        System.out.println("in analyzed playlist view");
         AnalyzedPlaylistState analyzedPlaylistState = analyzedPlaylistViewModel.getState();
-        analyzedPlaylistState.setPlaylistAudioFeaturesList(data.getPlaylistIDs());
+
+        Map<String, Double> averageFeatures = data.getAverageFeatures();
+        analyzedPlaylistState.setAverageAudioFeatures(averageFeatures);
 
         this.analyzedPlaylistViewModel.setState(analyzedPlaylistState);
         this.analyzedPlaylistViewModel.firePropertyChanged();
 
         this.viewManagerModel.setActiveView(analyzedPlaylistViewModel.getViewName());
-
         this.viewManagerModel.firePropertyChanged();
 
     }
@@ -58,14 +64,6 @@ public class AnalyzePlaylistPresenter implements AnalyzePlaylistOutputBoundary {
      */
     @Override
     public void prepareFailView(String error) {
-
-    }
-
-    /**
-     * Prepares the view for displaying a success message.
-     */
-    @Override
-    public void prepareSuccessView() {
 
     }
 }

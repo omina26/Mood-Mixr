@@ -38,30 +38,5 @@ public class AnalyzePlaylistOutputData {
         return this.averageFeatures;
     }
 
-    public Double getAverageAcousticness(){
-        return averageFeatures.get("acousticness");
-    }
-
-    public Double getAverageDanceability() {
-        return averageFeatures.get("danceability");
-    }
-
-    public Double getAverageEnergy() {
-        return averageFeatures.get("energy");
-    }
-
-    public Double getAverageInstrumentalness() {
-        return averageFeatures.get("instrumentalness");
-    }
-
-    public Double getAverageLiveness() {
-        return averageFeatures.get("liveness");
-    }
-    public Double getAverageSpeechiness() {
-        return averageFeatures.get("speechiness");
-    }
-
-    public Double getAverageValence() {
-        return averageFeatures.get("valence");
-    }
+    public boolean getUseCaseFailed() {return this.useCaseFailed;}
 }
