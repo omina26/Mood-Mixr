@@ -14,4 +14,3 @@ public interface GroupPlaylistAPIInterface {
 
     Boolean isValidPlaylist(String playlistID, User user);
 }
-
