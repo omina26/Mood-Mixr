@@ -72,11 +72,11 @@ public class SelectUserPlaylistView extends JPanel implements ActionListener, Pr
         ArrayList<String> playlists = state.getAllPlaylists();
         ArrayList<String> names = state.getNames();
         System.out.println(playlists);
-        for (String playlist: playlists){
-            checkBoxes.add(new JCheckBox(playlist));
+        for (String name: names){
+            checkBoxes.add(new JCheckBox(name));
         }
         for (int i = 0; i < names.size(); i++){
-            checkBoxes.get(i).setName(names.get(i));
+            checkBoxes.get(i).setName(playlists.get(i));
         }
         for (JCheckBox checkBox: checkBoxes){
             allPlaylists.add(checkBox);
@@ -84,13 +84,14 @@ public class SelectUserPlaylistView extends JPanel implements ActionListener, Pr
                 @Override
                 public void stateChanged(ChangeEvent e) {
                     if (!checkBox.isSelected()){
-                        selectedPlaylists.remove(checkBox.getText());
+                        selectedPlaylists.remove(checkBox.getName());
                     }
                     else{
-                        if(!selectedPlaylists.contains(checkBox.getText())){
-                            selectedPlaylists.add(checkBox.getText());
+                        if(!selectedPlaylists.contains(checkBox.getName())){
+                            selectedPlaylists.add(checkBox.getName());
                         }
                     }
+                    System.out.println(selectedPlaylists);
                 }
             });
         }

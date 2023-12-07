@@ -27,9 +27,7 @@ public class GroupPlaylistController {
         try {
             GroupPlaylistInputData groupPlaylistInputData = new GroupPlaylistInputData(user, self_only, playlistID);
             groupPlaylistUseCaseInteractor.getPlaylists(groupPlaylistInputData);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        } catch (IOException e) {throw new RuntimeException(e);}
 
     }
 }

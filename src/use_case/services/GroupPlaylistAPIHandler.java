@@ -95,7 +95,6 @@ public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface {
         }
         System.out.println(response.body());
         if (response.statusCode() == 201) {
-            System.out.println("True");
             return true;
         } else {
             return false;
@@ -128,10 +127,9 @@ public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface {
     public String createPlaylist(User user){
 
         String url = "https://api.spotify.com/v1/users/"+user.getUserId()+"/playlists";
-        System.out.println(url);
         String accessToken = user.getToken();
         HttpClient httpClient = HttpClient.newHttpClient();
-        String json = "{\"name\": \"Playlist!!!\", \"description\": \"created group playlist\", \"public\": true}";
+        String json = "{\"name\": \"GroupPlaylistCreated\", \"description\": \"created group playlist\", \"public\": true}";
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Authorization", "Bearer " + accessToken)
@@ -164,8 +162,6 @@ public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface {
 
             }
         } else {
-            System.out.println(response.statusCode());
-            System.out.println(response.body());
             return "";
         }
     }

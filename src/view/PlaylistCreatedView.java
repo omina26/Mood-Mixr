@@ -34,9 +34,8 @@ public class PlaylistCreatedView extends JPanel implements ActionListener, Prope
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JLabel successStatement = new JLabel("Playlist was successfully created. You can find it in your Spotify Account.");
-
+        successStatement.setSize(new Dimension(2000, 100));
         JButton menu = new JButton("Main menu");
-
 
         menu.addActionListener(
                 new ActionListener() {
@@ -54,8 +53,10 @@ public class PlaylistCreatedView extends JPanel implements ActionListener, Prope
 
 
         );
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(successStatement);
         this.add(menu);
+
     }
 
     /**

@@ -4,6 +4,7 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.group_playlist_created.GroupPlaylistCreatedViewModel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -19,12 +20,15 @@ public class GroupPlaylistCreatedView extends JPanel implements ActionListener, 
                                     ViewManagerModel viewManagerModel){
         this.groupPlaylistCreatedViewModel = groupPlaylistCreatedViewModel;
         this.viewManagerModel = viewManagerModel;
+
+        JLabel title = new JLabel("Playlist Created and Added to Spotify!");
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        JLabel Message = new JLabel(groupPlaylistCreatedViewModel.getState().getMessage());
-        panel.add(Message);
+
 
         returnToLoggedIn = new JButton("Return to Logged In Screen");
+        returnToLoggedIn.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(returnToLoggedIn);
 
         returnToLoggedIn.addActionListener(new ActionListener() {
@@ -34,6 +38,9 @@ public class GroupPlaylistCreatedView extends JPanel implements ActionListener, 
                 viewManagerModel.firePropertyChanged();
             }
         });
+        panel.setVisible(true);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(title);
         this.add(panel);
     }
 

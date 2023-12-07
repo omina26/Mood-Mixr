@@ -67,7 +67,6 @@ public class GroupPlaylistPresenter implements GroupPlaylistOutputBoundary {
         this.groupPlaylistCreatedViewModel.setState(groupPlaylistCreatedState);
         groupPlaylistCreatedViewModel.firePropertyChanged();
 
-        System.out.println("here");
         viewManagerModel.setActiveView(groupPlaylistCreatedViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
