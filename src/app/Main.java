@@ -2,15 +2,19 @@ package app;
 
 import data_access.analyze_playlist.AnalyzePlaylistDataAccessObject;
 import data_access.create_mood.MoodDataAccessObject;
+import data_access.group_playlist.GroupPlaylistDataAccessObject;
 import data_access.login.UserDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.analyze_playlist.AnalyzePlaylistViewModel;
 import interface_adapter.analyzed_playlist.AnalyzedPlaylistViewModel;
 import interface_adapter.create_mood.CreateMoodViewModel;
 import interface_adapter.create_playlist.CreatePlaylistViewModel;
+import interface_adapter.group_playlist.GroupPlaylistViewModel;
+import interface_adapter.group_playlist_created.GroupPlaylistCreatedViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.playlist_created.PlaylistCreatedViewModel;
+import interface_adapter.select_user_playlist.SelectUserPlaylistsViewModel;
 import interface_adapter.view_moods.ViewMoodsViewModel;
 import view.*;
 
@@ -46,16 +50,20 @@ public class Main {
         AnalyzePlaylistViewModel analyzePlaylistViewModel = new AnalyzePlaylistViewModel();
         AnalyzedPlaylistViewModel analyzedPlaylistViewModel = new AnalyzedPlaylistViewModel();
 
+        GroupPlaylistViewModel groupPlaylistViewModel = new GroupPlaylistViewModel();
+        SelectUserPlaylistsViewModel selectUserPlaylistsViewModel = new SelectUserPlaylistsViewModel();
+        GroupPlaylistCreatedViewModel groupPlaylistCreatedViewModel = new GroupPlaylistCreatedViewModel();
 
         MoodDataAccessObject moodDataAccessObject;
         UserDataAccessObject userDataAccessObject;
         AnalyzePlaylistDataAccessObject analyzePlaylistDataAccessObject;
-
+        GroupPlaylistDataAccessObject groupPlaylistDataAccessObject;
 
         try {
             moodDataAccessObject = new MoodDataAccessObject(new File("./moods.csv"));
             userDataAccessObject = new UserDataAccessObject(new File("./user.csv"));
             analyzePlaylistDataAccessObject = new AnalyzePlaylistDataAccessObject(new File("./playlistIDs.csv"));
+            groupPlaylistDataAccessObject = new GroupPlaylistDataAccessObject();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -79,7 +87,6 @@ public class Main {
 
         PlaylistCreatedViewModel playlistCreatedViewModel = new PlaylistCreatedViewModel();
 
-
         CreatePlaylistView createPlaylistView = CreatePlaylistUseCaseFactory.create(viewManagerModel, createPlaylistViewModel, playlistCreatedViewModel, userDataAccessObject, moodDataAccessObject);
         views.add(createPlaylistView, createPlaylistView.viewName);
 
@@ -88,6 +95,15 @@ public class Main {
 
         PlaylistCreatedView playlistCreatedView = new PlaylistCreatedView(playlistCreatedViewModel, viewManagerModel);
         views.add(playlistCreatedView, playlistCreatedView.viewName);
+
+        GroupPlaylistView groupPlaylistView = GroupPlaylistUseCaseFactory.create(viewManagerModel, groupPlaylistViewModel, loggedInViewModel,groupPlaylistDataAccessObject, selectUserPlaylistsViewModel, groupPlaylistCreatedViewModel);
+        views.add(groupPlaylistView, groupPlaylistView.viewName);
+
+        SelectUserPlaylistView selectUserPlaylistView = new SelectUserPlaylistView(selectUserPlaylistsViewModel, groupPlaylistView.groupPlaylistController, viewManagerModel);
+        views.add(selectUserPlaylistView, selectUserPlaylistView.viewName);
+
+        GroupPlaylistCreatedView groupPlaylistCreatedView = new GroupPlaylistCreatedView(groupPlaylistCreatedViewModel, viewManagerModel);
+        views.add(groupPlaylistCreatedView, groupPlaylistCreatedView.viewName);
 
         //viewManagerModel.setActiveView(createMoodView.viewName);
         //viewManagerModel.setActiveView(analyzePlaylistViewModel.getViewName());
