@@ -26,6 +26,7 @@ public class GroupPlaylistInteractor implements GroupPlaylistInputBoundary{
                     groupPlaylistInputData.user);
 
         } else{
+
             if(groupPlaylistAPIHandler.isValidPlaylist(groupPlaylistInputData.nonUserPlaylistID,
                     groupPlaylistInputData.user)){
                 ArrayList<String> playlists = groupPlaylistInputData.playlistsToCombine;
