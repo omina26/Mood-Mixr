@@ -1,7 +1,8 @@
-package use_case.group_playlist.services;
+package use_case.services;
 
 import com.google.gson.Gson;
 import entity.User;
+import use_case.services.GroupPlaylistAPIInterface;
 
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -16,7 +17,7 @@ import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 
-public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface{
+public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface {
     @Override
     public ArrayList<String> getPlaylists(User self) {
 

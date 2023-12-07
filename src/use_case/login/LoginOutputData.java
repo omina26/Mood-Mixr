@@ -12,6 +12,7 @@ public class LoginOutputData {
         this.user = user;
         this.useCaseFailed = useCaseFailed;
     }
+
     public String getName() {
         return user.getName();
     }

@@ -2,9 +2,6 @@ package view;
 
 import interface_adapter.ViewManagerModel;
 import interface_adapter.group_playlist.GroupPlaylistController;
-import interface_adapter.group_playlist.GroupPlaylistState;
-import interface_adapter.logged_in.LoggedInState;
-import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.select_user_playlist.SelectUserPlaylistState;
 import interface_adapter.select_user_playlist.SelectUserPlaylistsViewModel;
 
@@ -20,14 +17,14 @@ import java.util.ArrayList;
 
 public class SelectUserPlaylistView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "Select User Playlists";
-    private final SelectUserPlaylistsViewModel selectUserPlaylistsViewModel;
+    public final SelectUserPlaylistsViewModel selectUserPlaylistsViewModel;
 
     final JLabel instruction;
     final JButton GET_GROUP_PLAYLIST;
-    private JPanel allPlaylists;
+    public JPanel allPlaylists;
 
-    private ArrayList<String> selectedPlaylists;
-    private ArrayList<JCheckBox> checkBoxes;
+    public ArrayList<String> selectedPlaylists;
+    public ArrayList<JCheckBox> checkBoxes;
     private GroupPlaylistController groupPlaylistController;
     public SelectUserPlaylistView(SelectUserPlaylistsViewModel selectUserPlaylistsViewModel,
                                   GroupPlaylistController groupPlaylistController,
@@ -38,6 +35,7 @@ public class SelectUserPlaylistView extends JPanel implements ActionListener, Pr
         this.groupPlaylistController = groupPlaylistController;
         this.selectedPlaylists = new ArrayList<String>();
 
+        JPanel buttons = new JPanel();
         allPlaylists = new JPanel();
         allPlaylists.setLayout(new BoxLayout(allPlaylists, BoxLayout.Y_AXIS));
         this.checkBoxes = new ArrayList<JCheckBox>();
@@ -47,7 +45,6 @@ public class SelectUserPlaylistView extends JPanel implements ActionListener, Pr
 
         instruction = new JLabel("Please select which playlists you would like to add to the grouping:");
 
-        JPanel buttons = new JPanel();
 
         GET_GROUP_PLAYLIST = new JButton("Get Group Playlist");
         buttons.add(GET_GROUP_PLAYLIST);
@@ -56,10 +53,7 @@ public class SelectUserPlaylistView extends JPanel implements ActionListener, Pr
             @Override
             public void actionPerformed(ActionEvent e) {
                 SelectUserPlaylistState selectUserPlaylistState = selectUserPlaylistsViewModel.getState();
-                groupPlaylistController.executeUseCase(selectedPlaylists,
-                        selectUserPlaylistState.getUserPlaylistsOnly(),
-                        selectUserPlaylistState.getUser(),
-                        selectUserPlaylistState.getNonUserPlaylistID());
+                groupPlaylistController.executeUseCase(selectedPlaylists, selectUserPlaylistState.getUserPlaylistsOnly(), selectUserPlaylistState.getUser(), selectUserPlaylistState.getNonUserPlaylistID());
             }
         });
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

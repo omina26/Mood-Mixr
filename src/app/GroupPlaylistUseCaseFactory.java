@@ -10,7 +10,7 @@ import interface_adapter.select_user_playlist.SelectUserPlaylistsViewModel;
 import use_case.group_playlist.GroupPlaylistDataAccessInterface;
 import use_case.group_playlist.GroupPlaylistInteractor;
 import use_case.group_playlist.GroupPlaylistOutputBoundary;
-import use_case.group_playlist.services.GroupPlaylistAPIHandler;
+import use_case.services.GroupPlaylistAPIHandler;
 import view.GroupPlaylistView;
 
 import javax.swing.*;
@@ -31,7 +31,6 @@ public class GroupPlaylistUseCaseFactory {
             GroupPlaylistController groupPlaylistController = createGroupPlaylistUseCase(viewManagerModel, loggedInViewModel,
                     groupPlaylistViewModel, groupDataAccessObject, selectUserPlaylistsViewModel,
                     groupPlaylistCreatedViewModel);
-
             return new GroupPlaylistView(groupPlaylistController, groupPlaylistViewModel, loggedInViewModel.getState());
         } catch (IOException e){
             JOptionPane.showMessageDialog(null, "Could not Access User Data");

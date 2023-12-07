@@ -37,6 +37,4 @@ public class LoggedInViewModel extends ViewModel {
 
     public LoggedInState getState(){return state;}
 
-    public User getLoggedInUser(){return loggedInUser;}
-
 }

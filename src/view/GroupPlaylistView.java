@@ -24,8 +24,8 @@ public class GroupPlaylistView extends JPanel implements ActionListener, Propert
     public LoggedInState loggedInState;
     private final JButton getMyPlaylists;
     private User user;
-    private final String other_playlist_id;
-    private Boolean user_playlists;
+    public final String other_playlist_id;
+    public Boolean user_playlists;
 
 
     public GroupPlaylistView(GroupPlaylistController groupPlaylistController, GroupPlaylistViewModel groupPlaylistViewModel, LoggedInState loggedInState) {

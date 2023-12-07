@@ -7,7 +7,7 @@ import java.beans.PropertyChangeSupport;
 
 public class SelectUserPlaylistsViewModel extends ViewModel {
 
-    String viewName;
+    String viewName = "Select User Playlists";
     SelectUserPlaylistState state = new SelectUserPlaylistState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
@@ -32,4 +32,6 @@ public class SelectUserPlaylistsViewModel extends ViewModel {
     public void setState(SelectUserPlaylistState selectUserPlaylistState) {
         this.state = selectUserPlaylistState;
     }
+
+    public String getViewName(){return this.viewName;}
 }

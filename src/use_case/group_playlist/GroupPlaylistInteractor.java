@@ -1,6 +1,6 @@
 package use_case.group_playlist;
 
-import use_case.group_playlist.services.GroupPlaylistAPIInterface;
+import use_case.services.GroupPlaylistAPIInterface;
 
 import java.io.IOException;
 import java.util.ArrayList;

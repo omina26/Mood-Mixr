@@ -14,6 +14,7 @@ public class GroupPlaylistCreatedView extends JPanel implements ActionListener, 
     public final GroupPlaylistCreatedViewModel groupPlaylistCreatedViewModel;
     public final ViewManagerModel viewManagerModel;
 
+    public JButton returnToLoggedIn;
     public GroupPlaylistCreatedView(GroupPlaylistCreatedViewModel groupPlaylistCreatedViewModel,
                                     ViewManagerModel viewManagerModel){
         this.groupPlaylistCreatedViewModel = groupPlaylistCreatedViewModel;
@@ -23,7 +24,7 @@ public class GroupPlaylistCreatedView extends JPanel implements ActionListener, 
         JLabel Message = new JLabel(groupPlaylistCreatedViewModel.getState().getMessage());
         panel.add(Message);
 
-        JButton returnToLoggedIn = new JButton("Return to Logged In Screen");
+        returnToLoggedIn = new JButton("Return to Logged In Screen");
         panel.add(returnToLoggedIn);
 
         returnToLoggedIn.addActionListener(new ActionListener() {
@@ -37,12 +38,8 @@ public class GroupPlaylistCreatedView extends JPanel implements ActionListener, 
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
+    public void actionPerformed(ActionEvent e) {}
 
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-
-    }
+    public void propertyChange(PropertyChangeEvent evt) {}
 }
