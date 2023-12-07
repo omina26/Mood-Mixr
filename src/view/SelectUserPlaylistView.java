@@ -70,9 +70,13 @@ public class SelectUserPlaylistView extends JPanel implements ActionListener, Pr
     public void propertyChange(PropertyChangeEvent evt) {
         SelectUserPlaylistState state = (SelectUserPlaylistState) evt.getNewValue();
         ArrayList<String> playlists = state.getAllPlaylists();
+        ArrayList<String> names = state.getNames();
         System.out.println(playlists);
         for (String playlist: playlists){
             checkBoxes.add(new JCheckBox(playlist));
+        }
+        for (int i = 0; i < names.size(); i++){
+            checkBoxes.get(i).setName(names.get(i));
         }
         for (JCheckBox checkBox: checkBoxes){
             allPlaylists.add(checkBox);

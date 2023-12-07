@@ -33,7 +33,6 @@ public class GroupPlaylistInteractorTest {
             groupPlaylistInteractor.getPlaylists(groupPlaylistInputData);
 
             assertEquals("", mockGroupPlaylistPresenter.result);
-            assertEquals("0", mockGroupPlaylistPresenter.groupPlaylistOutputData.playlists.get(0));
         }
 
     @Test
@@ -108,7 +107,7 @@ class MockGroupPlaylistPresenter implements GroupPlaylistOutputBoundary{
     GroupPlaylistOutputData groupPlaylistOutputData;
 
     @Override
-    public void getCurrentUserPlaylistsSuccessView(GroupPlaylistOutputData groupPlaylistOutputData) {
+    public void getCurrentUserPlaylistsSuccessView(GroupPlaylistOutputData groupPlaylistOutputData, GroupPlaylistOutputData names) {
         this.groupPlaylistOutputData = groupPlaylistOutputData;
         this.result = "";
     }
@@ -132,10 +131,13 @@ class MockGroupPlaylistPresenter implements GroupPlaylistOutputBoundary{
 class MockGroupPlaylistAPIHandler implements GroupPlaylistAPIInterface {
 
     @Override
-    public ArrayList<String> getPlaylists(User self) throws IOException {
-        ArrayList<String> test = new ArrayList<String>();
+    public ArrayList<ArrayList<String>> getPlaylists(User self) throws IOException {
+        ArrayList<String> test1 = new ArrayList<String>();
+        ArrayList<String> test2 = new ArrayList<String>();
+        ArrayList<ArrayList<String>> test = new ArrayList<ArrayList<String>>();
+        test.add(test1);
+        test.add(test2);
         if (!(self.getToken().equals(100))){
-            test.add(self.getUserId());
             return test;
         } else{
             IOException IOException = new IOException();

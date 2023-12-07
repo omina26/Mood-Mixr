@@ -26,4 +26,13 @@ public class GroupPlaylistOutputData {
         this.isUserPlaylistsOnly = false;
         this.user = null;
     }
+
+    public GroupPlaylistOutputData(ArrayList<String> names){
+        this.playlists = names;
+        this.playlistName = null;
+        nonUserPlaylistID = null;
+        this.isUserPlaylistsOnly = false;
+        this.user = null;
+        this.success = false;
+    }
 }

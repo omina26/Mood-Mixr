@@ -2,7 +2,6 @@ package use_case.services;
 
 import com.google.gson.Gson;
 import entity.User;
-import use_case.services.GroupPlaylistAPIInterface;
 
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 
 public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface {
     @Override
-    public ArrayList<String> getPlaylists(User self) {
+    public ArrayList<ArrayList<String>> getPlaylists(User self) {
 
         String url = "https://api.spotify.com/v1/me/playlists";
         String accessToken = self.getToken();
@@ -43,7 +42,7 @@ public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface {
             // You'll need to parse the JSON response to get playlist details
             // This is a placeholder for where you would add your JSON parsing logic
             ArrayList<String> href = new ArrayList<>();
-
+            ArrayList<String> names = new ArrayList<>();
             try (JsonReader jsonReader = Json.createReader(new StringReader(response.body()))) {
                 JsonObject root = jsonReader.readObject();
                 JsonArray items = root.getJsonArray("items");
@@ -51,11 +50,16 @@ public class GroupPlaylistAPIHandler implements GroupPlaylistAPIInterface {
                 for (JsonObject item : items.getValuesAs(JsonObject.class)) {
                     String uri = item.getString("uri");
                     href.add(uri);
+                    String name = item.getString("name");
+                    names.add(name);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return href;
+            ArrayList<ArrayList<String>> names_and_refs = new ArrayList<>();
+            names_and_refs.add(href);
+            names_and_refs.add(names);
+            return names_and_refs;
         } else {
             // Handle non-200 status codes appropriately
             System.out.println("Error: " + response.statusCode() + " - " + response.body());

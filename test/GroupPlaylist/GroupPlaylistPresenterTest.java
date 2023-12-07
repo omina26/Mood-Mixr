@@ -49,13 +49,19 @@ public class GroupPlaylistPresenterTest {
         GroupPlaylistCreatedViewModel groupPlaylistCreatedViewModel = new GroupPlaylistCreatedViewModel();
         GroupPlaylistPresenter testGroupPlaylistPresenter = new GroupPlaylistPresenter(viewManagerModel,
                 groupPlaylistViewModel, selectUserPlaylistsViewModel, groupPlaylistCreatedViewModel);
+
         ArrayList<String> playlists = new ArrayList<String>();
+        ArrayList<String> name = new ArrayList<String>();
+
         User user = new User("name", "token", "userId");
         boolean isUserPlaylistsOnly = false;
         String nonUserPlaylistID = "ID";
+
         GroupPlaylistOutputData groupPlaylistOutputData = new GroupPlaylistOutputData(playlists, user,
                 isUserPlaylistsOnly, nonUserPlaylistID);
-        testGroupPlaylistPresenter.getCurrentUserPlaylistsSuccessView(groupPlaylistOutputData);
+
+        GroupPlaylistOutputData names = new GroupPlaylistOutputData(name);
+        testGroupPlaylistPresenter.getCurrentUserPlaylistsSuccessView(groupPlaylistOutputData, names);
         assertEquals(viewManagerModel.getActiveView(), "Select User Playlists");
         assertEquals(selectUserPlaylistsViewModel.getState().getAllPlaylists(), playlists);
         assertEquals(selectUserPlaylistsViewModel.getState().getNonUserPlaylistID(), "ID");

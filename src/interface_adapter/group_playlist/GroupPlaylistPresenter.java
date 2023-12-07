@@ -27,11 +27,12 @@ public class GroupPlaylistPresenter implements GroupPlaylistOutputBoundary {
     }
 
     @Override
-    public void getCurrentUserPlaylistsSuccessView(GroupPlaylistOutputData groupPlaylistOutputData) {
+    public void getCurrentUserPlaylistsSuccessView(GroupPlaylistOutputData groupPlaylistOutputData, GroupPlaylistOutputData names) {
 
         SelectUserPlaylistState selectUserPlaylistState = selectUserPlaylistsViewModel.getState();
         selectUserPlaylistState.setAllPlaylists(groupPlaylistOutputData.playlists);
         selectUserPlaylistState.setUserPlaylistsOnly(groupPlaylistOutputData.isUserPlaylistsOnly);
+        selectUserPlaylistState.setNames(names.playlists);
         selectUserPlaylistState.setNonUserPlaylistID(groupPlaylistOutputData.nonUserPlaylistID);
         selectUserPlaylistState.setUser(groupPlaylistOutputData.user);
 

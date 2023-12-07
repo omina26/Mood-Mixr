@@ -1,7 +1,7 @@
 package use_case.group_playlist;
 
 public interface GroupPlaylistOutputBoundary {
-    void getCurrentUserPlaylistsSuccessView(GroupPlaylistOutputData groupPlaylistOutputData);
+    void getCurrentUserPlaylistsSuccessView(GroupPlaylistOutputData groupPlaylistOutputData, GroupPlaylistOutputData names);
 
     void prepareSuccessView(GroupPlaylistOutputData groupPlaylistOutputData, String successMessage);
 

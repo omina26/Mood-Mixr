@@ -47,16 +47,14 @@ public class GroupPlaylistInteractor implements GroupPlaylistInputBoundary{
 
     @Override
     public void getPlaylists(GroupPlaylistInputData groupPlaylistInputData){
-        ArrayList<String> playlists;
+        ArrayList<ArrayList<String>> playlists;
         try {
             playlists = groupPlaylistAPIHandler.getPlaylists(groupPlaylistInputData.user);
-            GroupPlaylistOutputData groupPlaylistOutputData = new GroupPlaylistOutputData(playlists,
-                    groupPlaylistInputData.user,
+            GroupPlaylistOutputData groupPlaylistOutputData = new GroupPlaylistOutputData(playlists.get(0), groupPlaylistInputData.user,
                     groupPlaylistInputData.self_only, groupPlaylistInputData.nonUserPlaylistID);
-            groupPresenter.getCurrentUserPlaylistsSuccessView(groupPlaylistOutputData);
-        } catch (IOException e){
-            System.out.println("Error!");
-        }
+            GroupPlaylistOutputData names = new GroupPlaylistOutputData(playlists.get(1));
+            groupPresenter.getCurrentUserPlaylistsSuccessView(groupPlaylistOutputData, names);
+        } catch (IOException e){System.out.println("Error!");}
     }
 
 }

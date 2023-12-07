@@ -43,6 +43,7 @@ public class SelectUserPlaylistViewTest {
         ArrayList<String> allPlaylists = new ArrayList<String>();
         allPlaylists.add("hi!");
         selectUserPlaylistState.setAllPlaylists(allPlaylists);
+        selectUserPlaylistState.setNames(allPlaylists);
         selectUserPlaylistState.setNonUserPlaylistID("");
         selectUserPlaylistState.setUser(new User("0", "0", "0"));
         selectUserPlaylistsViewModel.firePropertyChanged();

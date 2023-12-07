@@ -50,11 +50,12 @@ public class GroupPlaylistView extends JPanel implements ActionListener, Propert
         check_box.add(own_playlists);
 
         check_box.add(playlistIDFieldLabel);
-
         JTextField playlist_id = new JTextField();
         playlist_id.setAlignmentX(Component.CENTER_ALIGNMENT);
         playlistIDFieldLabel.setLabelFor(playlist_id);
         check_box.add(playlist_id);
+
+
 
         own_playlists.addChangeListener(new ChangeListener() {
             @Override
